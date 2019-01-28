@@ -1,6 +1,5 @@
 // jj as escape
 imap('jj', "<Esc>");
-
 /*
 Usage for Oxford dictionary in visual mode:
 
