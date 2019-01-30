@@ -261,7 +261,7 @@ var setLanguages = function(langSettings) {
     });
     
     
-    vmapkey("x", "Synonyms of the selected word", function() {
+    vmapkey("z", "Synonyms of the selected word", function() {
         var urlCallback = function(best_match) {
             var lang = langSettings.definitions;
             return "https://od-api.oxforddictionaries.com/api/v1/entries/" + lang + "/" + best_match + "/synonyms";
