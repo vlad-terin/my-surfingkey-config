@@ -308,7 +308,6 @@ mapkey('B', 'Choose a tab with omnibar', function() {
 
 // Properties list
 Hints.numericHints           = false;
-Hints.characters             = "asdfgqwertzxcvbyuiopmnhlk";  // remove j for esc (TODO: jj for esc when hints mode)
 settings.omnibarSuggestion   = true;
 settings.defaultSearchEngine = 'l';                          // Google I'm Feeling Luckey
 settings.focusFirstCandidate = true;
