@@ -309,7 +309,7 @@ mapkey('B', 'Choose a tab with omnibar', function() {
 // Properties list
 Hints.numericHints           = false;
 settings.omnibarSuggestion   = true;
-settings.defaultSearchEngine = 'l';                          // Google I'm Feeling Luckey
+settings.defaultSearchEngine = 'd';                          // Google I'm Feeling Luckey
 settings.focusFirstCandidate = true;
 
 mapkey(',s', 'opne new tab and split', function () {
@@ -325,7 +325,6 @@ removeSearchAliasX('s')
 //General
 addSearchAliasX('L', 'Im feeling lucky', 'https://www.google.com/search?btnI=1&q=');
 addSearchAliasX('G', 'Google', 'https://www.google.com/search?q=');
-addSearchAliasX('d', 'download', 'https://www.google.com/search?q=download+');
 addSearchAliasX('gm', 'googlemonth', 'https://www.google.com/search?q={0}&es_sm=93&source=lnt&tbs=qdr:m&sa=X&ved=0CBUQpwVqFQoTCNvLqLq-gskCFYrUJgodrW4KCw&biw=1280&bih=637', 's');
 addSearchAliasX('gw', 'googleweek', 'https://www.google.com/search?q={0}&source=lnt&tbs=qdr:w&sa=X&ved=0ahUKEwiC88iB14bfAhUzKX0KHUMpBhAQpwUIJg&biw=1920&bih=970', 's');
 addSearchAliasX('gy', 'googleyear', 'https://www.google.com/search?q={0}&google+year&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
