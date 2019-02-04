@@ -502,7 +502,7 @@ vmapkey('mby', "Markdown bold", function () {
 vmapkey('mly', "Markdown link", function () {
     Clipboard.write('[replaceit](' + window.getSelection().toString() + ')');
 });
-vmapkey('yml', "Markdown link", function () {
+mapkey('yml', "Markdown link", function () {
     Clipboard.write(`[${document.title}](${window.location.href})`);
 });
 vmapkey('msy', "Markdown Strikethrough", function () {
