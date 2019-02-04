@@ -1,10 +1,11 @@
+
 // jj as escape
 imap('jj', "<Esc>");
 /*
 Usage for Oxford dictionary in visual mode:
 
 d - pull up the definition
-S - get the synonyms (must be uppercase S, because s is reserved for searching)
+z - get the synonyms (instead S, so no need to press shift+s)
 q - translate the word (looking first to find a close match)
 Q - also translations (exact, without finding the best match)
 a - searching for antonyms
