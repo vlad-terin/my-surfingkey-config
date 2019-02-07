@@ -1,4 +1,5 @@
-
+map('L', 'R');
+map('H', 'E');
 // jj as escape
 imap('jj', "<Esc>");
 /*
