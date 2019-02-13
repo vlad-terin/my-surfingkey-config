@@ -1,0 +1,86 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/84dbaf52/
+AnonymousFunction3be1360d0100	surfingkeys-config.js	/^            var entryHtml = lexEntries.map(function(entry) {$/;"	f	function:setLanguages.parseDefinitions
+AnonymousFunction3be1360d0200	surfingkeys-config.js	/^                var categoryEntriesHtml = entry.entries[0].senses.map(function(sense) {$/;"	f	function:setLanguages.parseDefinitions.AnonymousFunction3be1360d0100
+AnonymousFunction3be1360d0300	surfingkeys-config.js	/^                        var senseExamples = sense.examples.map(function(ex) {$/;"	f	function:setLanguages.parseDefinitions.AnonymousFunction3be1360d0100.AnonymousFunction3be1360d0200
+AnonymousFunction3be1360d0400	surfingkeys-config.js	/^            var entryHtml = lexEntries.map(function(entry) {$/;"	f	function:setLanguages.parseSynonyms
+AnonymousFunction3be1360d0500	surfingkeys-config.js	/^                var categoryEntriesHtml = entry.entries[0].senses.map(function(sense) {$/;"	f	function:setLanguages.parseSynonyms.AnonymousFunction3be1360d0400
+AnonymousFunction3be1360d0600	surfingkeys-config.js	/^                        var senseExamples = sense.synonyms.map(function(ex) {$/;"	f	function:setLanguages.parseSynonyms.AnonymousFunction3be1360d0400.AnonymousFunction3be1360d0500
+AnonymousFunction3be1360d0700	surfingkeys-config.js	/^            var entryHtml = lexEntries.map(function(entry) {$/;"	f	function:setLanguages.parseAntonyms
+AnonymousFunction3be1360d0800	surfingkeys-config.js	/^                var categoryEntriesHtml = entry.entries[0].senses.map(function(sense) {$/;"	f	function:setLanguages.parseAntonyms.AnonymousFunction3be1360d0700
+AnonymousFunction3be1360d0900	surfingkeys-config.js	/^                        var senseExamples = sense.antonyms.map(function(ex) {$/;"	f	function:setLanguages.parseAntonyms.AnonymousFunction3be1360d0700.AnonymousFunction3be1360d0800
+AnonymousFunction3be1360d0a00	surfingkeys-config.js	/^            var entryHtml = lexEntries.map(function(entry) {$/;"	f	function:setLanguages.parseTranslations
+AnonymousFunction3be1360d0b00	surfingkeys-config.js	/^                var categoryEntriesHtml = entry.entries[0].senses.map(function(sense) {$/;"	f	function:setLanguages.parseTranslations.AnonymousFunction3be1360d0a00
+AnonymousFunction3be1360d0c00	surfingkeys-config.js	/^                        var senseExamples = sense.examples.map(function(ex) {$/;"	f	function:setLanguages.parseTranslations.AnonymousFunction3be1360d0a00.AnonymousFunction3be1360d0b00
+AnonymousFunction3be1360d0d00	surfingkeys-config.js	/^                    }, function(res) {$/;"	f	function:setLanguages.searchThenQuery.parseResult
+AnonymousFunction3be1360d0e00	surfingkeys-config.js	/^        }, function(res) {$/;"	f	function:setLanguages.searchThenQuery
+AnonymousFunction3be1360d0f00	surfingkeys-config.js	/^        url: function(query) {$/;"	f
+AnonymousFunction3be1360d1000	surfingkeys-config.js	/^    vmapkey("q", "Translation of the selected word", function() {$/;"	f	function:setLanguages
+AnonymousFunction3be1360d1100	surfingkeys-config.js	/^    vmapkey("d", "Definition of the selected word", function() {$/;"	f	function:setLanguages
+AnonymousFunction3be1360d1200	surfingkeys-config.js	/^    vmapkey("z", "Synonyms of the selected word", function() {$/;"	f	function:setLanguages
+AnonymousFunction3be1360d1300	surfingkeys-config.js	/^    vmapkey("a", "Antonyms of the selected word", function() {$/;"	f	function:setLanguages
+AnonymousFunction3be1360d1400	surfingkeys-config.js	/^mapkey('B', 'Choose a tab with omnibar', function() {$/;"	f
+AnonymousFunction3be1360d1500	surfingkeys-config.js	/^mapkey(',s', 'opne new tab and split', function () {$/;"	f
+AnonymousFunction3be1360d1600	surfingkeys-config.js	/^mapkey('ymr', '#7Copy multiple link regex URLs to the clipboard', function () {$/;"	f
+AnonymousFunction3be1360d1700	surfingkeys-config.js	/^    Hints.create('*[href]', function (element) {$/;"	f
+AnonymousFunction3be1360d1800	surfingkeys-config.js	/^mapkey('yE', '#7 Yank Element info. copy link element id or classname', function () {$/;"	f
+AnonymousFunction3be1360d1900	surfingkeys-config.js	/^    Hints.create("", function (element) {$/;"	f
+AnonymousFunction3be1360d1a00	surfingkeys-config.js	/^mapkey('yeI', '#7 Yank Element info. copy link element id or classname', function (element) { (C/;"	f
+AnonymousFunction3be1360d1b00	surfingkeys-config.js	/^mapkey('yeC', '#7 Yank Element info. copy link element id or classname', function (element) { (C/;"	f
+AnonymousFunction3be1360d1c00	surfingkeys-config.js	/^mapkey('yeT', '#7 Yank Element info. copy link element id or classname', function (element) { (C/;"	f
+AnonymousFunction3be1360d1d00	surfingkeys-config.js	/^mapkey('yeS', '#7 Yank Element info. copy link element id or classname', function (element) { (C/;"	f
+AnonymousFunction3be1360d1e00	surfingkeys-config.js	/^mapkey('yeA', '#7 Yank Element info. copy link element id or classname', function (element) { (C/;"	f
+AnonymousFunction3be1360d1f00	surfingkeys-config.js	/^mapkey('ymE', '#7 Yank Multiple Element info  (copy multiple link element id or classname)', fun/;"	f
+AnonymousFunction3be1360d2000	surfingkeys-config.js	/^    Hints.create('*[href]', function (element) {$/;"	f
+AnonymousFunction3be1360d2100	surfingkeys-config.js	/^mapkey('yg', '#7 git clone', function () {$/;"	f
+AnonymousFunction3be1360d2200	surfingkeys-config.js	/^vmapkey('"y', "surround selection with doube quotation mark", function () {$/;"	f
+AnonymousFunction3be1360d2300	surfingkeys-config.js	/^vmapkey('<y', "surround selection ", function () {$/;"	f
+AnonymousFunction3be1360d2400	surfingkeys-config.js	/^vmapkey('(y', "surround selection ", function () {$/;"	f
+AnonymousFunction3be1360d2500	surfingkeys-config.js	/^vmapkey('[y', "surround selection ", function () {$/;"	f
+AnonymousFunction3be1360d2600	surfingkeys-config.js	/^vmapkey('{y', "surround selection ", function () {$/;"	f
+AnonymousFunction3be1360d2700	surfingkeys-config.js	/^vmapkey('\/*y', "surround selection ", function () {$/;"	f
+AnonymousFunction3be1360d2800	surfingkeys-config.js	/^vmapkey('<--!y', "surround selection ", function () {$/;"	f
+AnonymousFunction3be1360d2900	surfingkeys-config.js	/^vmapkey('~y', "surround selection ", function () {$/;"	f
+AnonymousFunction3be1360d2a00	surfingkeys-config.js	/^vmapkey('~jy', "Remove enter", function () {$/;"	f
+AnonymousFunction3be1360d2b00	surfingkeys-config.js	/^vmapkey('~cy', "Added comma", function () {$/;"	f
+AnonymousFunction3be1360d2c00	surfingkeys-config.js	/^vmapkey('~dy', "Delete first 1 character", function () {$/;"	f
+AnonymousFunction3be1360d2d00	surfingkeys-config.js	/^vmapkey('~Dy', "Delete surrounded", function () {$/;"	f
+AnonymousFunction3be1360d2e00	surfingkeys-config.js	/^vmapkey('~sy', "Remove special character (blank is not considered as special character", functio/;"	f
+AnonymousFunction3be1360d2f00	surfingkeys-config.js	/^vmapkey('~dy', "Markdown Strikethrough", function () {$/;"	f
+AnonymousFunction3be1360d3000	surfingkeys-config.js	/^vmapkey('my', '#7Copy multiple  동작하지 않음 FIXlink URLs to the clipboard', function () /;"	f
+AnonymousFunction3be1360d3100	surfingkeys-config.js	/^vmapkey('miy', "Markdown italic", function () {$/;"	f
+AnonymousFunction3be1360d3200	surfingkeys-config.js	/^vmapkey('mby', "Markdown bold", function () {$/;"	f
+AnonymousFunction3be1360d3300	surfingkeys-config.js	/^vmapkey('mly', "Markdown link", function () {$/;"	f
+AnonymousFunction3be1360d3400	surfingkeys-config.js	/^mapkey('yml', "Markdown link", function () {$/;"	f
+AnonymousFunction3be1360d3500	surfingkeys-config.js	/^vmapkey('msy', "Markdown Strikethrough", function () {$/;"	f
+AnonymousFunction3be1360d3600	surfingkeys-config.js	/^mapkey('gs', '#12 go Setting - Open Chrome Settings', function () {$/;"	f
+AnonymousFunction3be1360d3700	surfingkeys-config.js	/^mapkey('gE', '#12 go Extensions - Open Chrome extensions Shortcut setting', function () {$/;"	f
+AnonymousFunction3be1360d3800	surfingkeys-config.js	/^mapkey('gC', 'Go to the code tab', function () {$/;"	f
+AnonymousFunction3be1360d3900	surfingkeys-config.js	/^mapkey('gI', 'Go to the Issues tab. ', function () {$/;"	f
+AnonymousFunction3be1360d3a00	surfingkeys-config.js	/^mapkey('gP', 'Go to the Pull requests tab.  ', function () {$/;"	f
+AnonymousFunction3be1360d3b00	surfingkeys-config.js	/^mapkey('gB', 'Go to the Projects tab. "', function () {$/;"	f
+AnonymousFunction3be1360d3c00	surfingkeys-config.js	/^mapkey('gW', 'Go to the Wiki tab. ', function () {$/;"	f
+AnonymousFunction3be1360d3d00	surfingkeys-config.js	/^mapkey('gO', 'Go to the Overview tab. ', function () {$/;"	f
+AnonymousFunction3be1360d3e00	surfingkeys-config.js	/^mapkey('gR', 'Go to the Repository tab. ', function () {$/;"	f
+AnonymousFunction3be1360d3f00	surfingkeys-config.js	/^mapkey('gS', 'Go to the Stars tab. ', function () {$/;"	f
+AnonymousFunction3be1360d4000	surfingkeys-config.js	/^mapkey('gT', 'Goto Text Area', function () {$/;"	f
+_oxfordHeaders	surfingkeys-config.js	/^    var _oxfordHeaders = {$/;"	c	class:setLanguages
+_showOxfordQueryResult	surfingkeys-config.js	/^    var _showOxfordQueryResult = function(queryResult) {$/;"	f	function:setLanguages
+app_id	surfingkeys-config.js	/^        "app_id": "b9c84084",$/;"	p	class:setLanguages._oxfordHeaders
+app_key	surfingkeys-config.js	/^        "app_key": "b96b8e9a328df6d70563d04c6ec4dcf4"$/;"	p	class:setLanguages._oxfordHeaders
+parseAntonyms	surfingkeys-config.js	/^    var parseAntonyms = function(res) {$/;"	f	function:setLanguages
+parseDefinitions	surfingkeys-config.js	/^    var parseDefinitions = function(res) {$/;"	f	function:setLanguages
+parseResult	surfingkeys-config.js	/^        var parseResult = function(res, urlCallback, callback) {$/;"	f	function:setLanguages.searchThenQuery
+parseSynonyms	surfingkeys-config.js	/^    var parseSynonyms = function(res) {$/;"	f	function:setLanguages
+parseTranslations	surfingkeys-config.js	/^    var parseTranslations = function(res) {$/;"	f	function:setLanguages
+searchThenQuery	surfingkeys-config.js	/^    var searchThenQuery = function(obj) {$/;"	f	function:setLanguages
+setLanguages	surfingkeys-config.js	/^var setLanguages = function(langSettings) {$/;"	f
+urlCallback	surfingkeys-config.js	/^        var urlCallback = function(best_match) {$/;"	f	function:setLanguages.AnonymousFunction3be1360d1000
+urlCallback	surfingkeys-config.js	/^        var urlCallback = function(best_match) {$/;"	f	function:setLanguages.AnonymousFunction3be1360d1100
+urlCallback	surfingkeys-config.js	/^        var urlCallback = function(best_match) {$/;"	f	function:setLanguages.AnonymousFunction3be1360d1200
+urlCallback	surfingkeys-config.js	/^        var urlCallback = function(best_match) {$/;"	f	function:setLanguages.AnonymousFunction3be1360d1300

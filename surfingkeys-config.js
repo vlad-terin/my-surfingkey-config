@@ -1,5 +1,6 @@
 map('L', 'R');
 map('H', 'E');
+map('<A-w>','<C-b>');
 // jj as escape
 imap('jj', "<Esc>");
 /*
@@ -22,7 +23,7 @@ var setLanguages = function(langSettings) {
         "app_id": "b9c84084",
         "app_key": "b96b8e9a328df6d70563d04c6ec4dcf4"
     };
-    
+
     var _showOxfordQueryResult = function(queryResult) {
         var b = document.getSelection().getRangeAt(0).getClientRects()[0];
         Front.showBubble({
