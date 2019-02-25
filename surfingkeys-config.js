@@ -6,7 +6,6 @@ imap('jj', "<Esc>");
 /*
 Usage for Oxford dictionary in visual mode:
 
-test
 d - pull up the definition
 z - get the synonyms (instead S, so no need to press shift+s)
 q - translate the word (looking first to find a close match)
