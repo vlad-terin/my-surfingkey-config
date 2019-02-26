@@ -1,6 +1,7 @@
 map('L', 'R');
 map('H', 'E');
 imap('<Alt-w>','<Ctrl-b>');
+imap('Alt-w>','<Ctrl-w>');
 // jj as escape
 imap('jj', "<Esc>");
 /*
@@ -17,7 +18,7 @@ Enjoy!
 */
 
 var setLanguages = function(langSettings) {
-    
+
     // Enter the appropriate app_id and app_key here only
     var _oxfordHeaders = {
         "app_id": "b9c84084",
@@ -33,18 +34,18 @@ var setLanguages = function(langSettings) {
             width: b.width
         }, queryResult, false);
     };
-    
+
     var parseDefinitions = function(res) {
         try {
             var obj = JSON.parse(res.text);
             results = obj.results[0];
             var word = results.word;
-            
+
             var lexEntries = results.lexicalEntries;
-            
+
             var entryHtml = lexEntries.map(function(entry) {
                 var category = entry.lexicalCategory;
-                
+
                 var categoryEntriesHtml = entry.entries[0].senses.map(function(sense) {
                     var senseHtml = "";
                     if (sense.hasOwnProperty("definitions")) {
@@ -58,30 +59,30 @@ var setLanguages = function(langSettings) {
                     }
                     return senseHtml;
                 }).join("");
-                
+
                 var categoryHtml = "<b>" + category + "</b>" + "<ol>" + categoryEntriesHtml + "</ol>";
-                
+
                 return categoryHtml;
             }).join("");
             var html = "<div><h3>Definition of " + word + "</h3>" + entryHtml + "</div>";
-            
+
             return html;
         } catch (e) {
             return res.text;
         }
     };
-    
+
     var parseSynonyms = function(res) {
         try {
             var obj = JSON.parse(res.text);
             results = obj.results[0];
             var word = results.word;
-            
+
             var lexEntries = results.lexicalEntries;
-            
+
             var entryHtml = lexEntries.map(function(entry) {
                 var category = entry.lexicalCategory;
-                
+
                 var categoryEntriesHtml = entry.entries[0].senses.map(function(sense) {
                     var senseHtml = "<li>";
                     if (sense.hasOwnProperty("synonyms")) {
@@ -92,30 +93,30 @@ var setLanguages = function(langSettings) {
                     }
                     return senseHtml;
                 }).join("");
-                
+
                 var categoryHtml = "<b>" + category + "</b>" + "<ol>" + categoryEntriesHtml + "</ol>";
-                
+
                 return categoryHtml;
             }).join("");
             var html = "<div><h3>Synonyms for " + word + "</h3>" + entryHtml + "</div>";
-            
+
             return html;
         } catch (e) {
             return res.text;
         }
     };
-    
+
     var parseAntonyms = function(res) {
         try {
             var obj = JSON.parse(res.text);
             results = obj.results[0];
             var word = results.word;
-            
+
             var lexEntries = results.lexicalEntries;
-            
+
             var entryHtml = lexEntries.map(function(entry) {
                 var category = entry.lexicalCategory;
-                
+
                 var categoryEntriesHtml = entry.entries[0].senses.map(function(sense) {
                     var senseHtml = "<li>";
                     if (sense.hasOwnProperty("antonyms")) {
@@ -126,32 +127,32 @@ var setLanguages = function(langSettings) {
                     }
                     return senseHtml;
                 }).join("");
-                
+
                 var categoryHtml = "<b>" + category + "</b>" + "<ol>" + categoryEntriesHtml + "</ol>";
-                
+
                 return categoryHtml;
             }).join("");
             var html = "<div><h3>Antonyms for " + word + "</h3>" + entryHtml + "</div>";
-            
+
             return html;
         } catch (e) {
             return res.text;
         }
     };
-    
+
     // Function that retrives translations given a response object
     var parseTranslations = function(res) {
         try {
             var obj = JSON.parse(res.text);
-            
+
             results = obj.results[0];
             var word = results.word;
-            
+
             var lexEntries = results.lexicalEntries;
-            
+
             var entryHtml = lexEntries.map(function(entry) {
                 var category = entry.lexicalCategory;
-                
+
                 var categoryEntriesHtml = entry.entries[0].senses.map(function(sense) {
                     var senseHtml = "";
                     if (sense.hasOwnProperty("translations")) {
@@ -165,20 +166,20 @@ var setLanguages = function(langSettings) {
                     }
                     return senseHtml;
                 }).join("");
-                
+
                 var categoryHtml = "<b>" + category + "</b>" + "<ol>" + categoryEntriesHtml + "</ol>";
-                
+
                 return categoryHtml;
             }).join("");
-            
+
             var html = "<div><h3>Translation of " + word + "</h3>" + entryHtml + "</div>";
-            
+
             return html;
         } catch (e) {
             return res.text;
         }
     }
-    
+
     var searchThenQuery = function(obj) {
         var parseResult = function(res, urlCallback, callback) {
             try {
@@ -187,7 +188,7 @@ var setLanguages = function(langSettings) {
                 // obj.results.length > 0 && ["headword", "inflection"].includes(obj.results[0].matchType)
                 if (obj.results.length > 0) {
                     best_match = obj.results[0].id;
-                    
+
                     httpRequest({
                         url: urlCallback(best_match),
                         headers: _oxfordHeaders,
@@ -204,10 +205,10 @@ var setLanguages = function(langSettings) {
         }
         var urlCallback = obj.url_callback;
         var callback = obj.callback;
-        
+
         var query = Visual.getWordUnderCursor();
         var url =  "https://od-api.oxforddictionaries.com/api/v1/search/"
-        
+
         if (obj.hasOwnProperty("translate") && obj.translate) {
             var fromlang = langSettings.translate_from;
             var tolang = langSettings.translate_to;
@@ -216,16 +217,16 @@ var setLanguages = function(langSettings) {
             var lang = langSettings.definitions;
             url = url + lang + "?q=" + query;
         }
-        
+
         httpRequest({
             url: url,
             headers: _oxfordHeaders,
         }, function(res) {
             return parseResult(res, urlCallback, callback);
         });
-        
+
     }
-    
+
     Front.registerInlineQuery({
         url: function(query) {
             var fromlang = langSettings.translate_from;
@@ -235,61 +236,61 @@ var setLanguages = function(langSettings) {
         headers: _oxfordHeaders,
         parseResult: parseTranslations
     });
-    
+
     vmapkey("q", "Translation of the selected word", function() {
         var urlCallback = function(best_match) {
             var fromlang = langSettings.translate_from;
             var tolang = langSettings.translate_to;
             return url = "https://od-api.oxforddictionaries.com/api/v1/entries/" + fromlang + "/" + best_match + "/translations=" + tolang;
         }
-        
+
         searchThenQuery({
             url_callback : urlCallback,
             callback: parseTranslations,
             translate: true
         })
     });
-    
+
     vmapkey("d", "Definition of the selected word", function() {
         var urlCallback = function(best_match) {
             var lang = langSettings.definitions;
             return "https://od-api.oxforddictionaries.com/api/v1/entries/" + lang + "/" + best_match;
         }
-        
+
         searchThenQuery({
             url_callback : urlCallback,
             callback: parseDefinitions,
             translate: false
         })
     });
-    
-    
+
+
     vmapkey("z", "Synonyms of the selected word", function() {
         var urlCallback = function(best_match) {
             var lang = langSettings.definitions;
             return "https://od-api.oxforddictionaries.com/api/v1/entries/" + lang + "/" + best_match + "/synonyms";
         }
-        
+
         searchThenQuery({
             url_callback : urlCallback,
             callback: parseSynonyms,
             translate: false
         })
     });
-    
+
     vmapkey("a", "Antonyms of the selected word", function() {
         var urlCallback = function(best_match) {
             var lang = langSettings.definitions;
             return "https://od-api.oxforddictionaries.com/api/v1/entries/" + lang + "/" + best_match + "/antonyms";
         }
-        
+
         searchThenQuery({
             url_callback : urlCallback,
             callback: parseAntonyms,
             translate: false
         })
-    });    
-    
+    });
+
 };
 
 // Here you set the languages to use for translations, and the language to use for definitions and synonyms.
@@ -305,7 +306,7 @@ setLanguages({
 
 mapkey('B', 'Choose a tab with omnibar', function() {
     Front.openOmnibar({type: "Tabs"});
-    
+
 });
 
 
@@ -338,7 +339,7 @@ addSearchAliasX('os', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=
 //map
 addSearchAliasX('gM', '구글맵', 'https://www.google.com/maps?q=');
 
-//coding 
+//coding
 addSearchAliasX('C', 'search coding', 'https://searchcode.com/?q=');
 addSearchAliasX('cC', 'search coding', 'https://searchcode.com/?q=');
 addSearchAliasX('cW', 'chrome webstore', 'https://chrome.google.com/webstore/search/'); // chrome
@@ -369,7 +370,7 @@ addSearchAliasX('tW', 'tWitter', 'https://twitter.com/search?q=');
 addSearchAliasX('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
 addSearchAliasX('rD', 'redDit', 'https://www.reddit.com/search?q=');
 
-//shorten - what is.. who is.. where is..  
+//shorten - what is.. who is.. where is..
 addSearchAliasX('wA', 'advanced', 'https://www.google.com/search?q=advanced+');
 addSearchAliasX('wB', 'basic', 'https://www.google.com/search?q=basic+');
 addSearchAliasX('wC', 'classification', 'https://www.google.com/search?q=classfication+of+');
@@ -398,7 +399,7 @@ mapkey('ymr', '#7Copy multiple link regex URLs to the clipboard', function () {
 mapkey('yE', '#7 Yank Element info. copy link element id or classname', function () {
     var linksToYank = [];
     Hints.create("", function (element) {
-        
+
         linksToYank.push('id: ' + element.id + '\n');
         linksToYank.push('innertext: ' + element.innerText + '\n');
         linksToYank.push('className: ' + element.className + '\n');
@@ -422,7 +423,7 @@ mapkey('yeA', '#7 Yank Element info. copy link element id or classname', functio
 mapkey('ymE', '#7 Yank Multiple Element info  (copy multiple link element id or classname)', function () {
     var linksToYank = [];
     Hints.create('*[href]', function (element) {
-        
+
         linksToYank.push('id: ' + element.id + '\n');
         linksToYank.push('innertext: ' + element.innerText + '\n');
         linksToYank.push('className: ' + element.className + '\n');
@@ -442,7 +443,7 @@ mapkey('yg', '#7 git clone', function () {
 
 
 //////////////////////////////////////////////////////////
-// visualmode setting 
+// visualmode setting
 //////////////////////////////////////////////////////////
 vmapkey('"y', "surround selection with doube quotation mark", function () {
     Clipboard.write('"' + window.getSelection().toString().replace(/\n/g, " ") + '"');
@@ -512,7 +513,7 @@ vmapkey('msy', "Markdown Strikethrough", function () {
 });
 
 
-//setting 
+//setting
 mapkey('gs', '#12 go Setting - Open Chrome Settings', function () {
     tabOpenLink("chrome://settings/");
 });
