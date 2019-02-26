@@ -1,6 +1,6 @@
 map('L', 'R');
 map('H', 'E');
-imap("Alt-w>","<Ctrl-w>");
+imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
 /*
