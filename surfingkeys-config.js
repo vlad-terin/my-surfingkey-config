@@ -312,7 +312,7 @@ mapkey('B', 'Choose a tab with omnibar', function() {
 // Properties list
 Hints.numericHints           = false;
 settings.omnibarSuggestion   = true;
-settings.defaultSearchEngine = 'l';                          // Google I'm Feeling Luckey
+settings.defaultSearchEngine = 'G';                          // Google I'm Feeling Luckey
 settings.focusFirstCandidate = false;
 
 mapkey(',s', 'opne new tab and split', function () {
