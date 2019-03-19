@@ -4,7 +4,11 @@ imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
 
-// Youtube Fullscreen
+// Youtube Fullscreen, credit github.com/okiptkn/dotfiles
+function ytFullscreen() {
+  $(".ytp-fullscreen-button.ytp-button").click()
+}
+
 const siteleader = "x"
 const ri = { repeatIgnore: true }
 
@@ -19,10 +23,8 @@ function mapsitekeys(d, maps) {
   maps.forEach((map) => {
     mapsitekey(domainRegex, map[0], map[1], map[2])
   })
-
-function ytFullscreen() {
-  $(".ytp-fullscreen-button.ytp-button").click()
 }
+
 mapsitekeys("youtube.com", [
   ['F', 'Toggle fullscreen', ytFullscreen],
 ])
