@@ -4,6 +4,13 @@ imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
 
+// Youtube Fullscreen
+function ytFullscreen() {
+  $(".ytp-fullscreen-button.ytp-button").click()
+}
+mapsitekeys("youtube.com", [
+  ['F', 'Toggle fullscreen', ytFullscreen],
+])
 
 /*
 Usage for Oxford dictionary in visual mode:
