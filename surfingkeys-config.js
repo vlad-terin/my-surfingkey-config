@@ -348,6 +348,9 @@ addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https:
         return r.phrase;
     });
 });
+mapkey('op', '#8Open Search with duckduckgoHTML', function() {
+    Front.openOmnibar({type: "SearchEngine", extra: "p"});
+});
 
 //map
 addSearchAliasX('gM', '구글맵', 'https://www.google.com/maps?q=');
