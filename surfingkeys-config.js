@@ -4,9 +4,6 @@ imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
 
-mapkey('ogH', '#8Open Search with github', function() {
-    Front.openOmnibar({type: "SearchEngine", extra: "gH"});
-});
 
 /*
 Usage for Oxford dictionary in visual mode:
