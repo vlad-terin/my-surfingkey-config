@@ -317,10 +317,7 @@ mapkey('B', 'Choose a tab with omnibar', function() {
 // Properties list
 Hints.numericHints           = false;
 settings.omnibarSuggestion   = true;
-<<<<<<< HEAD
 settings.defaultSearchEngine = 'G';                          // Google I'm Feeling Luckey
-=======
->>>>>>> e4d1ab540a1c0f2aceaece08a168bfe9aa86cae4
 settings.focusFirstCandidate = false;
 
 mapkey(',s', 'opne new tab and split', function () {
