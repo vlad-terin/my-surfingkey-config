@@ -342,7 +342,12 @@ addSearchAliasX('gy', 'googleyear', 'https://www.google.com/search?q={0}&google+
 addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
 addSearchAliasX('ol', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
 addSearchAliasX('os', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
-
+addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
+    var res = JSON.parse(response.text);
+    return res.map(function(r){
+        return r.phrase;
+    });
+});
 
 //map
 addSearchAliasX('gM', '구글맵', 'https://www.google.com/maps?q=');
