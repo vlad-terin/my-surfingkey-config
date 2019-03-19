@@ -3,6 +3,11 @@ map('H', 'E');
 imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
+
+mapkey('ogH', '#8Open Search with github', function() {
+    Front.openOmnibar({type: "SearchEngine", extra: "gH"});
+});
+
 /*
 Usage for Oxford dictionary in visual mode:
 
@@ -312,7 +317,10 @@ mapkey('B', 'Choose a tab with omnibar', function() {
 // Properties list
 Hints.numericHints           = false;
 settings.omnibarSuggestion   = true;
+<<<<<<< HEAD
 settings.defaultSearchEngine = 'G';                          // Google I'm Feeling Luckey
+=======
+>>>>>>> e4d1ab540a1c0f2aceaece08a168bfe9aa86cae4
 settings.focusFirstCandidate = false;
 
 mapkey(',s', 'opne new tab and split', function () {
