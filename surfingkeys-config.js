@@ -5,6 +5,21 @@ imap("<Ctrl-w>","Alt-w>");
 imap('jj', "<Esc>");
 
 // Youtube Fullscreen
+const siteleader = "x"
+const ri = { repeatIgnore: true }
+
+function mapsitekey(domainRegex, key, desc, f, o) {
+  const opts = o || {}
+  mapkey(`${siteleader}${key}`, desc, f, Object.assign({}, opts, { domain: domainRegex }))
+}
+
+function mapsitekeys(d, maps) {
+  const domain = d.replace(".", "\\.")
+  const domainRegex = new RegExp(`^http(s)?://(([a-zA-Z0-9-_]+\\.)*)(${domain})(/.*)?`)
+  maps.forEach((map) => {
+    mapsitekey(domainRegex, map[0], map[1], map[2])
+  })
+
 function ytFullscreen() {
   $(".ytp-fullscreen-button.ytp-button").click()
 }
