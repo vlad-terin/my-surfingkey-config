@@ -321,8 +321,8 @@ var setLanguages = function(langSettings) {
 // Here you set the languages to use for translations, and the language to use for definitions and synonyms.
 
 setLanguages({
-    translate_from: "es",
-    translate_to: "en",
+    translate_from: "en",
+    translate_to: "ru",
     definitions: "en"
 });
 
