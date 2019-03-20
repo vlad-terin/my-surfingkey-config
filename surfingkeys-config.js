@@ -349,6 +349,7 @@ mapkey(',s', 'opne new tab and split', function () {
 removeSearchAliasX('b')
 removeSearchAliasX('g')
 removeSearchAliasX('s')
+removeSearchAliasX('w')
 
 //General
 addSearchAliasX('G', 'Google', 'https://www.google.com/search?q=');
@@ -359,6 +360,7 @@ addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
 addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
 addSearchAliasX('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
 addSearchAliasX('c', 'technical translation', 'https://techterms.com/definition/{0}', 's');
+addSearchAliasX('w', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
 addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
     var res = JSON.parse(response.text);
     return res.map(function(r){
