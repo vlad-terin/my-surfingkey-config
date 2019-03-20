@@ -348,7 +348,6 @@ mapkey(',s', 'opne new tab and split', function () {
 // Removing default search aliases
 removeSearchAliasX('b')
 removeSearchAliasX('g')
-removeSearchAliasX('w')
 removeSearchAliasX('s')
 
 //General
