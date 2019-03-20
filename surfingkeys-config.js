@@ -322,7 +322,7 @@ var setLanguages = function(langSettings) {
 
 setLanguages({
     translate_from: "en",
-    translate_to: "ru",
+    translate_to: "en",
     definitions: "en"
 });
 
