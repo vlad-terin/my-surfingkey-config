@@ -357,8 +357,9 @@ addSearchAliasX('gm', 'googlemonth', 'https://www.google.com/search?q={0}&es_sm=
 addSearchAliasX('gw', 'googleweek', 'https://www.google.com/search?q={0}&source=lnt&tbs=qdr:w&sa=X&ved=0ahUKEwiC88iB14bfAhUzKX0KHUMpBhAQpwUIJg&biw=1920&bih=970', 's');
 addSearchAliasX('gy', 'googleyear', 'https://www.google.com/search?q={0}&google+year&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
 addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
-addSearchAliasX('ol', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
-addSearchAliasX('os', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
+addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
+addSearchAliasX('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
+addSearchAliasX('c', 'technical translation', 'https://techterms.com/definition/{0}', 's');
 addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
     var res = JSON.parse(response.text);
     return res.map(function(r){
