@@ -5,13 +5,14 @@ imap("<Ctrl-w>","Alt-w>");
 imap('jj', "<Esc>");
 map('sU', 'su');
 
-{
-  alias:       "yI",
-  category:    categories.clipboard,
-  description: "Copy Image URL",
-  callback:    actions.createHint("img", i => Clipboard.write(i.src)),
+const maps = {
+    {
+      alias:       "yI",
+      category:    categories.clipboard,
+      description: "Copy Image URL",
+      callback:    actions.createHint("img", i => Clipboard.write(i.src)),
+    }
 }
-
 // Youtube Fullscreen, credit github.com/okiptkn/dotfiles
 function ytFullscreen() {
   $(".ytp-fullscreen-button.ytp-button").click()
