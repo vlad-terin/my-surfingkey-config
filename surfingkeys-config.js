@@ -3,6 +3,7 @@ map('H', 'E');
 imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
+map('sU', 'su');
 
 // Youtube Fullscreen, credit github.com/okiptkn/dotfiles
 function ytFullscreen() {
