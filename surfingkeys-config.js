@@ -233,7 +233,7 @@ var setLanguages = function(langSettings) {
         var callback = obj.callback;
 
         var query = Visual.getWordUnderCursor();
-        var url =  "https://od-api.oxforddictionaries.com/api/v1/search/"
+        var url =  "https://od-api.oxforddictionaries.com/api/v2/search/"
 
         if (obj.hasOwnProperty("translate") && obj.translate) {
             var fromlang = langSettings.translate_from;
@@ -257,7 +257,7 @@ var setLanguages = function(langSettings) {
         url: function(query) {
             var fromlang = langSettings.translate_from;
             var tolang = langSettings.translate_to;
-            return "https://od-api.oxforddictionaries.com/api/v1/entries/" + fromlang + "/" + query + "/translations=" + tolang;
+            return "https://od-api.oxforddictionaries.com/api/v2/entries/" + fromlang + "/" + query + "/translations=" + tolang;
         },
         headers: _oxfordHeaders,
         parseResult: parseTranslations
@@ -267,7 +267,7 @@ var setLanguages = function(langSettings) {
         var urlCallback = function(best_match) {
             var fromlang = langSettings.translate_from;
             var tolang = langSettings.translate_to;
-            return url = "https://od-api.oxforddictionaries.com/api/v1/entries/" + fromlang + "/" + best_match + "/translations=" + tolang;
+            return url = "https://od-api.oxforddictionaries.com/api/v2/entries/" + fromlang + "/" + best_match + "/translations=" + tolang;
         }
 
         searchThenQuery({
@@ -280,7 +280,7 @@ var setLanguages = function(langSettings) {
     vmapkey("d", "Definition of the selected word", function() {
         var urlCallback = function(best_match) {
             var lang = langSettings.definitions;
-            return "https://od-api.oxforddictionaries.com/api/v1/entries/" + lang + "/" + best_match;
+            return "https://od-api.oxforddictionaries.com/api/v2/entries/" + lang + "/" + best_match;
         }
 
         searchThenQuery({
@@ -294,7 +294,7 @@ var setLanguages = function(langSettings) {
     vmapkey("z", "Synonyms of the selected word", function() {
         var urlCallback = function(best_match) {
             var lang = langSettings.definitions;
-            return "https://od-api.oxforddictionaries.com/api/v1/entries/" + lang + "/" + best_match + "/synonyms";
+            return "https://od-api.oxforddictionaries.com/api/v2/entries/" + lang + "/" + best_match + "/synonyms";
         }
 
         searchThenQuery({
@@ -307,7 +307,7 @@ var setLanguages = function(langSettings) {
     vmapkey("a", "Antonyms of the selected word", function() {
         var urlCallback = function(best_match) {
             var lang = langSettings.definitions;
-            return "https://od-api.oxforddictionaries.com/api/v1/entries/" + lang + "/" + best_match + "/antonyms";
+            return "https://od-api.oxforddictionaries.com/api/v2/entries/" + lang + "/" + best_match + "/antonyms";
         }
 
         searchThenQuery({
