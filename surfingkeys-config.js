@@ -9,6 +9,7 @@ map('ls', ':listSession');
 map('ds', ':deleteSession');
 map('cs', ':createSession');
 
+
 // Youtube Fullscreen, credit github.com/okiptkn/dotfiles
 function ytFullscreen() {
   $(".ytp-fullscreen-button.ytp-button").click()
@@ -52,7 +53,7 @@ var setLanguages = function(langSettings) {
     // Enter the appropriate app_id and app_key here only
     var _oxfordHeaders = {
         "app_id": "b9c84084",
-        "app_key": "d42eb3691962912038a7700945ef6f51"
+        "app_key": "b96b8e9a328df6d70563d04c6ec4dcf4"
     };
 
     var _showOxfordQueryResult = function(queryResult) {
