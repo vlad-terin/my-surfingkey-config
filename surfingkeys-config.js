@@ -5,9 +5,7 @@ imap("<Ctrl-w>","Alt-w>");
 imap('jj', "<Esc>");
 map('sU', 'su');
 map('os', ':openSession');
-map('ls', ':listSession');
-map('ds', ':deleteSession');
-map('cs', ':createSession');
+
 
 
 // Youtube Fullscreen, credit github.com/okiptkn/dotfiles
