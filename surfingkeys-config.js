@@ -6,6 +6,8 @@ imap('jj', "<Esc>");
 map('sU', 'su');
 map('os', ':openSession');
 
+settings.stealFocusOnLoad = true;
+
 // Surfingkey Ctrl-p Ctrl-n in google
 if (window.origin === "https://www.google.com") {
     function cycleGoogleSuggestions(forward) {
