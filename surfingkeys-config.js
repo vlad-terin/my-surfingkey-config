@@ -674,12 +674,7 @@ mapkey('gT', 'Goto Text Area', function () {
     .sk_theme .omnibar_visitcount {
         color: #98c379;
     }
-    .sk_theme #sk_omnibarSearchResult>ul>li:nth-child(odd) {
-        background: #303030;
-    }
-    .sk_theme #sk_omnibarSearchResult>ul>li.focused {
-        background: #3e4452;
-    }
+  
     #sk_status, #sk_find {
         font-size: 20pt;
     }`;
