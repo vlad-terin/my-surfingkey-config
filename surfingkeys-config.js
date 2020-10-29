@@ -67,26 +67,26 @@ addSearchAliasX('lT', 'language Typescript', 'https://www.google.com/search?q=Ty
 addSearchAliasX('lH', 'language HTML', 'https://www.google.com/search?q=HTML+');
 
 //sns
-addSearchAliasX('fB', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
-addSearchAliasX('tW', 'tWitter', 'https://twitter.com/search?q=');
+addSearchAliasX('fb', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
+addSearchAliasX('tw', 'tWitter', 'https://twitter.com/search?q=');
 addSearchAliasX('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
-addSearchAliasX('rD', 'redDit', 'https://www.reddit.com/search?q=');
+addSearchAliasX('rd', 'redDit', 'https://www.reddit.com/search?q=');
 
 //shorten - what is.. who is.. where is..
-addSearchAliasX('wA', 'advanced', 'https://www.google.com/search?q=advanced+');
-addSearchAliasX('wB', 'basic', 'https://www.google.com/search?q=basic+');
-addSearchAliasX('wC', 'classification', 'https://www.google.com/search?q=classfication+of+');
-addSearchAliasX('wD', 'difference', 'https://www.google.com/search?q=difference+between+');
-addSearchAliasX('wE', 'example', 'https://www.google.com/search?q=example+of+');
-addSearchAliasX('wF', 'wherefrom', 'https://www.google.com/search?q=where+from+');
-addSearchAliasX('wG', 'goalof', 'https://www.google.com/search?q=what+is+goal+of+');
-addSearchAliasX('wH', 'historyof', 'https://www.google.com/search?q=history+of+');
-addSearchAliasX('wI', 'introductionof', 'https://www.google.com/search?q=Introduction+of');
+addSearchAliasX('wa', 'advanced', 'https://www.google.com/search?q=advanced+');
+addSearchAliasX('wb', 'basic', 'https://www.google.com/search?q=basic+');
+addSearchAliasX('wc', 'classification', 'https://www.google.com/search?q=classfication+of+');
+addSearchAliasX('wd', 'difference', 'https://www.google.com/search?q=difference+between+');
+addSearchAliasX('we', 'example', 'https://www.google.com/search?q=example+of+');
+addSearchAliasX('ww', 'wherefrom', 'https://www.google.com/search?q=where+from+');
+addSearchAliasX('wg', 'goalof', 'https://www.google.com/search?q=what+is+goal+of+');
+addSearchAliasX('wh', 'historyof', 'https://www.google.com/search?q=history+of+');
+addSearchAliasX('wi', 'introductionof', 'https://www.google.com/search?q=Introduction+of');
 //file
-addSearchAliasX('pdF', 'pdf', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Apdf+');
-addSearchAliasX('cpP', 'cpp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Acpp+');
-addSearchAliasX('hwP', 'hwp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Ahwp+');
-addSearchAliasX('ppT', 'ppt', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Appt+');
+addSearchAliasX('pdf', 'pdf', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Apdf+');
+addSearchAliasX('cpp', 'cpp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Acpp+');
+addSearchAliasX('hwp', 'hwp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Ahwp+');
+addSearchAliasX('ppt', 'ppt', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Appt+');
 
 
 // Surfingkey Ctrl-p Ctrl-n in google
