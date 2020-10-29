@@ -393,17 +393,20 @@ addSearchAliasX('G', 'Google', 'https://www.google.com/search?q=');
 addSearchAliasX('gm', 'googlemonth', 'https://www.google.com/search?q={0}&es_sm=93&source=lnt&tbs=qdr:m&sa=X&ved=0CBUQpwVqFQoTCNvLqLq-gskCFYrUJgodrW4KCw&biw=1280&bih=637', 's');
 addSearchAliasX('gw', 'googleweek', 'https://www.google.com/search?q={0}&source=lnt&tbs=qdr:w&sa=X&ved=0ahUKEwiC88iB14bfAhUzKX0KHUMpBhAQpwUIJg&biw=1920&bih=970', 's');
 addSearchAliasX('gy', 'googleyear', 'https://www.google.com/search?q={0}&google+year&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
+addSearchAliasX('gd', 'googleday', 'https://www.google.com/search?q={0}&google+day&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
+
 addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
 addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
 addSearchAliasX('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
+addSearchAliasX('d', 'google drive search', 'https://drive.google.com/drive/u/1/search?q=', 's');
 addSearchAliasX('c', 'technical translation', 'https://techterms.com/definition/{0}', 's');
 addSearchAliasX('w', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
-addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
-    var res = JSON.parse(response.text);
-    return res.map(function(r){
-        return r.phrase;
-    });
-});
+//addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
+//    var res = JSON.parse(response.text);
+//    return res.map(function(r){
+//        return r.phrase;
+//    });
+//});
 mapkey('op', '#8Open Search with duckduckgoHTML', function() {
     Front.openOmnibar({type: "SearchEngine", extra: "p"});
 });
