@@ -26,7 +26,7 @@ addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
 addSearchAliasX('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
 addSearchAliasX('d', 'google drive search', 'https://drive.google.com/drive/u/1/search?q=', 's');
 addSearchAliasX('c', 'technical translation', 'https://techterms.com/definition/{0}', 's');
-//addSearchAliasX('w', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
+addSearchAliasX('w', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
 //addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
 //    var res = JSON.parse(response.text);
 //    return res.map(function(r){
@@ -67,10 +67,10 @@ addSearchAliasX('lT', 'language Typescript', 'https://www.google.com/search?q=Ty
 addSearchAliasX('lH', 'language HTML', 'https://www.google.com/search?q=HTML+');
 
 //sns
-addSearchAliasX('fb', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
-addSearchAliasX('tw', 'tWitter', 'https://twitter.com/search?q=');
+addSearchAliasX('fB', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
+addSearchAliasX('tW', 'tWitter', 'https://twitter.com/search?q=');
 addSearchAliasX('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
-addSearchAliasX('rd', 'redDit', 'https://www.reddit.com/search?q=');
+addSearchAliasX('rD', 'redDit', 'https://www.reddit.com/search?q=');
 
 //shorten - what is.. who is.. where is..
 addSearchAliasX('wA', 'advanced', 'https://www.google.com/search?q=advanced+');
@@ -86,7 +86,8 @@ addSearchAliasX('wI', 'introductionof', 'https://www.google.com/search?q=Introdu
 addSearchAliasX('pdF', 'pdf', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Apdf+');
 addSearchAliasX('cpP', 'cpp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Acpp+');
 addSearchAliasX('hwP', 'hwp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Ahwp+');
-addSearchAliasX('ppT', 'ppt', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=fil
+addSearchAliasX('ppT', 'ppt', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Appt+');
+
 
 // Surfingkey Ctrl-p Ctrl-n in google
 if (window.origin === "https://www.google.com") {
@@ -462,85 +463,6 @@ mapkey(',s', 'opne new tab and split', function () {
     RUNTIME("newWindow");
 });
 
-// Removing default search aliases
-removeSearchAliasX('b')
-removeSearchAliasX('g')
-removeSearchAliasX('s')
-removeSearchAliasX('w')
-
-//General
-addSearchAliasX('G', 'Google', 'https://www.google.com/search?q=');
-addSearchAliasX('gm', 'googlemonth', 'https://www.google.com/search?q={0}&es_sm=93&source=lnt&tbs=qdr:m&sa=X&ved=0CBUQpwVqFQoTCNvLqLq-gskCFYrUJgodrW4KCw&biw=1280&bih=637', 's');
-addSearchAliasX('gw', 'googleweek', 'https://www.google.com/search?q={0}&source=lnt&tbs=qdr:w&sa=X&ved=0ahUKEwiC88iB14bfAhUzKX0KHUMpBhAQpwUIJg&biw=1920&bih=970', 's');
-addSearchAliasX('gy', 'googleyear', 'https://www.google.com/search?q={0}&google+year&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
-addSearchAliasX('gd', 'googleday', 'https://www.google.com/search?q={0}&rlz=1C1CHBF_enUS823US823&sxsrf=ALeKk039hxPcS_8R26jZwfSMlMpaeP6e9Q:1603992141705&source=lnt&tbs=qdr:d&sa=X&ved=2ahUKEwj6qNCuqNrsAhVQM6wKHYqqDN0QpwV6BAgPEBw&biw=1920&bih=1007', 's');
-
-addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
-addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
-addSearchAliasX('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
-addSearchAliasX('d', 'google drive search', 'https://drive.google.com/drive/u/1/search?q=', 's');
-addSearchAliasX('c', 'technical translation', 'https://techterms.com/definition/{0}', 's');
-addSearchAliasX('w', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
-//addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
-//    var res = JSON.parse(response.text);
-//    return res.map(function(r){
-//        return r.phrase;
-//    });
-//});
-mapkey('op', '#8Open Search with duckduckgoHTML', function() {
-    Front.openOmnibar({type: "SearchEngine", extra: "p"});
-});
-
-//map
-addSearchAliasX('gM', '구글맵', 'https://www.google.com/maps?q=');
-
-//coding
-addSearchAliasX('C', 'search coding', 'https://searchcode.com/?q=');
-addSearchAliasX('cC', 'search coding', 'https://searchcode.com/?q=');
-addSearchAliasX('cW', 'chrome webstore', 'https://chrome.google.com/webstore/search/'); // chrome
-addSearchAliasX('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
-addSearchAliasX('gH', 'github', 'https://github.com/search?q=');
-addSearchAliasX('ghS', 'githubStars', 'https://github.com/vlad-terin?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
-addSearchAliasX('gC', 'githubCode', 'https://github.com/search?q={0}&type=Code');
-
-//language
-addSearchAliasX('lJ', 'language Javascript', 'https://www.google.com/search?q=Javascript+');
-addSearchAliasX('lj', 'language java', 'https://www.google.com/search?q=Java+');
-addSearchAliasX('lC', 'C++', 'https://www.google.com/search?q=C++');
-addSearchAliasX('lc', 'language c', 'https://www.google.com/search?q=c+language+');
-addSearchAliasX('l#', 'language C#', 'https://www.google.com/search?q=c%23+');
-addSearchAliasX('lR', 'language R', 'https://www.google.com/search?q=languag+');
-addSearchAliasX('lr', 'language Ruby', 'https://www.google.com/search?q=Ruby+');
-addSearchAliasX('lP', 'language Python', 'https://www.google.com/search?q=Python+');
-addSearchAliasX('lp', 'language php', 'https://www.google.com/search?q=php+');
-addSearchAliasX('lK', 'language Kotlin', 'https://www.google.com/search?q=Kotlin+');
-addSearchAliasX('lS', 'language Swift', 'https://www.google.com/search?q=Swift+');
-addSearchAliasX('lQ', 'language SQL Query', 'https://www.google.com/search?q=SQL+');
-addSearchAliasX('ls', 'language Shell script', 'https://www.google.com/search?q=Shell+Schript+');
-addSearchAliasX('lT', 'language Typescript', 'https://www.google.com/search?q=TypeScript+');
-addSearchAliasX('lH', 'language HTML', 'https://www.google.com/search?q=HTML+');
-
-//sns
-addSearchAliasX('fB', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
-addSearchAliasX('tW', 'tWitter', 'https://twitter.com/search?q=');
-addSearchAliasX('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
-addSearchAliasX('rD', 'redDit', 'https://www.reddit.com/search?q=');
-
-//shorten - what is.. who is.. where is..
-addSearchAliasX('wA', 'advanced', 'https://www.google.com/search?q=advanced+');
-addSearchAliasX('wB', 'basic', 'https://www.google.com/search?q=basic+');
-addSearchAliasX('wC', 'classification', 'https://www.google.com/search?q=classfication+of+');
-addSearchAliasX('wD', 'difference', 'https://www.google.com/search?q=difference+between+');
-addSearchAliasX('wE', 'example', 'https://www.google.com/search?q=example+of+');
-addSearchAliasX('wF', 'wherefrom', 'https://www.google.com/search?q=where+from+');
-addSearchAliasX('wG', 'goalof', 'https://www.google.com/search?q=what+is+goal+of+');
-addSearchAliasX('wH', 'historyof', 'https://www.google.com/search?q=history+of+');
-addSearchAliasX('wI', 'introductionof', 'https://www.google.com/search?q=Introduction+of');
-//file
-addSearchAliasX('pdF', 'pdf', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Apdf+');
-addSearchAliasX('cpP', 'cpp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Acpp+');
-addSearchAliasX('hwP', 'hwp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Ahwp+');
-addSearchAliasX('ppT', 'ppt', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Appt+');
 
 mapkey('ymr', '#7Copy multiple link regex URLs to the clipboard', function () {
     var linksToYank = [];
