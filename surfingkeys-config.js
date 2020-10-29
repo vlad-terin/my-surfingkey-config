@@ -393,7 +393,7 @@ addSearchAliasX('G', 'Google', 'https://www.google.com/search?q=');
 addSearchAliasX('gm', 'googlemonth', 'https://www.google.com/search?q={0}&es_sm=93&source=lnt&tbs=qdr:m&sa=X&ved=0CBUQpwVqFQoTCNvLqLq-gskCFYrUJgodrW4KCw&biw=1280&bih=637', 's');
 addSearchAliasX('gw', 'googleweek', 'https://www.google.com/search?q={0}&source=lnt&tbs=qdr:w&sa=X&ved=0ahUKEwiC88iB14bfAhUzKX0KHUMpBhAQpwUIJg&biw=1920&bih=970', 's');
 addSearchAliasX('gy', 'googleyear', 'https://www.google.com/search?q={0}&google+year&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
-addSearchAliasX('gd', 'googleday', 'https://www.google.com/search?q={0}&google+day&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
+addSearchAliasX('gd', 'googleday', 'https://www.google.com/search?q={0}&rlz=1C1CHBF_enUS823US823&sxsrf=ALeKk039hxPcS_8R26jZwfSMlMpaeP6e9Q:1603992141705&source=lnt&tbs=qdr:d&sa=X&ved=2ahUKEwj6qNCuqNrsAhVQM6wKHYqqDN0QpwV6BAgPEBw&biw=1920&bih=1007', 's');
 
 addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
 addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
