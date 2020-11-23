@@ -14,12 +14,37 @@ removeSearchAliasX('g')
 removeSearchAliasX('s')
 removeSearchAliasX('w')
 
+// [+] Remove omnibar mappings to removed search aliases
+unmap('ob');
+unmap('og');
+unmap('os');
+unmap('ow');
+
 //General
-addSearchAliasX('G', 'Google', 'https://www.google.com/search?q=');
-addSearchAliasX('gm', 'googlemonth', 'https://www.google.com/search?q={0}&es_sm=93&source=lnt&tbs=qdr:m&sa=X&ved=0CBUQpwVqFQoTCNvLqLq-gskCFYrUJgodrW4KCw&biw=1280&bih=637', 's');
-addSearchAliasX('gw', 'googleweek', 'https://www.google.com/search?q={0}&source=lnt&tbs=qdr:w&sa=X&ved=0ahUKEwiC88iB14bfAhUzKX0KHUMpBhAQpwUIJg&biw=1920&bih=970', 's');
-addSearchAliasX('gy', 'googleyear', 'https://www.google.com/search?q={0}&google+year&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
-addSearchAliasX('gd', 'googleday', 'https://www.google.com/search?q={0}&rlz=1C1CHBF_enUS823US823&sxsrf=ALeKk039hxPcS_8R26jZwfSMlMpaeP6e9Q:1603992141705&source=lnt&tbs=qdr:d&sa=X&ved=2ahUKEwj6qNCuqNrsAhVQM6wKHYqqDN0QpwV6BAgPEBw&biw=1920&bih=1007', 's');
+
+// [+-] Google searches
+(function(){
+
+const
+openOmnibar = function(){ Front.openOmnibar(this); },
+// addSearchAliasX and omnibar mapping (removes previous omnibar mapping)
+addSAXWithOmnibar = function(){
+    unmap('o'+ arguments[0]);
+    
+    addSearchAliasX.apply(null, arguments);
+    
+    mapkey('o'+ arguments[0], 'Open with '+ arguments[1], openOmnibar.bind({type: "SearchEngine", extra: arguments[0] +''}));
+},
+googleSearchBase = 'https://www.google.com/search?q={0}';
+
+addSAXWithOmnibar('G', 'Google', googleSearchBase, 's');
+addSAXWithOmnibar('gm', 'googlemonth', googleSearchBase +'&tbs=qdr:m', 's');
+addSAXWithOmnibar('gw', 'googleweek', googleSearchBase +'&tbs=qdr:w', 's');
+addSAXWithOmnibar('gy', 'googleyear', googleSearchBase +'&tbs=qdr:y', 's');
+addSAXWithOmnibar('gd', 'googleday', googleSearchBase +'&tbs=qdr:d', 's');
+addSAXWithOmnibar('gh', 'googlehour', googleSearchBase +'&tbs=qdr:h', 's');
+
+})();
 
 addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
 addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
