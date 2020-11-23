@@ -4,7 +4,7 @@ imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
 map('sU', 'su');
-map('os', ':openSession');
+
 
 settings.stealFocusOnLoad = true;
 
