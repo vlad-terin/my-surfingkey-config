@@ -25,15 +25,15 @@ unmap('ow');
 // [+-] Google searches
 (function(){
 
+const
+openOmnibar = function(){ Front.openOmnibar(this); },
 // addSearchAliasX and omnibar mapping (removes previous omnibar mapping)
-const addSAXWithOmnibar = function(){
+addSAXWithOmnibar = function(){
     unmap('o'+ arguments[0]);
     
     addSearchAliasX.apply(null, arguments);
     
-    mapkey('o'+ arguments[0], 'Open with '+ arguments[1], function(){
-        Front.openOmnibar({type: "SearchEngine", extra: this[0]});
-    }.bind([arguments[0] +'']));
+    mapkey('o'+ arguments[0], 'Open with '+ arguments[1], openOmnibar.bind({type: "SearchEngine", extra: arguments[0] +''}));
 },
 googleSearchBase = 'https://www.google.com/search?q={0}';
 
