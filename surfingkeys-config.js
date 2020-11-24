@@ -766,7 +766,7 @@ settings.theme = `
 :root {
   /* Font */
   --font: 'Source Code Pro', Ubuntu, sans;
-  --font-size: 12;
+  --font-size: 14;
   --font-weight: bold;
   /* -------------- */
   /* --- THEMES --- */
