@@ -46,6 +46,50 @@ addSAXWithOmnibar('gh', 'googlehour', googleSearchBase +'&tbs=qdr:h', 's');
 
 })();
 
+// [+] Session command shortcuts
+(function(){
+
+const
+omnibarCmdArgs = { type: 'Commands' },
+mapToCmdPrefix = function(key, cmdPrefix, optionalOmnibarName){
+    mapkey(key, (optionalOmnibarName || (':'+ (cmdPrefix || ''))) +'', function(){
+        // open command omnibar (equivalent to ':' key press)
+        Front.openOmnibar(omnibarCmdArgs);
+    
+        // find omnibar frame and fill command input field with cmdPrefix
+        for (var i = 0, l = this.frames.length; i < l; i++){
+            try{
+                var w = this.frames[i],
+                d = w.document;
+                
+                if (/.*\/pages\/frontend\.html$/i.test(d.URL)){
+                    w.setTimeout(function(i){
+                        var omnibarInput = d.getElementById('sk_omnibarSearchArea').getElementsByTagName('input')[0];
+                        omnibarInput.value = cmdPrefix;
+                        omnibarInput.focus();
+                        omnibarInput.dispatchEvent(new Event('input'));
+                    }, 64, i);
+                    
+                    break;
+                }
+            }catch(e){
+                //window.console.log(e);
+            }
+        }
+    });
+};
+
+// Temporary naming (better to build Huffman-like tree from all registered keybindings to test for possible conflicts)
+// [o]mnibar - main state
+// [s]ession - common part
+// [ ] - changing part - action name
+mapToCmdPrefix('osc', 'createSession ');
+mapToCmdPrefix('osd', 'deleteSession ');
+mapToCmdPrefix('osl', 'listSession');
+mapToCmdPrefix('oso', 'openSession ');
+
+})();
+
 addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
 addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
 addSearchAliasX('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
