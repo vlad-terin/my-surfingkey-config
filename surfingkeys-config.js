@@ -107,7 +107,7 @@ saxo('ww', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
 saxo('ppp', 'duckHTML', 'https://duckduckgo.com/html/?q={0}', 's');
 
 //map
-saxo('gM', '구글맵', 'https://www.google.com/maps?q=');
+saxo('gM', 'google maps', 'https://www.google.com/maps?q=');
 
 //coding
 saxo('C', 'search coding', 'https://searchcode.com/?q=');
@@ -153,10 +153,10 @@ saxo('wh', 'historyof', googleSearchQ +'history+of+');
 saxo('wi', 'introductionof', googleSearchQ +'Introduction+of');
 
 //file
-saxo('pdf', 'pdf', googleSearchQ +'filetype%3Apdf+');
-saxo('cpp', 'cpp', googleSearchQ +'filetype%3Acpp+');
-saxo('hwp', 'hwp', googleSearchQ +'filetype%3Ahwp+');
-saxo('ppt', 'ppt', googleSearchQ +'filetype%3Appt+');
+saxo('ftpdf', 'pdf', googleSearchQ +'filetype%3Apdf+');
+saxo('ftcpp', 'cpp', googleSearchQ +'filetype%3Acpp+');
+saxo('fthwp', 'hwp', googleSearchQ +'filetype%3Ahwp+');
+saxo('ftppt', 'ppt', googleSearchQ +'filetype%3Appt+');
 
 
 
