@@ -13,149 +13,201 @@ removeSearchAliasX('b')
 removeSearchAliasX('g')
 removeSearchAliasX('s')
 removeSearchAliasX('w')
+removeSearchAliasX('p');
 
 // [+] Remove omnibar mappings to removed search aliases
 unmap('ob');
 unmap('og');
 unmap('os');
 unmap('ow');
+unmap('op');
+
+
 
 //General
 
-// [+-] Google searches
 (function(){
 
 const
-openOmnibar = function(){ Front.openOmnibar(this); },
+// put first to minimize retained size
+openSearchOmnibar = function(){ Front.openOmnibar({ type: 'SearchEngine', extra: this.extra }); }
+//,openLink = function(){ RUNTIME("openLink", { tab: { tabbed: true, active: true }, url: this.url }); }
+,cl = window.console.log.bind(window.console)
+// fix overrides so this block of code can be replaced by NOOP
+// @todo: consider reporting all registered mappings that can be [before|after] key sequence
+// normalOverrideF
+,nOF = function(key){
+    const nmEntry = Normal.mappings.find(key);
+    
+    if (nmEntry){
+        // if meta isn't present then we're blocking set of key sequences
+        cl('Override of '+ key, nmEntry.meta || nmEntry);
+    }
+}
 // addSearchAliasX and omnibar mapping (removes previous omnibar mapping)
-addSAXWithOmnibar = function(){
-    unmap('o'+ arguments[0]);
+// addSAXWithOmnibar
+,saxo = function(){
+    const a = arguments,
+    key  = a[0],
+    desc = a[1],
+    okey = 'o'+ key,
+    skey = 's'+ key;
+
+    nOF(key);
+    nOF(okey);
+    nOF(skey);
     
-    addSearchAliasX.apply(null, arguments);
+    // overall 59 global searches registered
+    // @todo: plan out hotkeys for searches
+    // key, okey, skey will be taken by them
     
-    mapkey('o'+ arguments[0], 'Open with '+ arguments[1], openOmnibar.bind({type: "SearchEngine", extra: arguments[0] +''}));
-},
-googleSearchBase = 'https://www.google.com/search?q={0}';
+    // adds key and 's'+ key mappings:
+    // open new search tab (doesn't work, fix below)
+    // search selected text in new tab (works)
+    addSearchAliasX.apply(null, a);
+    
+    // 1 character hotkeys break whole thing
+    // unmap(key);
+    // mapkey(key, a[0], openLink.bind({ url: a[2].split('{0}')[0] }));
+    
+    unmap(okey);
+    // adds 'o'+ key mapping (open Omnibar to trigger search selected text in new tab on Enter, where selected text is value in Omnibar) 
+    mapkey(okey, 'Open with '+ desc, openSearchOmnibar.bind({ extra: key }));
+};
 
-addSAXWithOmnibar('G', 'Google', googleSearchBase, 's');
-addSAXWithOmnibar('gm', 'googlemonth', googleSearchBase +'&tbs=qdr:m', 's');
-addSAXWithOmnibar('gw', 'googleweek', googleSearchBase +'&tbs=qdr:w', 's');
-addSAXWithOmnibar('gy', 'googleyear', googleSearchBase +'&tbs=qdr:y', 's');
-addSAXWithOmnibar('gd', 'googleday', googleSearchBase +'&tbs=qdr:d', 's');
-addSAXWithOmnibar('gh', 'googlehour', googleSearchBase +'&tbs=qdr:h', 's');
 
-})();
 
-// [+] Session command shortcuts
-(function(){
-
+// Searches
+// @todo: registered key sequences are free for mapping, must decide if it should be so
+// @note: press [o|s] and wait for a list of possible commands (must be >=59 in both, otherwise some conflict blocked something)
 const
-omnibarCmdArgs = { type: 'Commands' },
-mapToCmdPrefix = function(key, cmdPrefix, optionalOmnibarName){
+googleSearchQ = 'https://www.google.com/search?q='
+,googleSearchBase = googleSearchQ +'{0}'
+,tStr = googleSearchBase +'&tbs=qdr:';
+
+saxo('G', 'Google', googleSearchBase, 's');
+saxo('gm', 'googlemonth', tStr +'m', 's');
+saxo('gw', 'googleweek', tStr +'w', 's');
+saxo('gy', 'googleyear', tStr +'y', 's');
+saxo('gd', 'googleday', tStr +'d', 's');
+saxo('gh', 'googlehour', tStr +'h', 's');
+
+// conflict, changed from l to ll
+saxo('ll', 'lucky', googleSearchBase +'&btnI', 's');
+// conflict, changed from t to tt
+saxo('tt', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
+saxo('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s={0}', 's');
+saxo('d', 'google drive search', 'https://drive.google.com/drive/u/1/search?q={0}', 's');
+// conflict, changed from c to cc
+saxo('cc', 'technical translation', 'https://techterms.com/definition/{0}', 's');
+// conflict, changed from w to ww
+saxo('ww', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
+
+// conflict, changed from p to ppp
+saxo('ppp', 'duckHTML', 'https://duckduckgo.com/html/?q={0}', 's');
+
+//map
+saxo('gM', '구글맵', 'https://www.google.com/maps?q=');
+
+//coding
+saxo('C', 'search coding', 'https://searchcode.com/?q=');
+saxo('cC', 'search coding', 'https://searchcode.com/?q=');
+saxo('cW', 'chrome webstore', 'https://chrome.google.com/webstore/search/'); // chrome
+saxo('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
+saxo('gH', 'github', 'https://github.com/search?q=');
+saxo('ghS', 'githubStars', 'https://github.com/vlad-terin?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
+saxo('gC', 'githubCode', 'https://github.com/search?q={0}&type=Code');
+
+//language
+saxo('lJ', 'language Javascript', googleSearchQ +'Javascript+');
+saxo('lj', 'language java', googleSearchQ +'Java+');
+saxo('lC', 'C++', googleSearchQ +'C++');
+saxo('lc', 'language c', googleSearchQ +'c+language+');
+saxo('l#', 'language C#', googleSearchQ +'c%23+');
+saxo('lR', 'language R', googleSearchQ +'languag+');
+saxo('lr', 'language Ruby', googleSearchQ +'Ruby+');
+saxo('lP', 'language Python', googleSearchQ +'Python+');
+saxo('lp', 'language php', googleSearchQ +'php+');
+saxo('lK', 'language Kotlin', googleSearchQ +'Kotlin+');
+saxo('lS', 'language Swift', googleSearchQ +'Swift+');
+saxo('lQ', 'language SQL Query', googleSearchQ +'SQL+');
+saxo('ls', 'language Shell script', googleSearchQ +'Shell+Schript+');
+saxo('lT', 'language Typescript', googleSearchQ +'TypeScript+');
+saxo('lH', 'language HTML', googleSearchQ +'HTML+');
+
+//sns
+saxo('fb', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
+saxo('tw', 'tWitter', 'https://twitter.com/search?q=');
+saxo('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
+saxo('rd', 'redDit', 'https://www.reddit.com/search?q=');
+
+//shorten - what is.. who is.. where is..
+saxo('wa', 'advanced', googleSearchQ +'advanced+');
+saxo('wb', 'basic', googleSearchQ +'basic+');
+saxo('wc', 'classification', googleSearchQ +'classfication+of+');
+saxo('wd', 'difference', googleSearchQ +'difference+between+');
+saxo('we', 'example', googleSearchQ +'example+of+');
+saxo('ww', 'wherefrom', googleSearchQ +'where+from+');
+saxo('wg', 'goalof', googleSearchQ +'what+is+goal+of+');
+saxo('wh', 'historyof', googleSearchQ +'history+of+');
+saxo('wi', 'introductionof', googleSearchQ +'Introduction+of');
+
+//file
+saxo('pdf', 'pdf', googleSearchQ +'filetype%3Apdf+');
+saxo('cpp', 'cpp', googleSearchQ +'filetype%3Acpp+');
+saxo('hwp', 'hwp', googleSearchQ +'filetype%3Ahwp+');
+saxo('ppt', 'ppt', googleSearchQ +'filetype%3Appt+');
+
+
+
+// Session command shortcuts (FF only right now)
+// @todo: find a way to overcome limitation of chromium extension content script
+// security model (content script inherits page origin instead of having extension origin)
+const
+onMatch = function(d, i, cmdPrefix){
+    const omnibarInput = d.getElementById('sk_omnibarSearchArea').getElementsByTagName('input')[0];
+    omnibarInput.value = cmdPrefix;
+    omnibarInput.focus();
+    omnibarInput.dispatchEvent(new Event('input'));
+}
+,omnibarCmdArgs = { type: 'Commands' }
+,mapToCmdPrefix = function(key, cmdPrefix, optionalOmnibarName){
     mapkey(key, (optionalOmnibarName || (':'+ (cmdPrefix || ''))) +'', function(){
         // open command omnibar (equivalent to ':' key press)
         Front.openOmnibar(omnibarCmdArgs);
     
         // find omnibar frame and fill command input field with cmdPrefix
-        for (var i = 0, l = this.frames.length; i < l; i++){
+        for (let i = 0, l = this.frames.length; i < l; i++){
             try{
-                var w = this.frames[i],
+                let w = this.frames[i],
                 d = w.document;
                 
                 if (/.*\/pages\/frontend\.html$/i.test(d.URL)){
-                    w.setTimeout(function(i){
-                        var omnibarInput = d.getElementById('sk_omnibarSearchArea').getElementsByTagName('input')[0];
-                        omnibarInput.value = cmdPrefix;
-                        omnibarInput.focus();
-                        omnibarInput.dispatchEvent(new Event('input'));
-                    }, 64, i);
+                    w.setTimeout(onMatch, 64, d, i, cmdPrefix);
                     
                     break;
                 }
             }catch(e){
-                //window.console.log(e);
+                cl(e);
             }
         }
     });
 };
 
 // Temporary naming (better to build Huffman-like tree from all registered keybindings to test for possible conflicts)
+// @update: Normal.mappings, Visual.mappings, Instert.mappings provide methods to check if key sequence is taken
+// We can reuse existing Trie constructor to find and report conflicts inside this config only
 // [o]mnibar - main state
 // [s]ession - common part
 // [ ] - changing part - action name
-mapToCmdPrefix('osc', 'createSession ');
-mapToCmdPrefix('osd', 'deleteSession ');
-mapToCmdPrefix('osl', 'listSession');
-mapToCmdPrefix('oso', 'openSession ');
+unmap(';s');
+mapToCmdPrefix(';sc', 'createSession ');
+mapToCmdPrefix(';sd', 'deleteSession ');
+mapToCmdPrefix(';sl', 'listSession');
+mapToCmdPrefix(';so', 'openSession ');
 
 })();
 
-addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
-addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
-addSearchAliasX('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
-addSearchAliasX('d', 'google drive search', 'https://drive.google.com/drive/u/1/search?q=', 's');
-addSearchAliasX('c', 'technical translation', 'https://techterms.com/definition/{0}', 's');
-addSearchAliasX('w', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
-//addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
-//    var res = JSON.parse(response.text);
-//    return res.map(function(r){
-//        return r.phrase;
-//    });
-//});
-mapkey('op', '#8Open Search with duckduckgoHTML', function() {
-    Front.openOmnibar({type: "SearchEngine", extra: "p"});
-});
-
-//map
-addSearchAliasX('gM', '구글맵', 'https://www.google.com/maps?q=');
-
-//coding
-addSearchAliasX('C', 'search coding', 'https://searchcode.com/?q=');
-addSearchAliasX('cC', 'search coding', 'https://searchcode.com/?q=');
-addSearchAliasX('cW', 'chrome webstore', 'https://chrome.google.com/webstore/search/'); // chrome
-addSearchAliasX('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
-addSearchAliasX('gH', 'github', 'https://github.com/search?q=');
-addSearchAliasX('ghS', 'githubStars', 'https://github.com/vlad-terin?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
-addSearchAliasX('gC', 'githubCode', 'https://github.com/search?q={0}&type=Code');
-
-//language
-addSearchAliasX('lJ', 'language Javascript', 'https://www.google.com/search?q=Javascript+');
-addSearchAliasX('lj', 'language java', 'https://www.google.com/search?q=Java+');
-addSearchAliasX('lC', 'C++', 'https://www.google.com/search?q=C++');
-addSearchAliasX('lc', 'language c', 'https://www.google.com/search?q=c+language+');
-addSearchAliasX('l#', 'language C#', 'https://www.google.com/search?q=c%23+');
-addSearchAliasX('lR', 'language R', 'https://www.google.com/search?q=languag+');
-addSearchAliasX('lr', 'language Ruby', 'https://www.google.com/search?q=Ruby+');
-addSearchAliasX('lP', 'language Python', 'https://www.google.com/search?q=Python+');
-addSearchAliasX('lp', 'language php', 'https://www.google.com/search?q=php+');
-addSearchAliasX('lK', 'language Kotlin', 'https://www.google.com/search?q=Kotlin+');
-addSearchAliasX('lS', 'language Swift', 'https://www.google.com/search?q=Swift+');
-addSearchAliasX('lQ', 'language SQL Query', 'https://www.google.com/search?q=SQL+');
-addSearchAliasX('ls', 'language Shell script', 'https://www.google.com/search?q=Shell+Schript+');
-addSearchAliasX('lT', 'language Typescript', 'https://www.google.com/search?q=TypeScript+');
-addSearchAliasX('lH', 'language HTML', 'https://www.google.com/search?q=HTML+');
-
-//sns
-addSearchAliasX('fb', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
-addSearchAliasX('tw', 'tWitter', 'https://twitter.com/search?q=');
-addSearchAliasX('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
-addSearchAliasX('rd', 'redDit', 'https://www.reddit.com/search?q=');
-
-//shorten - what is.. who is.. where is..
-addSearchAliasX('wa', 'advanced', 'https://www.google.com/search?q=advanced+');
-addSearchAliasX('wb', 'basic', 'https://www.google.com/search?q=basic+');
-addSearchAliasX('wc', 'classification', 'https://www.google.com/search?q=classfication+of+');
-addSearchAliasX('wd', 'difference', 'https://www.google.com/search?q=difference+between+');
-addSearchAliasX('we', 'example', 'https://www.google.com/search?q=example+of+');
-addSearchAliasX('ww', 'wherefrom', 'https://www.google.com/search?q=where+from+');
-addSearchAliasX('wg', 'goalof', 'https://www.google.com/search?q=what+is+goal+of+');
-addSearchAliasX('wh', 'historyof', 'https://www.google.com/search?q=history+of+');
-addSearchAliasX('wi', 'introductionof', 'https://www.google.com/search?q=Introduction+of');
-//file
-addSearchAliasX('pdf', 'pdf', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Apdf+');
-addSearchAliasX('cpp', 'cpp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Acpp+');
-addSearchAliasX('hwp', 'hwp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Ahwp+');
-addSearchAliasX('ppt', 'ppt', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Appt+');
 
 
 // Surfingkey Ctrl-p Ctrl-n in google
