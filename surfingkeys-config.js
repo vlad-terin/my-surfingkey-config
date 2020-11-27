@@ -4,7 +4,7 @@ imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
 map('sU', 'su');
-map('os', ':openSession');
+
 
 settings.stealFocusOnLoad = true;
 
@@ -13,80 +13,201 @@ removeSearchAliasX('b')
 removeSearchAliasX('g')
 removeSearchAliasX('s')
 removeSearchAliasX('w')
+removeSearchAliasX('p');
+
+// [+] Remove omnibar mappings to removed search aliases
+unmap('ob');
+unmap('og');
+unmap('os');
+unmap('ow');
+unmap('op');
+
+
 
 //General
-addSearchAliasX('G', 'Google', 'https://www.google.com/search?q=');
-addSearchAliasX('gm', 'googlemonth', 'https://www.google.com/search?q={0}&es_sm=93&source=lnt&tbs=qdr:m&sa=X&ved=0CBUQpwVqFQoTCNvLqLq-gskCFYrUJgodrW4KCw&biw=1280&bih=637', 's');
-addSearchAliasX('gw', 'googleweek', 'https://www.google.com/search?q={0}&source=lnt&tbs=qdr:w&sa=X&ved=0ahUKEwiC88iB14bfAhUzKX0KHUMpBhAQpwUIJg&biw=1920&bih=970', 's');
-addSearchAliasX('gy', 'googleyear', 'https://www.google.com/search?q={0}&google+year&rlz=1C1CHBF_enUS823US823&source=lnt&tbs=qdr:y&sa=X&ved=0ahUKEwj2pOXS0obfAhUD9YMKHbOAAlMQpwUIJg&biw=1920&bih=970', 's');
-addSearchAliasX('gd', 'googleday', 'https://www.google.com/search?q={0}&rlz=1C1CHBF_enUS823US823&sxsrf=ALeKk039hxPcS_8R26jZwfSMlMpaeP6e9Q:1603992141705&source=lnt&tbs=qdr:d&sa=X&ved=2ahUKEwj6qNCuqNrsAhVQM6wKHYqqDN0QpwV6BAgPEBw&biw=1920&bih=1007', 's');
 
-addSearchAliasX('l', 'lucky', 'http://www.google.com/search?q={0}&btnI', 's');
-addSearchAliasX('t', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
-addSearchAliasX('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s=', 's');
-addSearchAliasX('d', 'google drive search', 'https://drive.google.com/drive/u/1/search?q=', 's');
-addSearchAliasX('c', 'technical translation', 'https://techterms.com/definition/{0}', 's');
-addSearchAliasX('w', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
-//addSearchAliasX('d', 'duckHTML', 'https://duckduckgo.com/html/?q=', 's', 'https://duckduckgo.com/ac/?q=', function(response) {
-//    var res = JSON.parse(response.text);
-//    return res.map(function(r){
-//        return r.phrase;
-//    });
-//});
-mapkey('op', '#8Open Search with duckduckgoHTML', function() {
-    Front.openOmnibar({type: "SearchEngine", extra: "p"});
-});
+(function(){
+
+const
+// put first to minimize retained size
+openSearchOmnibar = function(){ Front.openOmnibar({ type: 'SearchEngine', extra: this.extra }); }
+//,openLink = function(){ RUNTIME("openLink", { tab: { tabbed: true, active: true }, url: this.url }); }
+,cl = window.console.log.bind(window.console)
+// fix overrides so this block of code can be replaced by NOOP
+// @todo: consider reporting all registered mappings that can be [before|after] key sequence
+// normalOverrideF
+,nOF = function(key){
+    const nmEntry = Normal.mappings.find(key);
+    
+    if (nmEntry){
+        // if meta isn't present then we're blocking set of key sequences
+        cl('Override of '+ key, nmEntry.meta || nmEntry);
+    }
+}
+// addSearchAliasX and omnibar mapping (removes previous omnibar mapping)
+// addSAXWithOmnibar
+,saxo = function(){
+    const a = arguments,
+    key  = a[0],
+    desc = a[1],
+    okey = 'o'+ key,
+    skey = 's'+ key;
+
+    nOF(key);
+    nOF(okey);
+    nOF(skey);
+    
+    // overall 59 global searches registered
+    // @todo: plan out hotkeys for searches
+    // key, okey, skey will be taken by them
+    
+    // adds key and 's'+ key mappings:
+    // open new search tab (doesn't work, fix below)
+    // search selected text in new tab (works)
+    addSearchAliasX.apply(null, a);
+    
+    // 1 character hotkeys break whole thing
+    // unmap(key);
+    // mapkey(key, a[0], openLink.bind({ url: a[2].split('{0}')[0] }));
+    
+    unmap(okey);
+    // adds 'o'+ key mapping (open Omnibar to trigger search selected text in new tab on Enter, where selected text is value in Omnibar) 
+    mapkey(okey, 'Open with '+ desc, openSearchOmnibar.bind({ extra: key }));
+};
+
+
+
+// Searches
+// @todo: registered key sequences are free for mapping, must decide if it should be so
+// @note: press [o|s] and wait for a list of possible commands (must be >=59 in both, otherwise some conflict blocked something)
+const
+googleSearchQ = 'https://www.google.com/search?q='
+,googleSearchBase = googleSearchQ +'{0}'
+,tStr = googleSearchBase +'&tbs=qdr:';
+
+saxo('G', 'Google', googleSearchBase, 's');
+saxo('gm', 'googlemonth', tStr +'m', 's');
+saxo('gw', 'googleweek', tStr +'w', 's');
+saxo('gy', 'googleyear', tStr +'y', 's');
+saxo('gd', 'googleday', tStr +'d', 's');
+saxo('gh', 'googlehour', tStr +'h', 's');
+
+// conflict, changed from l to ll
+saxo('ll', 'lucky', googleSearchBase +'&btnI', 's');
+// conflict, changed from t to tt
+saxo('tt', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
+saxo('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s={0}', 's');
+saxo('d', 'google drive search', 'https://drive.google.com/drive/u/1/search?q={0}', 's');
+// conflict, changed from c to cc
+saxo('cc', 'technical translation', 'https://techterms.com/definition/{0}', 's');
+// conflict, changed from w to ww
+saxo('ww', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
+
+// conflict, changed from p to ppp
+saxo('ppp', 'duckHTML', 'https://duckduckgo.com/html/?q={0}', 's');
 
 //map
-addSearchAliasX('gM', '구글맵', 'https://www.google.com/maps?q=');
+saxo('gM', 'google maps', 'https://www.google.com/maps?q=');
 
 //coding
-addSearchAliasX('C', 'search coding', 'https://searchcode.com/?q=');
-addSearchAliasX('cC', 'search coding', 'https://searchcode.com/?q=');
-addSearchAliasX('cW', 'chrome webstore', 'https://chrome.google.com/webstore/search/'); // chrome
-addSearchAliasX('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
-addSearchAliasX('gH', 'github', 'https://github.com/search?q=');
-addSearchAliasX('ghS', 'githubStars', 'https://github.com/vlad-terin?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
-addSearchAliasX('gC', 'githubCode', 'https://github.com/search?q={0}&type=Code');
+saxo('C', 'search coding', 'https://searchcode.com/?q=');
+saxo('cC', 'search coding', 'https://searchcode.com/?q=');
+saxo('cW', 'chrome webstore', 'https://chrome.google.com/webstore/search/'); // chrome
+saxo('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
+saxo('gH', 'github', 'https://github.com/search?q=');
+saxo('ghS', 'githubStars', 'https://github.com/vlad-terin?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
+saxo('gC', 'githubCode', 'https://github.com/search?q={0}&type=Code');
 
 //language
-addSearchAliasX('lJ', 'language Javascript', 'https://www.google.com/search?q=Javascript+');
-addSearchAliasX('lj', 'language java', 'https://www.google.com/search?q=Java+');
-addSearchAliasX('lC', 'C++', 'https://www.google.com/search?q=C++');
-addSearchAliasX('lc', 'language c', 'https://www.google.com/search?q=c+language+');
-addSearchAliasX('l#', 'language C#', 'https://www.google.com/search?q=c%23+');
-addSearchAliasX('lR', 'language R', 'https://www.google.com/search?q=languag+');
-addSearchAliasX('lr', 'language Ruby', 'https://www.google.com/search?q=Ruby+');
-addSearchAliasX('lP', 'language Python', 'https://www.google.com/search?q=Python+');
-addSearchAliasX('lp', 'language php', 'https://www.google.com/search?q=php+');
-addSearchAliasX('lK', 'language Kotlin', 'https://www.google.com/search?q=Kotlin+');
-addSearchAliasX('lS', 'language Swift', 'https://www.google.com/search?q=Swift+');
-addSearchAliasX('lQ', 'language SQL Query', 'https://www.google.com/search?q=SQL+');
-addSearchAliasX('ls', 'language Shell script', 'https://www.google.com/search?q=Shell+Schript+');
-addSearchAliasX('lT', 'language Typescript', 'https://www.google.com/search?q=TypeScript+');
-addSearchAliasX('lH', 'language HTML', 'https://www.google.com/search?q=HTML+');
+saxo('lJ', 'language Javascript', googleSearchQ +'Javascript+');
+saxo('lj', 'language java', googleSearchQ +'Java+');
+saxo('lC', 'C++', googleSearchQ +'C++');
+saxo('lc', 'language c', googleSearchQ +'c+language+');
+saxo('l#', 'language C#', googleSearchQ +'c%23+');
+saxo('lR', 'language R', googleSearchQ +'languag+');
+saxo('lr', 'language Ruby', googleSearchQ +'Ruby+');
+saxo('lP', 'language Python', googleSearchQ +'Python+');
+saxo('lp', 'language php', googleSearchQ +'php+');
+saxo('lK', 'language Kotlin', googleSearchQ +'Kotlin+');
+saxo('lS', 'language Swift', googleSearchQ +'Swift+');
+saxo('lQ', 'language SQL Query', googleSearchQ +'SQL+');
+saxo('ls', 'language Shell script', googleSearchQ +'Shell+Schript+');
+saxo('lT', 'language Typescript', googleSearchQ +'TypeScript+');
+saxo('lH', 'language HTML', googleSearchQ +'HTML+');
 
 //sns
-addSearchAliasX('fb', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
-addSearchAliasX('tw', 'tWitter', 'https://twitter.com/search?q=');
-addSearchAliasX('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
-addSearchAliasX('rd', 'redDit', 'https://www.reddit.com/search?q=');
+saxo('fb', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
+saxo('tw', 'tWitter', 'https://twitter.com/search?q=');
+saxo('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
+saxo('rd', 'redDit', 'https://www.reddit.com/search?q=');
 
 //shorten - what is.. who is.. where is..
-addSearchAliasX('wa', 'advanced', 'https://www.google.com/search?q=advanced+');
-addSearchAliasX('wb', 'basic', 'https://www.google.com/search?q=basic+');
-addSearchAliasX('wc', 'classification', 'https://www.google.com/search?q=classfication+of+');
-addSearchAliasX('wd', 'difference', 'https://www.google.com/search?q=difference+between+');
-addSearchAliasX('we', 'example', 'https://www.google.com/search?q=example+of+');
-addSearchAliasX('ww', 'wherefrom', 'https://www.google.com/search?q=where+from+');
-addSearchAliasX('wg', 'goalof', 'https://www.google.com/search?q=what+is+goal+of+');
-addSearchAliasX('wh', 'historyof', 'https://www.google.com/search?q=history+of+');
-addSearchAliasX('wi', 'introductionof', 'https://www.google.com/search?q=Introduction+of');
+saxo('wa', 'advanced', googleSearchQ +'advanced+');
+saxo('wb', 'basic', googleSearchQ +'basic+');
+saxo('wc', 'classification', googleSearchQ +'classfication+of+');
+saxo('wd', 'difference', googleSearchQ +'difference+between+');
+saxo('we', 'example', googleSearchQ +'example+of+');
+saxo('ww', 'wherefrom', googleSearchQ +'where+from+');
+saxo('wg', 'goalof', googleSearchQ +'what+is+goal+of+');
+saxo('wh', 'historyof', googleSearchQ +'history+of+');
+saxo('wi', 'introductionof', googleSearchQ +'Introduction+of');
+
 //file
-addSearchAliasX('pdf', 'pdf', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Apdf+');
-addSearchAliasX('cpp', 'cpp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Acpp+');
-addSearchAliasX('hwp', 'hwp', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Ahwp+');
-addSearchAliasX('ppt', 'ppt', 'https://www.google.com/search?hl=en&biw=1600&bih=817&ei=ufUTW5_5FcGVmAXPqAc&q=filetype%3Appt+');
+saxo('ftpdf', 'pdf', googleSearchQ +'filetype%3Apdf+');
+saxo('ftcpp', 'cpp', googleSearchQ +'filetype%3Acpp+');
+saxo('fthwp', 'hwp', googleSearchQ +'filetype%3Ahwp+');
+saxo('ftppt', 'ppt', googleSearchQ +'filetype%3Appt+');
+
+
+
+// Session command shortcuts (FF only right now)
+// @todo: find a way to overcome limitation of chromium extension content script
+// security model (content script inherits page origin instead of having extension origin)
+const
+onMatch = function(d, i, cmdPrefix){
+    const omnibarInput = d.getElementById('sk_omnibarSearchArea').getElementsByTagName('input')[0];
+    omnibarInput.value = cmdPrefix;
+    omnibarInput.focus();
+    omnibarInput.dispatchEvent(new Event('input'));
+}
+,omnibarCmdArgs = { type: 'Commands' }
+,mapToCmdPrefix = function(key, cmdPrefix, optionalOmnibarName){
+    mapkey(key, (optionalOmnibarName || (':'+ (cmdPrefix || ''))) +'', function(){
+        // open command omnibar (equivalent to ':' key press)
+        Front.openOmnibar(omnibarCmdArgs);
+    
+        // find omnibar frame and fill command input field with cmdPrefix
+        for (let i = 0, l = this.frames.length; i < l; i++){
+            try{
+                let w = this.frames[i],
+                d = w.document;
+                
+                if (/.*\/pages\/frontend\.html$/i.test(d.URL)){
+                    w.setTimeout(onMatch, 64, d, i, cmdPrefix);
+                    
+                    break;
+                }
+            }catch(e){
+                cl(e);
+            }
+        }
+    });
+};
+
+// Temporary naming (better to build Huffman-like tree from all registered keybindings to test for possible conflicts)
+// @update: Normal.mappings, Visual.mappings, Instert.mappings provide methods to check if key sequence is taken
+// We can reuse existing Trie constructor to find and report conflicts inside this config only
+// [o]mnibar - main state
+// [s]ession - common part
+// [ ] - changing part - action name
+unmap(';s');
+mapToCmdPrefix(';sc', 'createSession ');
+mapToCmdPrefix(';sd', 'deleteSession ');
+mapToCmdPrefix(';sl', 'listSession');
+mapToCmdPrefix(';so', 'openSession ');
+
+})();
+
 
 
 // Surfingkey Ctrl-p Ctrl-n in google
@@ -457,7 +578,7 @@ mapkey('B', 'Choose a tab with omnibar', function() {
 Hints.numericHints           = false;
 settings.omnibarSuggestion   = true;
 settings.defaultSearchEngine = 'G';                          // Google I'm Feeling Luckey
-settings.focusFirstCandidate = false;
+settings.focusFirstCandidate = true;
 
 mapkey(',s', 'opne new tab and split', function () {
     RUNTIME("newWindow");
@@ -652,37 +773,301 @@ mapkey('gT', 'Goto Text Area', function () {
 });
 
 
-    settings.theme = `
-    .sk_theme {
-        font-family: Input Sans Condensed, Charcoal, sans-serif;
-        font-size: 10pt;
-        background: #24272e;
-        background: #24272e;
-        color: #3de447;
-    }
-    .sk_theme tbody {
-        color: #fff;
-    }
-    .sk_theme input {
-        color: #d0d0d0;
-    }
-    .sk_theme .url {
-        color: #61afef;
-    }
-    .sk_theme .annotation {
-        color: #3de447;
-    }
-    .sk_theme .omnibar_highlight {
-        color: #528bff;
-    }
-    .sk_theme .omnibar_timestamp {
-        color: #e5c07b;
-    }
-    .sk_theme .omnibar_visitcount {
-        color: #98c379;
-    }
-  
-    #sk_status, #sk_find {
-        font-size: 20pt;
-    }`;
-    // click `Save` button to make above settings to take effect.
+
+
+//credit https://github.com/Foldex/surfingkeys-config/blob/master/themes.js
+
+// ---- Hints ----
+// Hints have to be defined separately
+// Uncomment to enable
+
+// Tomorrow-Night
+
+Hints.style('border: solid 2px #373B41; color:#52C196; background: initial; background-color: #1D1F21;');
+Hints.style("border: solid 2px #373B41 !important; padding: 1px !important; color: #C5C8C6 !important; background: #1D1F21 !important;", "text");
+Visual.style('marks', 'background-color: #52C19699;');
+Visual.style('cursor', 'background-color: #81A2BE;');
+
+
+// Nord
+/* -- DELETE LINE TO ENABLE THEME
+Hints.style('border: solid 2px #4C566A; color:#A3BE8C; background: initial; background-color: #3B4252;');
+Hints.style("border: solid 2px #4C566A !important; padding: 1px !important; color: #E5E9F0 !important; background: #3B4252 !important;", "text");
+Visual.style('marks', 'background-color: #A3BE8C99;');
+Visual.style('cursor', 'background-color: #88C0D0;');
+-- DELETE LINE TO ENABLE THEME */
+
+// Doom One
+/* -- DELETE LINE TO ENABLE THEME
+Hints.style('border: solid 2px #282C34; color:#98be65; background: initial; background-color: #2E3440;');
+Hints.style("border: solid 2px #282C34 !important; padding: 1px !important; color: #51AFEF !important; background: #2E3440 !important;", "text");
+Visual.style('marks', 'background-color: #98be6599;');
+Visual.style('cursor', 'background-color: #51AFEF;');
+-- DELETE LINE TO ENABLE THEME */
+
+// Monokai
+/* -- DELETE LINE TO ENABLE THEME
+Hints.style('border: solid 2px #2D2E2E; color:#F92660; background: initial; background-color: #272822;');
+Hints.style("border: solid 2px #2D2E2E !important; padding: 1px !important; color: #A6E22E !important; background: #272822 !important;", "text");
+Visual.style('marks', 'background-color: #A6E22E99;');
+Visual.style('cursor', 'background-color: #F92660;');
+-- DELETE LINE TO ENABLE THEME */
+
+settings.theme = `
+/* Edit these variables for easy theme making */
+:root {
+  /* Font */
+  --font: 'Source Code Pro', Ubuntu, sans;
+  --font-size: 14;
+  --font-weight: bold;
+  /* -------------- */
+  /* --- THEMES --- */
+  /* -------------- */
+  /* -------------------- */
+  /* -- Tomorrow Night -- */
+  /* -------------------- */
+
+  --fg: #C5C8C6;
+  --bg: #282A2E;
+  --bg-dark: #1D1F21;
+  --border: #373b41;
+  --main-fg: #81A2BE;
+  --accent-fg: #52C196;
+  --info-fg: #AC7BBA;
+  --select: #585858;
+
+  /* Unused Alternate Colors */
+  /* --cyan: #4CB3BC; */
+  /* --orange: #DE935F; */
+  /* --red: #CC6666; */
+  /* --yellow: #CBCA77; */
+  /* -------------------- */
+  /* --      NORD      -- */
+  /* -------------------- */
+  /* -- DELETE LINE TO ENABLE THEME
+  --fg: #E5E9F0;
+  --bg: #3B4252;
+  --bg-dark: #2E3440;
+  --border: #4C566A;
+  --main-fg: #88C0D0;
+  --accent-fg: #A3BE8C;
+  --info-fg: #5E81AC;
+  --select: #4C566A;
+  -- DELETE LINE TO ENABLE THEME */
+  /* Unused Alternate Colors */
+  /* --orange: #D08770; */
+  /* --red: #BF616A; */
+  /* --yellow: #EBCB8B; */
+  /* -------------------- */
+  /* --    DOOM ONE    -- */
+  /* -------------------- */
+  /* -- DELETE LINE TO ENABLE THEME
+  --fg: #51AFEF;
+  --bg: #2E3440;
+  --bg-dark: #21242B;
+  --border: #282C34;
+  --main-fg: #51AFEF;
+  --accent-fg: #98be65;
+  --info-fg: #C678DD;
+  --select: #4C566A;
+  -- DELETE LINE TO ENABLE THEME */
+  /* Unused Alternate Colors */
+  /* --bg-dark: #21242B; */
+  /* --main-fg-alt: #2257A0; */
+  /* --cyan: #46D9FF; */
+  /* --orange: #DA8548; */
+  /* --red: #FF6C6B; */
+  /* --yellow: #ECBE7B; */
+  /* -------------------- */
+  /* --    MONOKAI    -- */
+  /* -------------------- */
+  /* -- DELETE LINE TO ENABLE THEME
+  --fg: #F8F8F2;
+  --bg: #272822;
+  --bg-dark: #1D1E19;
+  --border: #2D2E2E;
+  --main-fg: #F92660;
+  --accent-fg: #E6DB74;
+  --info-fg: #A6E22E;
+  --select: #556172;
+  -- DELETE LINE TO ENABLE THEME */
+  /* Unused Alternate Colors */
+  /* --red: #E74C3C; */
+  /* --orange: #FD971F; */
+  /* --blue: #268BD2; */
+  /* --violet: #9C91E4; */
+  /* --cyan: #66D9EF; */
+}
+/* ---------- Generic ---------- */
+.sk_theme {
+background: var(--bg);
+color: var(--fg);
+  background-color: var(--bg);
+  border-color: var(--border);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+input {
+  font-family: var(--font);
+  font-weight: var(--font-weight);
+}
+.sk_theme tbody {
+  color: var(--fg);
+}
+.sk_theme input {
+  color: var(--fg);
+}
+/* Hints */
+#sk_hints .begin {
+  color: var(--accent-fg) !important;
+}
+#sk_tabs .sk_tab {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+#sk_tabs .sk_tab_hint {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--accent-fg);
+}
+.sk_theme #sk_frame {
+  background: var(--bg);
+  opacity: 0.2;
+  color: var(--accent-fg);
+}
+/* ---------- Omnibar ---------- */
+/* Uncomment this and use settings.omnibarPosition = 'bottom' for Pentadactyl/Tridactyl style bottom bar */
+/* .sk_theme#sk_omnibar {
+  width: 100%;
+  left: 0;
+} */
+.sk_theme .title {
+  color: var(--accent-fg);
+}
+.sk_theme .url {
+  color: var(--main-fg);
+}
+.sk_theme .annotation {
+  color: var(--accent-fg);
+}
+.sk_theme .omnibar_highlight {
+  color: var(--accent-fg);
+}
+.sk_theme .omnibar_timestamp {
+  color: var(--info-fg);
+}
+.sk_theme .omnibar_visitcount {
+  color: var(--accent-fg);
+}
+.sk_theme #sk_omnibarSearchResult ul li:nth-child(odd) {
+  background: var(--bg-dark);
+}
+.sk_theme #sk_omnibarSearchResult ul li.focused {
+  background: var(--border);
+}
+.sk_theme #sk_omnibarSearchArea {
+  border-top-color: var(--border);
+  border-bottom-color: var(--border);
+}
+.sk_theme #sk_omnibarSearchArea input,
+.sk_theme #sk_omnibarSearchArea span {
+  font-size: var(--font-size);
+}
+.sk_theme .separator {
+  color: var(--accent-fg);
+}
+/* ---------- Popup Notification Banner ---------- */
+#sk_banner {
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--fg);
+  opacity: 0.9;
+}
+/* ---------- Popup Keys ---------- */
+#sk_keystroke {
+  background-color: var(--bg);
+}
+.sk_theme kbd .candidates {
+  color: var(--info-fg);
+}
+.sk_theme span.annotation {
+  color: var(--accent-fg);
+}
+/* ---------- Popup Translation Bubble ---------- */
+#sk_bubble {
+  background-color: var(--bg) !important;
+  color: var(--fg) !important;
+  border-color: var(--border) !important;
+}
+#sk_bubble * {
+  color: var(--fg) !important;
+}
+#sk_bubble div.sk_arrow div:nth-of-type(1) {
+  border-top-color: var(--border) !important;
+  border-bottom-color: var(--border) !important;
+}
+#sk_bubble div.sk_arrow div:nth-of-type(2) {
+  border-top-color: var(--bg) !important;
+  border-bottom-color: var(--bg) !important;
+}
+/* ---------- Search ---------- */
+#sk_status,
+#sk_find {
+  font-size: var(--font-size);
+  border-color: var(--border);
+}
+.sk_theme kbd {
+  background: var(--bg-dark);
+  border-color: var(--border);
+  box-shadow: none;
+  color: var(--fg);
+}
+.sk_theme .feature_name span {
+  color: var(--main-fg);
+}
+/* ---------- ACE Editor ---------- */
+#sk_editor {
+  background: var(--bg-dark) !important;
+  height: 50% !important;
+  /* Remove this to restore the default editor size */
+}
+.ace_dialog-bottom {
+  border-top: 1px solid var(--bg) !important;
+}
+.ace-chrome .ace_print-margin,
+.ace_gutter,
+.ace_gutter-cell,
+.ace_dialog {
+  background: var(--bg) !important;
+}
+.ace-chrome {
+  color: var(--fg) !important;
+}
+.ace_gutter,
+.ace_dialog {
+  color: var(--fg) !important;
+}
+.ace_cursor {
+  color: var(--fg) !important;
+}
+.normal-mode .ace_cursor {
+  background-color: var(--fg) !important;
+  border: var(--fg) !important;
+  opacity: 0.7 !important;
+}
+.ace_marker-layer .ace_selection {
+  background: var(--select) !important;
+}
+.ace_editor,
+.ace_dialog span,
+.ace_dialog input {
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+`;
