@@ -29,16 +29,18 @@ unmap('op');
 (function(){
 
 const
-// put first to minimize retained size
-openSearchOmnibar = function(){ Front.openOmnibar({ type: 'SearchEngine', extra: this.extra }); }
-//,openLink = function(){ RUNTIME("openLink", { tab: { tabbed: true, active: true }, url: this.url }); }
+// function call factory needed to fix unstable/freezing behaviour of '.bind'ed callbacks
+fcFactory = function(f, t){ return function(){ return f.call(t); }; }
+,openSearchOmnibar = function(){ Front.openOmnibar({ type: 'SearchEngine', extra: this.extra }); }
+,openLink = function(url){ RUNTIME("openLink", { tab: { tabbed: true, active: false }, url: url || this.url }); }
 ,cl = window.console.log.bind(window.console)
+// unmap if mappings already exist
+// @todo: consider removing all registered mappings that can be [before|after] key sequence
 // fix overrides so this block of code can be replaced by NOOP
-// @todo: consider reporting all registered mappings that can be [before|after] key sequence
-// normalOverrideF
+// normalOverrideFix
 ,nOF = function(key){
     const nmEntry = Normal.mappings.find(key);
-    
+
     if (nmEntry){
         // if meta isn't present then we're blocking set of key sequences
         cl('Override of '+ key, nmEntry.meta || nmEntry);
@@ -56,107 +58,177 @@ openSearchOmnibar = function(){ Front.openOmnibar({ type: 'SearchEngine', extra:
     nOF(key);
     nOF(okey);
     nOF(skey);
-    
+
     // overall 59 global searches registered
     // @todo: plan out hotkeys for searches
     // key, okey, skey will be taken by them
-    
+
     // adds key and 's'+ key mappings:
     // open new search tab (doesn't work, fix below)
     // search selected text in new tab (works)
     addSearchAliasX.apply(null, a);
-    
+
     // 1 character hotkeys break whole thing
     // unmap(key);
-    // mapkey(key, a[0], openLink.bind({ url: a[2].split('{0}')[0] }));
-    
+    // mapkey(key, a[0], fcFactory(openLink, { url: a[2].split('{0}')[0] }));
+
     unmap(okey);
-    // adds 'o'+ key mapping (open Omnibar to trigger search selected text in new tab on Enter, where selected text is value in Omnibar) 
-    mapkey(okey, 'Open with '+ desc, openSearchOmnibar.bind({ extra: key }));
+    // adds 'o'+ key mapping (open Omnibar to trigger search selected text in new tab on Enter, where selected text is value in Omnibar)
+    mapkey(okey, 'Open with '+ desc, fcFactory(openSearchOmnibar, { extra: key }));
+},
+searchWithGroup = function(data){
+    const t = this;
+    data = encodeURIComponent(typeof data == 'string' && data.length > 1 ? data : Visual.getWordUnderCursor());
+
+    let url = '';
+    for (let i = 0; i < t.length; i++){
+        url = t[i];
+
+        if (!url){
+            continue;
+        } else if (/\{0\}/g.test(url)){
+            url = url.replace(/\{0\}/g, data);
+        } else {
+            url = url + data;
+        }
+
+        openLink(url);
+    }
+},
+openWithGroup = function(warn){
+    const
+    msg = 'Enter query for "Google searches" group.'
+        + (typeof warn == 'string' && warn.length > 4 ? '\n'+ warn : '')
+    // @note: hacking Omnibar seems not possible
+    ,data = window.prompt(msg, Visual.getWordUnderCursor() || '');
+
+    if (!data || /^\s+$/g.test(data)){
+        return typeof data == 'string' && setTimeout(openWithGroup.bind(this), 16, 'Please enter something or cancel group open');
+    }
+
+    return searchWithGroup.call(this, data);
+},
+addSearchGroup = function(key, data, searches){
+    const
+    okey = 'o'+ key,
+    skey = 's'+ key,
+    gSearches = data.list.slice(0);
+
+    nOF(okey);
+    nOF(skey);
+
+    for (let i = 0; i < gSearches.length; i++){
+        gSearches[i] = searches[gSearches[i]][1];
+    }
+
+    unmap(okey);
+    mapkey(okey, 'Open with "'+ data.name +'"', fcFactory(openWithGroup, gSearches));
+
+    unmap(skey);
+    mapkey(skey, 'Search selected with "'+ data.name +'"', fcFactory(searchWithGroup, gSearches));
 };
 
 
 
 // Searches
+// Mappings with 's' and 'o' prefixes also will be taken
 // @todo: registered key sequences are free for mapping, must decide if it should be so
-// @note: press [o|s] and wait for a list of possible commands (must be >=59 in both, otherwise some conflict blocked something)
 const
 googleSearchQ = 'https://www.google.com/search?q='
 ,googleSearchBase = googleSearchQ +'{0}'
-,tStr = googleSearchBase +'&tbs=qdr:';
+,tStr = googleSearchBase +'&tbs=qdr:'
+,searches = {
+    // search
+    'G': ['Google', googleSearchBase],
+    'gm': ['googlemonth', tStr +'m'],
+    'gw': ['googleweek', tStr +'w'],
+    'gy': ['googleyear', tStr +'y'],
+    'gd': ['googleday', tStr +'d'],
+    'gh': ['googlehour', tStr +'h'],
 
-saxo('G', 'Google', googleSearchBase, 's');
-saxo('gm', 'googlemonth', tStr +'m', 's');
-saxo('gw', 'googleweek', tStr +'w', 's');
-saxo('gy', 'googleyear', tStr +'y', 's');
-saxo('gd', 'googleday', tStr +'d', 's');
-saxo('gh', 'googlehour', tStr +'h', 's');
+    // conflict, changed from l to ll
+    'll': ['lucky', googleSearchBase +'&btnI'],
+    // conflict, changed from t to tt
+    'tt': ['onelook', 'https://www.onelook.com/?w={0}&ls=a'],
+    's': ['onelook synonyms', 'https://www.onelook.com/thesaurus/?s={0}'],
+    'd': ['google drive search', 'https://drive.google.com/drive/u/1/search?q={0}'],
+    // conflict, changed from c to cc
+    'cc': ['technical translation', 'https://techterms.com/definition/{0}'],
+    // conflict, changed from w to ww to wk
+    'wk': ['wiki', 'https://en.wikipedia.org/wiki/{0}'],
 
-// conflict, changed from l to ll
-saxo('ll', 'lucky', googleSearchBase +'&btnI', 's');
-// conflict, changed from t to tt
-saxo('tt', 'onelook', 'https://www.onelook.com/?w={0}&ls=a', 's');
-saxo('s', 'onelook synonyms', 'https://www.onelook.com/thesaurus/?s={0}', 's');
-saxo('d', 'google drive search', 'https://drive.google.com/drive/u/1/search?q={0}', 's');
-// conflict, changed from c to cc
-saxo('cc', 'technical translation', 'https://techterms.com/definition/{0}', 's');
-// conflict, changed from w to ww
-saxo('ww', 'wiki', 'https://en.wikipedia.org/wiki/{0}', 's');
+    // conflict, changed from p to ppp
+    'ppp': ['duckHTML', 'https://duckduckgo.com/html/?q={0}'],
 
-// conflict, changed from p to ppp
-saxo('ppp', 'duckHTML', 'https://duckduckgo.com/html/?q={0}', 's');
+    //map
+    'gM': ['google maps', 'https://www.google.com/maps?q='],
 
-//map
-saxo('gM', 'google maps', 'https://www.google.com/maps?q=');
+    //coding
+    'C': ['search coding', 'https://searchcode.com/?q='],
+    'cC': ['search coding', 'https://searchcode.com/?q='],
+    'cW': ['chrome webstore', 'https://chrome.google.com/webstore/search/'], // chrome
+    'cS': ['slant (editor 비교 사이트)', 'https://www.slant.co/search?query='],
+    'gH': ['github', 'https://github.com/search?q='],
+    'ghS': ['githubStars', 'https://github.com/vlad-terin?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q='],
+    'gC': ['githubCode', 'https://github.com/search?q={0}&type=Code'],
 
-//coding
-saxo('C', 'search coding', 'https://searchcode.com/?q=');
-saxo('cC', 'search coding', 'https://searchcode.com/?q=');
-saxo('cW', 'chrome webstore', 'https://chrome.google.com/webstore/search/'); // chrome
-saxo('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
-saxo('gH', 'github', 'https://github.com/search?q=');
-saxo('ghS', 'githubStars', 'https://github.com/vlad-terin?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
-saxo('gC', 'githubCode', 'https://github.com/search?q={0}&type=Code');
+    //language
+    'lJ': ['language Javascript', googleSearchQ +'Javascript+'],
+    'lj': ['language java', googleSearchQ +'Java+'],
+    'lC': ['C++', googleSearchQ +'C++'],
+    'lc': ['language c', googleSearchQ +'c+language+'],
+    'l#': ['language C#', googleSearchQ +'c%23+'],
+    'lR': ['language R', googleSearchQ +'languag+'],
+    'lr': ['language Ruby', googleSearchQ +'Ruby+'],
+    'lP': ['language Python', googleSearchQ +'Python+'],
+    'lp': ['language php', googleSearchQ +'php+'],
+    'lK': ['language Kotlin', googleSearchQ +'Kotlin+'],
+    'lS': ['language Swift', googleSearchQ +'Swift+'],
+    'lQ': ['language SQL Query', googleSearchQ +'SQL+'],
+    'ls': ['language Shell script', googleSearchQ +'Shell+Schript+'],
+    'lT': ['language Typescript', googleSearchQ +'TypeScript+'],
+    'lH': ['language HTML', googleSearchQ +'HTML+'],
 
-//language
-saxo('lJ', 'language Javascript', googleSearchQ +'Javascript+');
-saxo('lj', 'language java', googleSearchQ +'Java+');
-saxo('lC', 'C++', googleSearchQ +'C++');
-saxo('lc', 'language c', googleSearchQ +'c+language+');
-saxo('l#', 'language C#', googleSearchQ +'c%23+');
-saxo('lR', 'language R', googleSearchQ +'languag+');
-saxo('lr', 'language Ruby', googleSearchQ +'Ruby+');
-saxo('lP', 'language Python', googleSearchQ +'Python+');
-saxo('lp', 'language php', googleSearchQ +'php+');
-saxo('lK', 'language Kotlin', googleSearchQ +'Kotlin+');
-saxo('lS', 'language Swift', googleSearchQ +'Swift+');
-saxo('lQ', 'language SQL Query', googleSearchQ +'SQL+');
-saxo('ls', 'language Shell script', googleSearchQ +'Shell+Schript+');
-saxo('lT', 'language Typescript', googleSearchQ +'TypeScript+');
-saxo('lH', 'language HTML', googleSearchQ +'HTML+');
+    //sns
+    'fb': ['faceBook(페이스북)', 'https://www.facebook.com/search/top/?q='],
+    'tw': ['tWitter', 'https://twitter.com/search?q='],
+    'ig': ['InstaGram HashTag', 'https://www.instagram.com/explore/tags/'],
+    'rd': ['redDit', 'https://www.reddit.com/search?q='],
 
-//sns
-saxo('fb', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
-saxo('tw', 'tWitter', 'https://twitter.com/search?q=');
-saxo('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
-saxo('rd', 'redDit', 'https://www.reddit.com/search?q=');
+    //shorten - what is.. who is.. where is..
+    'wa': ['advanced', googleSearchQ +'advanced+'],
+    'wb': ['basic', googleSearchQ +'basic+'],
+    'wc': ['classification', googleSearchQ +'classfication+of+'],
+    'wd': ['difference', googleSearchQ +'difference+between+'],
+    'we': ['example', googleSearchQ +'example+of+'],
+    'ww': ['wherefrom', googleSearchQ +'where+from+'],
+    'wg': ['goalof', googleSearchQ +'what+is+goal+of+'],
+    'wh': ['historyof', googleSearchQ +'history+of+'],
+    'wi': ['introductionof', googleSearchQ +'Introduction+of'],
 
-//shorten - what is.. who is.. where is..
-saxo('wa', 'advanced', googleSearchQ +'advanced+');
-saxo('wb', 'basic', googleSearchQ +'basic+');
-saxo('wc', 'classification', googleSearchQ +'classfication+of+');
-saxo('wd', 'difference', googleSearchQ +'difference+between+');
-saxo('we', 'example', googleSearchQ +'example+of+');
-saxo('ww', 'wherefrom', googleSearchQ +'where+from+');
-saxo('wg', 'goalof', googleSearchQ +'what+is+goal+of+');
-saxo('wh', 'historyof', googleSearchQ +'history+of+');
-saxo('wi', 'introductionof', googleSearchQ +'Introduction+of');
+    //file
+    'pdf': ['fppdf', googleSearchQ +'filetype%3Apdf+'],
+    'cpp': ['fpcpp', googleSearchQ +'filetype%3Acpp+'],
+    'hwp': ['fphwp', googleSearchQ +'filetype%3Ahwp+'],
+    'ppt': ['fpppt', googleSearchQ +'filetype%3Appt+']
+}
+// only 's' and 'o' prefixed mappings will be taken
+,searchGroups = {
+    '0': {
+        name: 'Social networks searches',
+        list: ['fb', 'tw', 'ig', 'rd']
+    }
+};
 
-//file
-saxo('ftpdf', 'pdf', googleSearchQ +'filetype%3Apdf+');
-saxo('ftcpp', 'cpp', googleSearchQ +'filetype%3Acpp+');
-saxo('fthwp', 'hwp', googleSearchQ +'filetype%3Ahwp+');
-saxo('ftppt', 'ppt', googleSearchQ +'filetype%3Appt+');
+// register mappings for searches
+for (let k in searches){
+    saxo.apply(null, [k].concat(searches[k]));
+}
+
+// register mappings for search groups
+for (let k in searchGroups){
+    addSearchGroup(k, searchGroups[k], searches);
+}
 
 
 
@@ -175,16 +247,16 @@ onMatch = function(d, i, cmdPrefix){
     mapkey(key, (optionalOmnibarName || (':'+ (cmdPrefix || ''))) +'', function(){
         // open command omnibar (equivalent to ':' key press)
         Front.openOmnibar(omnibarCmdArgs);
-    
+
         // find omnibar frame and fill command input field with cmdPrefix
         for (let i = 0, l = this.frames.length; i < l; i++){
             try{
                 let w = this.frames[i],
                 d = w.document;
-                
+
                 if (/.*\/pages\/frontend\.html$/i.test(d.URL)){
                     w.setTimeout(onMatch, 64, d, i, cmdPrefix);
-                    
+
                     break;
                 }
             }catch(e){
