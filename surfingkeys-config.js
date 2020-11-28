@@ -4,6 +4,8 @@ imap("<Ctrl-w>","Alt-w>");
 // jj as escape
 imap('jj', "<Esc>");
 map('sU', 'su');
+cmap('<Ctrl-n>', '<Tab>');
+cmap('<Ctrl-p>', '<Shift-Tab>');
 
 
 settings.stealFocusOnLoad = true;
