@@ -164,17 +164,33 @@ unmap("op");
   const googleSearchQ = "https://www.google.com/search?q=",
     googleSearchBase = googleSearchQ + "{0}",
     tStr = googleSearchBase + "&tbs=qdr:",
-    // const hackernewsSearchQ = "https://hn.algolia.com/?q=",
+    // const hackernewsSearchQ = "https://hn.algolia.com/",
     // hackernewsBase = hackernewsSearchQ + "{0}",
+    // htStr = hackernewsBase + "&sort=byPopularity&type=story"
 
     searches = {
       // search
-      hN: ["hacker news", hackernewsBase],
-      hny: ["hacker news year", hackernewsBase],
-      hnm: ["hacker news month", hackernewsBase],
-      hnw: ["hacker news week", hackernewsBase],
-      hnd: ["hacker news day", hackernewsBase],
-      hnh: ["hacker news hour", hackernewsBase],
+      hN: ["hacker news", hackernewsBase + "?q="],
+      hny: [
+        "hacker news year",
+        hackernewsBase + "?dateRange=pastYear&page=0&prefix=false&query=",
+        htStr,
+      ],
+      hnm: [
+        "hacker news month",
+        hackernewsBase + "?dateRange=pastMonth&page=0&prefix=false&query=",
+        htStr,
+      ],
+      hnw: [
+        "hacker news week",
+        hackernewsBase + "?dateRange=pastWeek&page=0&prefix=false&query=",
+        htStr,
+      ],
+      hnd: [
+        "hacker news day",
+        hackernewsBase + "?dateRange=pastDay&page=0&prefix=false&query=",
+        htStr,
+      ],
 
       G: ["Google", googleSearchBase],
       gm: ["googlemonth", tStr + "m"],
