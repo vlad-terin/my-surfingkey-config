@@ -164,13 +164,17 @@ unmap("op");
   const googleSearchQ = "https://www.google.com/search?q=",
     googleSearchBase = googleSearchQ + "{0}",
     tStr = googleSearchBase + "&tbs=qdr:",
-    
-  const hackernewsSearchQ = "https://hn.algolia.com/?q=",
-    hackernewsBase = hackernewsSearchQ + "{0}",
+    // const hackernewsSearchQ = "https://hn.algolia.com/?q=",
+    // hackernewsBase = hackernewsSearchQ + "{0}",
 
     searches = {
       // search
       hN: ["hacker news", hackernewsBase],
+      hny: ["hacker news year", hackernewsBase],
+      hnm: ["hacker news month", hackernewsBase],
+      hnw: ["hacker news week", hackernewsBase],
+      hnd: ["hacker news day", hackernewsBase],
+      hnh: ["hacker news hour", hackernewsBase],
 
       G: ["Google", googleSearchBase],
       gm: ["googlemonth", tStr + "m"],
@@ -260,6 +264,10 @@ unmap("op");
       gc: {
         name: "Google combined searches",
         list: ["gy", "gm", "gw", "gd", "gh"],
+      },
+      hnc: {
+        name: "Hacker News Combined",
+        list: ["hny", "hnm", "hnw", "hnd", "hnh"],
       },
     };
 
