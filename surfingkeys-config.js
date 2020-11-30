@@ -169,7 +169,7 @@ unmap("op");
     // htStr = hackernewsBase + "&sort=byPopularity&type=story"
 
     searches = {
-      // search
+      /*      // search
       hN: ["hacker news", hackernewsBase + "?q="],
       hny: [
         "hacker news year",
@@ -192,6 +192,7 @@ unmap("op");
         htStr,
       ],
 
+*/
       G: ["Google", googleSearchBase],
       gm: ["googlemonth", tStr + "m"],
       gw: ["googleweek", tStr + "w"],
