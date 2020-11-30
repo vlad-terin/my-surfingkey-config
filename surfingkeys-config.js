@@ -163,8 +163,8 @@ unmap("op");
   // @todo: registered key sequences are free for mapping, must decide if it should be so
   const googleSearchQ = "https://www.google.com/search?q=",
   const hackernewsSearchQ = "https://hn.algolia.com/?q=",
-    googleSearchBase = hackernewsSearchQ + "{0}",
-    hackernewsBase = hackernewsQ + "{0}",
+    googleSearchBase = googleSearchQ + "{0}",
+    hackernewsBase = hackernewsSearchQ + "{0}",
     tStr = googleSearchBase + "&tbs=qdr:",
     searches = {
       // search
