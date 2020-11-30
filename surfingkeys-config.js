@@ -282,10 +282,11 @@ unmap("op");
         name: "Google combined searches",
         list: ["gy", "gm", "gw", "gd", "gh"],
       },
-      hnc: {
+      /*     hnc: {
         name: "Hacker News Combined",
         list: ["hny", "hnm", "hnw", "hnd", "hnh"],
       },
+*/
     };
 
   // register mappings for searches
