@@ -162,10 +162,12 @@ unmap("op");
   // Mappings with 's' and 'o' prefixes also will be taken
   // @todo: registered key sequences are free for mapping, must decide if it should be so
   const googleSearchQ = "https://www.google.com/search?q=",
-  const hackernewsSearchQ = "https://hn.algolia.com/?q=",
     googleSearchBase = googleSearchQ + "{0}",
-    hackernewsBase = hackernewsSearchQ + "{0}",
     tStr = googleSearchBase + "&tbs=qdr:",
+    
+  const hackernewsSearchQ = "https://hn.algolia.com/?q=",
+    hackernewsBase = hackernewsSearchQ + "{0}",
+
     searches = {
       // search
       hN: ["hacker news", hackernewsBase],
