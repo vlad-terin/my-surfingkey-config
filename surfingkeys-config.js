@@ -4,6 +4,8 @@ imap("<Ctrl-w>", "Alt-w>");
 // jj as escape
 imap("jj", "<Esc>");
 map("sU", "su");
+map("hh", "[[");
+map("ll", "]]");
 cmap("<Ctrl-n>", "<Tab>");
 cmap("<Ctrl-p>", "<Shift-Tab>");
 
