@@ -1274,10 +1274,10 @@ input {
 }
 /* ---------- Omnibar ---------- */
 /* Uncomment this and use settings.omnibarPosition = 'bottom' for Pentadactyl/Tridactyl style bottom bar */
- .sk_theme#sk_omnibar {
+/* .sk_theme#sk_omnibar {
   width: 100%;
   left: 0;
-} 
+} */
 // .sk_theme .title {
   color: var(--accent-fg);
 }
