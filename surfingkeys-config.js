@@ -1201,7 +1201,7 @@ settings.theme = `
   --fg: #51AFEF;
   --bg: #2E3440;
   --bg-dark: #21242B;
-  --border: #282C34;
+  --border: #3CB371;
   --main-fg: #51AFEF;
   --accent-fg: #98be65;
   --info-fg: #C678DD;
@@ -1220,7 +1220,7 @@ settings.theme = `
   --fg: #F8F8F2;
   --bg: #272822;
   --bg-dark: #1D1E19;
-  --border: #3CB371;
+  --border: #2D2E2E;
   --main-fg: #F92660;
   --accent-fg: #E6DB74;
   --info-fg: #A6E22E;
