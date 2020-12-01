@@ -6,7 +6,6 @@ imap("jj", "<Esc>");
 map("sU", "su");
 cmap("<Ctrl-n>", "<Tab>");
 cmap("<Ctrl-p>", "<Shift-Tab>");
-cmap("<Ctrl-p>", "<Shift-Tab>");
 
 settings.stealFocusOnLoad = true;
 
