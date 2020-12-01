@@ -13,7 +13,6 @@ cmap("<Ctrl-n>", "<Tab>");
 cmap("<Ctrl-p>", "<Shift-Tab>");
 
 settings.stealFocusOnLoad = true;
-Hints.characters = "asdfghjkl;";
 
 // Removing default search aliases
 removeSearchAliasX("b");
