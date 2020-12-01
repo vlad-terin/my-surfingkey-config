@@ -1154,8 +1154,8 @@ settings.theme = `
 :root {
   /* Font */
   --font: 'Source Code Pro', Ubuntu, sans;
-  --font-size: 14;
-  --font-weight: bold;
+  --font-size: 16;
+  --font-weight: normal;
   /* -------------- */
   /* --- THEMES --- */
   /* -------------- */
@@ -1198,7 +1198,6 @@ settings.theme = `
   /* -------------------- */
   /* --    DOOM ONE    -- */
   /* -------------------- */
-  /* -- DELETE LINE TO ENABLE THEME
   --fg: #51AFEF;
   --bg: #2E3440;
   --bg-dark: #21242B;
@@ -1207,7 +1206,6 @@ settings.theme = `
   --accent-fg: #98be65;
   --info-fg: #C678DD;
   --select: #4C566A;
-  -- DELETE LINE TO ENABLE THEME */
   /* Unused Alternate Colors */
   /* --bg-dark: #21242B; */
   /* --main-fg-alt: #2257A0; */
@@ -1218,6 +1216,7 @@ settings.theme = `
   /* -------------------- */
   /* --    MONOKAI    -- */
   /* -------------------- */
+  /* -- DELETE LINE TO ENABLE THEME
   --fg: #F8F8F2;
   --bg: #272822;
   --bg-dark: #1D1E19;
@@ -1232,6 +1231,8 @@ settings.theme = `
   /* --blue: #268BD2; */
   /* --violet: #9C91E4; */
   /* --cyan: #66D9EF; */
+  -- DELETE LINE TO ENABLE THEME */
+  /* Unused Alternate Colors */
 }
 /* ---------- Generic ---------- */
 .sk_theme {
