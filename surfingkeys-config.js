@@ -223,7 +223,7 @@ unmap("op");
       //coding
       C: ["search coding", "https://searchcode.com/?q="],
       cC: ["search coding", "https://searchcode.com/?q="],
-      cW: ["chrome webstore", "https://chrome.google.com/webstore/search/"], // chrome
+      cw: ["chrome webstore", "https://chrome.google.com/webstore/search/"], // chrome
       cS: ["slant (editor 비교 사이트)", "https://www.slant.co/search?query="],
       gH: ["github", "https://github.com/search?q="],
       ghS: [
