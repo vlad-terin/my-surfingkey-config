@@ -4,9 +4,10 @@ imap("<Ctrl-w>", "Alt-w>");
 // jj as escape
 imap("jj", "<Esc>");
 map("sU", "su");
+//map hh and ll to go forward and backward a page
 unmap("h");
 unmap("l");
-map("hh", "[[");
+map("hh", "S");
 map("ll", "]]");
 cmap("<Ctrl-n>", "<Tab>");
 cmap("<Ctrl-p>", "<Shift-Tab>");
