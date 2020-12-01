@@ -1163,6 +1163,7 @@ settings.theme = `
   /* -- Tomorrow Night -- */
   /* -------------------- */
 
+  /* -- DELETE LINE TO ENABLE THEME
   --fg: #C5C8C6;
   --bg: #282A2E;
   --bg-dark: #1D1F21;
@@ -1171,7 +1172,7 @@ settings.theme = `
   --accent-fg: #52C196;
   --info-fg: #AC7BBA;
   --select: #585858;
-
+  -- DELETE LINE TO ENABLE THEME */
   /* Unused Alternate Colors */
   /* --cyan: #4CB3BC; */
   /* --orange: #DE935F; */
@@ -1217,7 +1218,6 @@ settings.theme = `
   /* -------------------- */
   /* --    MONOKAI    -- */
   /* -------------------- */
-  /* -- DELETE LINE TO ENABLE THEME
   --fg: #F8F8F2;
   --bg: #272822;
   --bg-dark: #1D1E19;
@@ -1226,7 +1226,6 @@ settings.theme = `
   --accent-fg: #E6DB74;
   --info-fg: #A6E22E;
   --select: #556172;
-  -- DELETE LINE TO ENABLE THEME */
   /* Unused Alternate Colors */
   /* --red: #E74C3C; */
   /* --orange: #FD971F; */
@@ -1275,11 +1274,11 @@ input {
 }
 /* ---------- Omnibar ---------- */
 /* Uncomment this and use settings.omnibarPosition = 'bottom' for Pentadactyl/Tridactyl style bottom bar */
-/* .sk_theme#sk_omnibar {
+ .sk_theme#sk_omnibar {
   width: 100%;
   left: 0;
-} */
-.sk_theme .title {
+} 
+// .sk_theme .title {
   color: var(--accent-fg);
 }
 .sk_theme .url {
