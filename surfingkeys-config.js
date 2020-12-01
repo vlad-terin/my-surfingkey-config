@@ -1220,7 +1220,7 @@ settings.theme = `
   --fg: #F8F8F2;
   --bg: #272822;
   --bg-dark: #1D1E19;
-  --border: #2D2E2E;
+  --border: #3CB371;
   --main-fg: #F92660;
   --accent-fg: #E6DB74;
   --info-fg: #A6E22E;
