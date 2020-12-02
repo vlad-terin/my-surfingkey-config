@@ -194,8 +194,8 @@ unmap("oy");
     rTStr = redditBase + "&t=",
     // googlenews
     googlenewsBase =
-      "https://news.google.com/search?q={0}&hl=en-US&gl=US&ceid=US%3Aen";
-  (googleimagesBase = "https://www.google.com/search?hl=EN&tbm=isch&sxsrf=ALeKk02lZRA04MrLKSiwRGjIuK060z8RYA%3A1606948771057&source=hp&biw=1745&bih=916&ei=oxfIX7iiAYGEtQX06LPQBQ&q={0}"(
+      "https://news.google.com/search?q={0}&hl=en-US&gl=US&ceid=US%3Aen",
+    googleimagesBase = "https://www.google.com/search?hl=EN&tbm=isch&sxsrf=ALeKk02lZRA04MrLKSiwRGjIuK060z8RYA%3A1606948771057&source=hp&biw=1745&bih=916&ei=oxfIX7iiAYGEtQX06LPQBQ&q={0}",
     (searches = {
       // search
 
