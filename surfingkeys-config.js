@@ -179,10 +179,10 @@ unmap("op");
     producthuntBase = "https://www.producthunt.com/search?q={0}",
     phTStr = producthuntBase + "&postedDate=",
     // github code
-    githubBaseRepo = "https://github.com/search?q={0}&type=repositories";
-  githubBaseCode = "https://github.com/search?o=desc&q={0}&s=&type=Code";
-  githubBaseCommits = "https://github.com/search?q={0}&type=commits";
-  githubBaseIssues = "https://github.com/search?q={0}&type=issues";
+    githubBaseRepo = "https://github.com/search?q={0}&type=repositories",
+    githubBaseCode = "https://github.com/search?o=desc&q={0}&s=&type=Code",
+    githubBaseCommits = "https://github.com/search?q={0}&type=commits",
+    githubBaseIssues = "https://github.com/search?q={0}&type=issues",
 
   (searches = {
     // search
@@ -199,6 +199,9 @@ unmap("op");
     hnd: ["hacker news day", hnTStr + "last24h"],
 
     gh: ["github", githubBaseRepo],
+    ghc: ["github", githubBaseCode],
+    ghm: ["github", githubBaseCommits],
+    ghi: ["github", githubBaseIssues],
 
     G: ["Google", googleSearchBase],
     gm: ["googlemonth", tStr + "m"],
@@ -1093,7 +1096,7 @@ mapkey("gT", "Goto Text Area", function () {
 settings.theme = `
 .sk_theme {
     font-family: Input Sans Condensed, Charcoal, sans-serif;
-    font-size: 10pt;
+    font-size: 14pt;
     background: #282828;
     color: #ebdbb2;
 }
