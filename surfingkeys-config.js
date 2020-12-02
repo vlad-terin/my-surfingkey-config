@@ -308,15 +308,15 @@ unmap("oy");
       },
       cpy: {
         name: "combined product search by year",
-        list: ["gy", "hny", "phy", "yy"],
+        list: ["gy", "hny", "phy", "yy", "gh"],
       },
       cpm: {
         name: "combined product search by month",
-        list: ["gm", "hnm", "phy", "ym"],
+        list: ["gm", "hnm", "phy", "ym", "gh"],
       },
       cpd: {
         name: "combined product search by day",
-        list: ["gd", "hnd", "phd", "yd"],
+        list: ["gd", "hnd", "phd", "yd", "gh"],
       },
     };
 
