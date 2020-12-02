@@ -311,11 +311,11 @@ unmap("oy");
         list: ["gy", "hny", "phy", "yy"],
       },
       cpm: {
-        name: "combined product search by year",
+        name: "combined product search by month",
         list: ["gm", "hnm", "phy", "ym"],
       },
       cpd: {
-        name: "combined product search by year",
+        name: "combined product search by day",
         list: ["gd", "hnd", "phd", "yd"],
       },
     };
