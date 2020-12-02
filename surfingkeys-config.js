@@ -310,6 +310,14 @@ unmap("oy");
         name: "combined product search by year",
         list: ["gy", "hny", "phy", "yy"],
       },
+      cpm: {
+        name: "combined product search by year",
+        list: ["gm", "hnm", "phy", "ym"],
+      },
+      cpd: {
+        name: "combined product search by year",
+        list: ["gd", "hnd", "phd", "yd"],
+      },
     };
 
   // register mappings for searches
