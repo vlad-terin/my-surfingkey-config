@@ -278,26 +278,26 @@ unmap("op");
       cpp: ["fpcpp", googleSearchQ + "filetype%3Acpp+"],
       hwp: ["fphwp", googleSearchQ + "filetype%3Ahwp+"],
       ppt: ["fpppt", googleSearchQ + "filetype%3Appt+"],
+    },
+    // only 's' and 'o' prefixed mappings will be taken
+    searchGroups = {
+      "0": {
+        name: "Social networks searches",
+        list: ["fb", "tw", "ig", "rd"],
+      },
+      gc: {
+        name: "Google combined searches",
+        list: ["G", "gy", "gm", "gw", "gd", "gh"],
+      },
+      hnc: {
+        name: "Hacker News Combined",
+        list: ["hN", "hny", "hnm", "hnw", "hnd"],
+      },
+      phc: {
+        name: "Product Hunt Combined",
+        list: ["phy", "ph3m", "phm"],
+      },
     };
-  // only 's' and 'o' prefixed mappings will be taken
-  searchGroups = {
-    "0": {
-      name: "Social networks searches",
-      list: ["fb", "tw", "ig", "rd"],
-    },
-    gc: {
-      name: "Google combined searches",
-      list: ["G", "gy", "gm", "gw", "gd", "gh"],
-    },
-    hnc: {
-      name: "Hacker News Combined",
-      list: ["hN", "hny", "hnm", "hnw", "hnd"],
-    },
-    phc: {
-      name: "Product Hunt Combined",
-      list: ["phy", "ph3m", "phm"],
-    },
-  };
 
   // register mappings for searches
   for (let k in searches) {
