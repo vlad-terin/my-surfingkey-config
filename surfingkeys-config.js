@@ -276,7 +276,7 @@ unmap("op");
     cpp: ["fpcpp", googleSearchQ + "filetype%3Acpp+"],
     hwp: ["fphwp", googleSearchQ + "filetype%3Ahwp+"],
     ppt: ["fpppt", googleSearchQ + "filetype%3Appt+"],
-  }),
+  },
     // only 's' and 'o' prefixed mappings will be taken
     (searchGroups = {
       "0": {
