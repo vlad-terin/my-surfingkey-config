@@ -174,7 +174,7 @@ unmap("op");
     tStr = googleSearchBase + "&tbs=qdr:",
     hackernewsBase = "https://hn.algolia.com/?q={0}&page=0&prefix=false",
     hnTStr = hackernewsBase + "&dateRange=",
-    producthuntBase = "https://www.producthunt.com/search?q=",
+    producthuntBase = "https://www.producthunt.com/search?q={0}",
     phTStr = producthuntBase + "&postedDate=",
     searches = {
       pH: ["product hunt", producthuntBase],
