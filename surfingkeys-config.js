@@ -341,11 +341,11 @@ unmap("oy");
       },
       cpd: {
         name: "combined product search by day",
-        list: ["gd", "hnd", "phm", "yd", "gh", "rd", "w", "gn"],
+        list: ["gd", "hnd", "phm", "yd", "gh", "rd", "w"],
       },
       cph: {
         name: "combined product search by day",
-        list: ["gh", "hnh", "yh", "gh", "rh", "w", "gn"],
+        list: ["gh", "hnd", "yh", "gh", "rh", "w"],
       },
     });
 
