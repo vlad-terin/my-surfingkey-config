@@ -219,7 +219,7 @@ unmap("oy");
       gw: ["googleweek", tStr + "w"],
       gy: ["googleyear", tStr + "y"],
       gd: ["googleday", tStr + "d"],
-      gh: ["googlehour", tStr + "h"],
+      gH: ["googlehour", tStr + "h"],
 
       // conflict, changed from l to ll
       ll: ["lucky", googleSearchBase + "&btnI"],
@@ -296,7 +296,7 @@ unmap("oy");
       },
       gc: {
         name: "Google combined searches",
-        list: ["G", "gy", "gm", "gw", "gd", "gh"],
+        list: ["G", "gy", "gm", "gw", "gd", "gH"],
       },
       hnc: {
         name: "Hacker News Combined",
@@ -305,6 +305,10 @@ unmap("oy");
       phc: {
         name: "Product Hunt Combined",
         list: ["phy", "ph3m", "phm"],
+      },
+      cpy: {
+        name: "combined product search by year",
+        list: ["gy", "hny", "phy", "yy"],
       },
     };
 
