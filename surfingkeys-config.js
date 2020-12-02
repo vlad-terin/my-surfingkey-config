@@ -187,8 +187,17 @@ unmap("oy");
     githubBaseIssues = "https://github.com/search?q={0}&type=issues",
     gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
     youtubeBase = "https://www.youtube.com/results?search_query={0}",
+    redditBase = "https://www.reddit.com/search/?q={0}&type=link",
+    rTStr = redditBase + "&t=",
     searches = {
       // search
+
+      R: ["reddit posts search", redditBase],
+      ry: ["reddit posts year", rTStr + "year"],
+      rm: ["reddit posts month", rTstr + "month"],
+      rd: ["reddit posts day", rTstr + "day"],
+      rh: ["reddit posts hour", rTstr + "hour"],
+
       Y: ["youtube search", youtubeBase],
       yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
       ym: ["youtube month", youtubeBase + "&sp=EgQIBBAB"],
@@ -269,7 +278,6 @@ unmap("oy");
       fb: ["faceBook(페이스북)", "https://www.facebook.com/search/top/?q="],
       tw: ["tWitter", "https://twitter.com/search?q="],
       ig: ["InstaGram HashTag", "https://www.instagram.com/explore/tags/"],
-      rd: ["redDit", "https://www.reddit.com/search?q="],
 
       //shorten - what is.. who is.. where is..
       wa: ["advanced", googleSearchQ + "advanced+"],
@@ -306,17 +314,27 @@ unmap("oy");
         name: "Product Hunt Combined",
         list: ["phy", "ph3m", "phm"],
       },
+
+      rc: {
+        name: "Reddit Combined",
+        list: ["ry", "rm", "rd", "rh", "R"],
+      },
+
       cpy: {
         name: "combined product search by year",
-        list: ["gy", "hny", "phy", "yy", "gh"],
+        list: ["gy", "hny", "phy", "yy", "gh", "ry"],
       },
       cpm: {
         name: "combined product search by month",
-        list: ["gm", "hnm", "phy", "ym", "gh"],
+        list: ["gm", "hnm", "phy", "ym", "gh", "rm"],
       },
       cpd: {
         name: "combined product search by day",
-        list: ["gd", "hnd", "phd", "yd", "gh"],
+        list: ["gd", "hnd", "phm", "yd", "gh", "rd"],
+      },
+      cph: {
+        name: "combined product search by day",
+        list: ["gh", "hnh", "yh", "gh", "rh"],
       },
     };
 
