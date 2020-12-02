@@ -22,6 +22,7 @@ removeSearchAliasX("w");
 removeSearchAliasX("p");
 
 // [+] Remove omnibar mappings to removed search aliases
+unmap("oi");
 unmap("ob");
 unmap("og");
 unmap("os");
@@ -30,7 +31,7 @@ unmap("op");
 
 //General
 
-function () {
+(function () {
   const // function call factory needed to fix unstable/freezing behaviour of '.bind'ed callbacks
     fcFactory = function (f, t, a, b, c, d, e) {
       return function () {
@@ -188,6 +189,7 @@ function () {
     searches = {
     // search
 
+
     pH: ["product hunt", producthuntBase],
     phy: ["product hunt year", phTStr + "12%3Amonths"],
     ph3m: ["product hunt year", phTStr + "90%3Adays"],
@@ -335,7 +337,7 @@ function () {
   mapToCmdPrefix(";sd", "deleteSession ");
   mapToCmdPrefix(";sl", "listSession");
   mapToCmdPrefix(";so", "openSession ");
-};
+})();
 
 // Surfingkey Ctrl-p Ctrl-n in google
 if (window.origin === "https://www.google.com") {
