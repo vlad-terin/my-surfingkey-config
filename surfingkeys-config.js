@@ -30,7 +30,7 @@ unmap("op");
 
 //General
 
-(function () {
+function () {
   const // function call factory needed to fix unstable/freezing behaviour of '.bind'ed callbacks
     fcFactory = function (f, t, a, b, c, d, e) {
       return function () {
@@ -183,6 +183,7 @@ unmap("op");
     githubBaseCode = "https://github.com/search?o=desc&q={0}&s=&type=Code",
     githubBaseCommits = "https://github.com/search?q={0}&type=commits",
     githubBaseIssues = "https://github.com/search?q={0}&type=issues",
+    gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
 
     searches = {
     // search
@@ -334,7 +335,7 @@ unmap("op");
   mapToCmdPrefix(";sd", "deleteSession ");
   mapToCmdPrefix(";sl", "listSession");
   mapToCmdPrefix(";so", "openSession ");
-})();
+};
 
 // Surfingkey Ctrl-p Ctrl-n in google
 if (window.origin === "https://www.google.com") {
