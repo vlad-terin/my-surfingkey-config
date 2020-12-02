@@ -185,120 +185,119 @@ unmap("op");
     githubBaseCommits = "https://github.com/search?q={0}&type=commits",
     githubBaseIssues = "https://github.com/search?q={0}&type=issues",
     gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
-
     searches = {
-    // search
-    oi: ['gmail search', gmailBase],
+      // search
+      oi: ["gmail search", gmailBase],
 
-    pH: ["product hunt", producthuntBase],
-    phy: ["product hunt year", phTStr + "12%3Amonths"],
-    ph3m: ["product hunt year", phTStr + "90%3Adays"],
-    phm: ["product hunt year", phTStr + "30%3Adays"],
+      pH: ["product hunt", producthuntBase],
+      phy: ["product hunt year", phTStr + "12%3Amonths"],
+      ph3m: ["product hunt year", phTStr + "90%3Adays"],
+      phm: ["product hunt year", phTStr + "30%3Adays"],
 
-    hN: ["hacker news", hackernewsBase],
-    hny: ["hacker news year", hnTStr + "pastYear"],
-    hnm: ["hacker news month", hnTStr + "pastMonth"],
-    hnw: ["hacker news week", hnTStr + "pastWeek"],
-    hnd: ["hacker news day", hnTStr + "last24h"],
+      hN: ["hacker news", hackernewsBase],
+      hny: ["hacker news year", hnTStr + "pastYear"],
+      hnm: ["hacker news month", hnTStr + "pastMonth"],
+      hnw: ["hacker news week", hnTStr + "pastWeek"],
+      hnd: ["hacker news day", hnTStr + "last24h"],
 
-    gh: ["github", githubBaseRepo],
-    ghc: ["github", githubBaseCode],
-    ghm: ["github", githubBaseCommits],
-    ghi: ["github", githubBaseIssues],
+      gh: ["github", githubBaseRepo],
+      ghc: ["github", githubBaseCode],
+      ghm: ["github", githubBaseCommits],
+      ghi: ["github", githubBaseIssues],
 
-    G: ["Google", googleSearchBase],
-    gm: ["googlemonth", tStr + "m"],
-    gw: ["googleweek", tStr + "w"],
-    gy: ["googleyear", tStr + "y"],
-    gd: ["googleday", tStr + "d"],
-    gh: ["googlehour", tStr + "h"],
+      G: ["Google", googleSearchBase],
+      gm: ["googlemonth", tStr + "m"],
+      gw: ["googleweek", tStr + "w"],
+      gy: ["googleyear", tStr + "y"],
+      gd: ["googleday", tStr + "d"],
+      gh: ["googlehour", tStr + "h"],
 
-    // conflict, changed from l to ll
-    ll: ["lucky", googleSearchBase + "&btnI"],
-    // conflict, changed from t to tt
-    tt: ["onelook", "https://www.onelook.com/?w={0}&ls=a"],
-    s: ["onelook synonyms", "https://www.onelook.com/thesaurus/?s={0}"],
-    d: [
-      "google drive search",
-      "https://drive.google.com/drive/u/1/search?q={0}",
-    ],
-    // conflict, changed from c to cc
-    cc: ["technical translation", "https://techterms.com/definition/{0}"],
-    // conflict, changed from w to ww to wk
-    wk: ["wiki", "https://en.wikipedia.org/wiki/{0}"],
+      // conflict, changed from l to ll
+      ll: ["lucky", googleSearchBase + "&btnI"],
+      // conflict, changed from t to tt
+      tt: ["onelook", "https://www.onelook.com/?w={0}&ls=a"],
+      s: ["onelook synonyms", "https://www.onelook.com/thesaurus/?s={0}"],
+      d: [
+        "google drive search",
+        "https://drive.google.com/drive/u/1/search?q={0}",
+      ],
+      // conflict, changed from c to cc
+      cc: ["technical translation", "https://techterms.com/definition/{0}"],
+      // conflict, changed from w to ww to wk
+      wk: ["wiki", "https://en.wikipedia.org/wiki/{0}"],
 
-    // conflict, changed from p to ppp
-    ppp: ["duckHTML", "https://duckduckgo.com/html/?q={0}"],
+      // conflict, changed from p to ppp
+      ppp: ["duckHTML", "https://duckduckgo.com/html/?q={0}"],
 
-    //map
-    gM: ["google maps", "https://www.google.com/maps?q="],
+      //map
+      gM: ["google maps", "https://www.google.com/maps?q="],
 
-    //coding
-    C: ["search coding", "https://searchcode.com/?q="],
-    cC: ["search coding", "https://searchcode.com/?q="],
-    cw: ["chrome webstore", "https://chrome.google.com/webstore/search/"], // chrome
-    cS: ["slant (editor 비교 사이트)", "https://www.slant.co/search?query="],
-    gH: ["github", "https://github.com/search?q="],
+      //coding
+      C: ["search coding", "https://searchcode.com/?q="],
+      cC: ["search coding", "https://searchcode.com/?q="],
+      cw: ["chrome webstore", "https://chrome.google.com/webstore/search/"], // chrome
+      cS: ["slant (editor 비교 사이트)", "https://www.slant.co/search?query="],
+      gH: ["github", "https://github.com/search?q="],
 
-    //language
-    lJ: ["language Javascript", googleSearchQ + "Javascript+"],
-    lj: ["language java", googleSearchQ + "Java+"],
-    lC: ["C++", googleSearchQ + "C++"],
-    lc: ["language c", googleSearchQ + "c+language+"],
-    "l#": ["language C#", googleSearchQ + "c%23+"],
-    lR: ["language R", googleSearchQ + "languag+"],
-    lr: ["language Ruby", googleSearchQ + "Ruby+"],
-    lP: ["language Python", googleSearchQ + "Python+"],
-    lp: ["language php", googleSearchQ + "php+"],
-    lK: ["language Kotlin", googleSearchQ + "Kotlin+"],
-    lS: ["language Swift", googleSearchQ + "Swift+"],
-    lQ: ["language SQL Query", googleSearchQ + "SQL+"],
-    ls: ["language Shell script", googleSearchQ + "Shell+Schript+"],
-    lT: ["language Typescript", googleSearchQ + "TypeScript+"],
-    lH: ["language HTML", googleSearchQ + "HTML+"],
+      //language
+      lJ: ["language Javascript", googleSearchQ + "Javascript+"],
+      lj: ["language java", googleSearchQ + "Java+"],
+      lC: ["C++", googleSearchQ + "C++"],
+      lc: ["language c", googleSearchQ + "c+language+"],
+      "l#": ["language C#", googleSearchQ + "c%23+"],
+      lR: ["language R", googleSearchQ + "languag+"],
+      lr: ["language Ruby", googleSearchQ + "Ruby+"],
+      lP: ["language Python", googleSearchQ + "Python+"],
+      lp: ["language php", googleSearchQ + "php+"],
+      lK: ["language Kotlin", googleSearchQ + "Kotlin+"],
+      lS: ["language Swift", googleSearchQ + "Swift+"],
+      lQ: ["language SQL Query", googleSearchQ + "SQL+"],
+      ls: ["language Shell script", googleSearchQ + "Shell+Schript+"],
+      lT: ["language Typescript", googleSearchQ + "TypeScript+"],
+      lH: ["language HTML", googleSearchQ + "HTML+"],
 
-    //sns
-    fb: ["faceBook(페이스북)", "https://www.facebook.com/search/top/?q="],
-    tw: ["tWitter", "https://twitter.com/search?q="],
-    ig: ["InstaGram HashTag", "https://www.instagram.com/explore/tags/"],
-    rd: ["redDit", "https://www.reddit.com/search?q="],
+      //sns
+      fb: ["faceBook(페이스북)", "https://www.facebook.com/search/top/?q="],
+      tw: ["tWitter", "https://twitter.com/search?q="],
+      ig: ["InstaGram HashTag", "https://www.instagram.com/explore/tags/"],
+      rd: ["redDit", "https://www.reddit.com/search?q="],
 
-    //shorten - what is.. who is.. where is..
-    wa: ["advanced", googleSearchQ + "advanced+"],
-    wb: ["basic", googleSearchQ + "basic+"],
-    wc: ["classification", googleSearchQ + "classfication+of+"],
-    wd: ["difference", googleSearchQ + "difference+between+"],
-    we: ["example", googleSearchQ + "example+of+"],
-    ww: ["wherefrom", googleSearchQ + "where+from+"],
-    wg: ["goalof", googleSearchQ + "what+is+goal+of+"],
-    wh: ["historyof", googleSearchQ + "history+of+"],
-    wi: ["introductionof", googleSearchQ + "Introduction+of"],
+      //shorten - what is.. who is.. where is..
+      wa: ["advanced", googleSearchQ + "advanced+"],
+      wb: ["basic", googleSearchQ + "basic+"],
+      wc: ["classification", googleSearchQ + "classfication+of+"],
+      wd: ["difference", googleSearchQ + "difference+between+"],
+      we: ["example", googleSearchQ + "example+of+"],
+      ww: ["wherefrom", googleSearchQ + "where+from+"],
+      wg: ["goalof", googleSearchQ + "what+is+goal+of+"],
+      wh: ["historyof", googleSearchQ + "history+of+"],
+      wi: ["introductionof", googleSearchQ + "Introduction+of"],
 
-    //file
-    pdf: ["fppdf", googleSearchQ + "filetype%3Apdf+"],
-    cpp: ["fpcpp", googleSearchQ + "filetype%3Acpp+"],
-    hwp: ["fphwp", googleSearchQ + "filetype%3Ahwp+"],
-    ppt: ["fpppt", googleSearchQ + "filetype%3Appt+"],
-  },
-    // only 's' and 'o' prefixed mappings will be taken
-    (searchGroups = {
-      "0": {
-        name: "Social networks searches",
-        list: ["fb", "tw", "ig", "rd"],
-      },
-      gc: {
-        name: "Google combined searches",
-        list: ["G", "gy", "gm", "gw", "gd", "gh"],
-      },
-      hnc: {
-        name: "Hacker News Combined",
-        list: ["hN", "hny", "hnm", "hnw", "hnd"],
-      },
-      phc: {
-        name: "Product Hunt Combined",
-        list: ["phy", "ph3m", "phm"],
-      },
-    });
+      //file
+      pdf: ["fppdf", googleSearchQ + "filetype%3Apdf+"],
+      cpp: ["fpcpp", googleSearchQ + "filetype%3Acpp+"],
+      hwp: ["fphwp", googleSearchQ + "filetype%3Ahwp+"],
+      ppt: ["fpppt", googleSearchQ + "filetype%3Appt+"],
+    };
+  // only 's' and 'o' prefixed mappings will be taken
+  searchGroups = {
+    "0": {
+      name: "Social networks searches",
+      list: ["fb", "tw", "ig", "rd"],
+    },
+    gc: {
+      name: "Google combined searches",
+      list: ["G", "gy", "gm", "gw", "gd", "gh"],
+    },
+    hnc: {
+      name: "Hacker News Combined",
+      list: ["hN", "hny", "hnm", "hnw", "hnd"],
+    },
+    phc: {
+      name: "Product Hunt Combined",
+      list: ["phy", "ph3m", "phm"],
+    },
+  };
 
   // register mappings for searches
   for (let k in searches) {
