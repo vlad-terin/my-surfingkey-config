@@ -187,7 +187,7 @@ unmap("op");
     gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
     searches = {
       // search
-      oi: ["gmail search", gmailBase],
+      oI: ["gmail search", gmailBase],
 
       pH: ["product hunt", producthuntBase],
       phy: ["product hunt year", phTStr + "12%3Amonths"],
