@@ -184,7 +184,7 @@ unmap("op");
     githubBaseCommits = "https://github.com/search?q={0}&type=commits",
     githubBaseIssues = "https://github.com/search?q={0}&type=issues",
 
-  (searches = {
+    searches = {
     // search
 
     pH: ["product hunt", producthuntBase],
