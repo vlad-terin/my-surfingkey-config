@@ -194,9 +194,9 @@ unmap("oy");
 
       R: ["reddit posts search", redditBase],
       ry: ["reddit posts year", rTStr + "year"],
-      rm: ["reddit posts month", rTstr + "month"],
-      rd: ["reddit posts day", rTstr + "day"],
-      rh: ["reddit posts hour", rTstr + "hour"],
+      rm: ["reddit posts month", rTStr + "month"],
+      rd: ["reddit posts day", rTStr + "day"],
+      rh: ["reddit posts hour", rTStr + "hour"],
 
       Y: ["youtube search", youtubeBase],
       yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
