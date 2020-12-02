@@ -178,9 +178,9 @@ unmap("op");
     phTStr = producthuntBase + "&postedDate=",
     searches = {
       pH: ["product hunt", producthuntBase],
-      phy: ["product hunt year", phTstr + "12%3Amonths"],
-      ph3m: ["product hunt year", phTstr + "90%3Adays"],
-      phm: ["product hunt year", phTstr + "30%3Adays"],
+      phy: ["product hunt year", phTStr + "12%3Amonths"],
+      ph3m: ["product hunt year", phTStr + "90%3Adays"],
+      phm: ["product hunt year", phTStr + "30%3Adays"],
       // search
       hN: ["hacker news", hackernewsBase],
       hny: ["hacker news year", hnTStr + "pastYear"],
