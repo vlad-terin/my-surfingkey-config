@@ -188,7 +188,7 @@ unmap("op");
 
     searches = {
     // search
-
+    oi: ['gmail search', gmailBase],
 
     pH: ["product hunt", producthuntBase],
     phy: ["product hunt year", phTStr + "12%3Amonths"],
