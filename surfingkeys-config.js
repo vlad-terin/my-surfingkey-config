@@ -28,6 +28,7 @@ unmap("og");
 unmap("os");
 unmap("ow");
 unmap("op");
+unmap("oy");
 
 //General
 
@@ -185,9 +186,17 @@ unmap("op");
     githubBaseCommits = "https://github.com/search?q={0}&type=commits",
     githubBaseIssues = "https://github.com/search?q={0}&type=issues",
     gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
+    youtubeBase = "https://www.youtube.com/results?search_query={0}",
     searches = {
       // search
-      oI: ["gmail search", gmailBase],
+      Y: ["youtube search", youtubeBase],
+      yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
+      ym: ["youtube month", youtubeBase + "&sp=EgQIBBAB"],
+      yw: ["youtube week", youtubeBase + "&sp=EgQIAxAB"],
+      yd: ["youtube day", youtubeBase + "&sp=EgQIAhAB"],
+      yh: ["youtube hour", youtubeBase + "&sp=EgQIARAB"],
+
+      i: ["gmail search", gmailBase],
 
       pH: ["product hunt", producthuntBase],
       phy: ["product hunt year", phTStr + "12%3Amonths"],
