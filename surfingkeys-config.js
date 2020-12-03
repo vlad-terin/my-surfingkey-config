@@ -338,7 +338,7 @@ unmap("oy");
       },
       cd: {
         name: "combined design",
-        list: ["odcm", "odb", "odee", "odd", "odaw", "odui", "odm", "odp"],
+        list: ["dcm", "db", "dee", "dd", "daw", "dui", "dm", "dp"],
       },
     };
 
