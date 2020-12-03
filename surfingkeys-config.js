@@ -215,6 +215,8 @@ unmap("od");
       yd: ["youtube day", youtubeBase + "&sp=EgQIAhAB"],
       yh: ["youtube hour", youtubeBase + "&sp=EgQIARAB"],
 
+      i: ["gmail search", gmailBase],
+
       pH: ["product hunt", producthuntBase],
       phy: ["product hunt year", phTStr + "12%3Amonths"],
       ph3m: ["product hunt year", phTStr + "90%3Adays"],
@@ -238,7 +240,6 @@ unmap("od");
       gd: ["googleday", tStr + "d"],
       gH: ["googlehour", tStr + "h"],
 
-      i: ["gmail search", gmailBase],
       // conflict, changed from l to ll
       ll: ["lucky", googleSearchBase + "&btnI"],
       // conflict, changed from t to tt
@@ -335,7 +336,7 @@ unmap("od");
       },
       cd: {
         name: "combined design",
-        list: ["daw", "dui", "dm", "dp"],
+        list: ["dcm", "db", "dee", "dd", "daw", "dui", "dm", "dp"],
       },
     };
 
