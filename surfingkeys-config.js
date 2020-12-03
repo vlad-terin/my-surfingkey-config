@@ -29,6 +29,7 @@ unmap("os");
 unmap("ow");
 unmap("op");
 unmap("oy");
+unmap("od");
 
 //General
 
@@ -214,8 +215,6 @@ unmap("oy");
       yd: ["youtube day", youtubeBase + "&sp=EgQIAhAB"],
       yh: ["youtube hour", youtubeBase + "&sp=EgQIARAB"],
 
-      i: ["gmail search", gmailBase],
-
       pH: ["product hunt", producthuntBase],
       phy: ["product hunt year", phTStr + "12%3Amonths"],
       ph3m: ["product hunt year", phTStr + "90%3Adays"],
@@ -238,7 +237,7 @@ unmap("oy");
       gy: ["googleyear", tStr + "y"],
       gd: ["googleday", tStr + "d"],
       gH: ["googlehour", tStr + "h"],
-
+      i: ["gmail search", gmailBase],
       // conflict, changed from l to ll
       ll: ["lucky", googleSearchBase + "&btnI"],
       // conflict, changed from t to tt
@@ -252,9 +251,6 @@ unmap("oy");
       cc: ["technical translation", "https://techterms.com/definition/{0}"],
       // conflict, changed from w to ww to wk
       wk: ["wiki", "https://en.wikipedia.org/wiki/{0}"],
-
-      // conflict, changed from p to ppp
-      ppp: ["duckHTML", "https://duckduckgo.com/html/?q={0}"],
 
       //map
       gM: ["google maps", "https://www.google.com/maps?q="],
