@@ -237,6 +237,7 @@ unmap("od");
       gy: ["googleyear", tStr + "y"],
       gd: ["googleday", tStr + "d"],
       gH: ["googlehour", tStr + "h"],
+
       i: ["gmail search", gmailBase],
       // conflict, changed from l to ll
       ll: ["lucky", googleSearchBase + "&btnI"],
@@ -334,7 +335,7 @@ unmap("od");
       },
       cd: {
         name: "combined design",
-        list: ["dcm", "db", "dee", "dd", "daw", "dui", "dm", "dp"],
+        list: ["daw", "dui", "dm", "dp"],
       },
     };
 
