@@ -180,34 +180,33 @@ unmap("oy");
     // product hunt
     producthuntBase = "https://www.producthunt.com/search?q={0}",
     phTStr = producthuntBase + "&postedDate=",
-    // github
+    // github code
     githubBaseRepo = "https://github.com/search?q={0}&type=repositories",
     githubBaseCode = "https://github.com/search?o=desc&q={0}&s=&type=Code",
     githubBaseCommits = "https://github.com/search?q={0}&type=commits",
     githubBaseIssues = "https://github.com/search?q={0}&type=issues",
-    //gmail
     gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
-    // youtube
     youtubeBase = "https://www.youtube.com/results?search_query={0}",
-    // reddit
-    redditBase = "https://www.reddit.com/search/?q={0}&type=link",
-    rTStr = redditBase + "&t=",
-    // googlenews
-    googlenewsBase =
-      "https://news.google.com/search?q={0}&hl=en-US&gl=US&ceid=US%3Aen",
-    googleimagesBase =
-      "https://www.google.com/search?hl=EN&tbm=isch&sxsrf=ALeKk02lZRA04MrLKSiwRGjIuK060z8RYA%3A1606948771057&source=hp&biw=1745&bih=916&ei=oxfIX7iiAYGEtQX06LPQBQ&q={0}",
+    // web design
+    creativemarketBase = "https://creativemarket.com/search?q={0}",
+    elementsenvatoBase = "https://elements.envato.com/all-items/{0}",
+    behanceBase = "https://www.behance.net/search?search={0}",
+    dribbleBase = "https://dribbble.com/search/{0}",
+    awwardsBase = "https://www.awwwards.com/inspiration/search?text={0}",
+    uisourcesBase = "https://www.uisources.com/search?query={0}",
+    uisourcesBase = "https://www.uisources.com/search?query={0}",
+    searchmuzliBase = "https://search.muz.li/search/{0}",
+    pinterestBase = "https://www.pinterest.com/search/pins/?q={0}",
     searches = {
       // search
-
-      gi: ["google images", googleimagesBase],
-      gn: ["google news", googlenewsBase],
-
-      R: ["reddit posts search", redditBase],
-      ry: ["reddit posts year", rTStr + "year"],
-      rm: ["reddit posts month", rTStr + "month"],
-      rd: ["reddit posts day", rTStr + "day"],
-      rh: ["reddit posts hour", rTStr + "hour"],
+      odcm: ["creative market", creativemarketBase],
+      odee: ["envato elements", elementsenvatoBase],
+      odb: ["behance", behanceBase],
+      odd: ["dribble", dribbleBase],
+      odaw: ["awwards", awwardsBase],
+      odui: ["uisources", uisourcesBase],
+      odm: ["muzli", searchmuzliBase],
+      odp: ["pinterest", pinterestBase],
 
       Y: ["youtube search", youtubeBase],
       yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
@@ -241,22 +240,19 @@ unmap("oy");
       gd: ["googleday", tStr + "d"],
       gH: ["googlehour", tStr + "h"],
 
-      w: [
-        "wiki",
-        "https://en.wikipedia.org/w/index.php?search={0}&title=Special%3ASearch&wprov=acrw1_0",
-      ],
-
       // conflict, changed from l to ll
       ll: ["lucky", googleSearchBase + "&btnI"],
       // conflict, changed from t to tt
       tt: ["onelook", "https://www.onelook.com/?w={0}&ls=a"],
       s: ["onelook synonyms", "https://www.onelook.com/thesaurus/?s={0}"],
-      d: [
+      D: [
         "google drive search",
         "https://drive.google.com/drive/u/1/search?q={0}",
       ],
       // conflict, changed from c to cc
       cc: ["technical translation", "https://techterms.com/definition/{0}"],
+      // conflict, changed from w to ww to wk
+      wk: ["wiki", "https://en.wikipedia.org/wiki/{0}"],
 
       // conflict, changed from p to ppp
       ppp: ["duckHTML", "https://duckduckgo.com/html/?q={0}"],
@@ -292,9 +288,10 @@ unmap("oy");
       fb: ["faceBook(페이스북)", "https://www.facebook.com/search/top/?q="],
       tw: ["tWitter", "https://twitter.com/search?q="],
       ig: ["InstaGram HashTag", "https://www.instagram.com/explore/tags/"],
+      rd: ["redDit", "https://www.reddit.com/search?q="],
 
       //shorten - what is.. who is.. where is..
-      /*wa: ["advanced", googleSearchQ + "advanced+"],
+      wa: ["advanced", googleSearchQ + "advanced+"],
       wb: ["basic", googleSearchQ + "basic+"],
       wc: ["classification", googleSearchQ + "classfication+of+"],
       wd: ["difference", googleSearchQ + "difference+between+"],
@@ -302,7 +299,7 @@ unmap("oy");
       ww: ["wherefrom", googleSearchQ + "where+from+"],
       wg: ["goalof", googleSearchQ + "what+is+goal+of+"],
       wh: ["historyof", googleSearchQ + "history+of+"],
-      wi: ["introductionof", googleSearchQ + "Introduction+of"],*/
+      wi: ["introductionof", googleSearchQ + "Introduction+of"],
 
       //file
       pdf: ["fppdf", googleSearchQ + "filetype%3Apdf+"],
@@ -328,27 +325,17 @@ unmap("oy");
         name: "Product Hunt Combined",
         list: ["phy", "ph3m", "phm"],
       },
-
-      rc: {
-        name: "Reddit Combined",
-        list: ["ry", "rm", "rd", "rh", "R"],
-      },
-
       cpy: {
         name: "combined product search by year",
-        list: ["gy", "hny", "phy", "yy", "gh", "ry", "w", "gn"],
+        list: ["gy", "hny", "phy", "yy", "gh"],
       },
       cpm: {
         name: "combined product search by month",
-        list: ["gm", "hnm", "phy", "ym", "gh", "rm", "w", "gn"],
+        list: ["gm", "hnm", "phy", "ym", "gh"],
       },
       cpd: {
         name: "combined product search by day",
-        list: ["gd", "hnd", "phm", "yd", "gh", "rd", "w"],
-      },
-      cph: {
-        name: "combined product search by day",
-        list: ["gh", "hnd", "yh", "gh", "rh", "w"],
+        list: ["gd", "hnd", "phd", "yd", "gh"],
       },
     };
 
