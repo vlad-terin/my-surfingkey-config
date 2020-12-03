@@ -337,6 +337,10 @@ unmap("oy");
         name: "combined product search by day",
         list: ["gd", "hnd", "phd", "yd", "gh"],
       },
+      cd: {
+        name: "combined design",
+        list: ["odcm", "odb", "odee", "odd", "odaw", "odui", "odm", "odp"],
+      },
     };
 
   // register mappings for searches
