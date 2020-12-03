@@ -198,14 +198,14 @@ unmap("oy");
     pinterestBase = "https://www.pinterest.com/search/pins/?q={0}",
     searches = {
       // search
-      odcm: ["creative market", creativemarketBase],
-      odee: ["envato elements", elementsenvatoBase],
-      odb: ["behance", behanceBase],
-      odd: ["dribble", dribbleBase],
-      odaw: ["awwards", awwardsBase],
-      odui: ["uisources", uisourcesBase],
-      odm: ["muzli", searchmuzliBase],
-      odp: ["pinterest", pinterestBase],
+      dcm: ["creative market", creativemarketBase],
+      dee: ["envato elements", elementsenvatoBase],
+      db: ["behance", behanceBase],
+      dd: ["dribble", dribbleBase],
+      daw: ["awwards", awwardsBase],
+      dui: ["uisources", uisourcesBase],
+      dm: ["muzli", searchmuzliBase],
+      dp: ["pinterest", pinterestBase],
 
       Y: ["youtube search", youtubeBase],
       yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
