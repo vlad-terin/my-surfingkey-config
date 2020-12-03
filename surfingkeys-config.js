@@ -194,7 +194,6 @@ unmap("oy");
     dribbleBase = "https://dribbble.com/search/{0}",
     awwardsBase = "https://www.awwwards.com/inspiration/search?text={0}",
     uisourcesBase = "https://www.uisources.com/search?query={0}",
-    uisourcesBase = "https://www.uisources.com/search?query={0}",
     searchmuzliBase = "https://search.muz.li/search/{0}",
     pinterestBase = "https://www.pinterest.com/search/pins/?q={0}",
     searches = {
