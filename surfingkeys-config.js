@@ -332,7 +332,7 @@ unmap("od");
       },
       cpd: {
         name: "combined product search by day",
-        list: ["gd", "hnd", "phd", "yd", "gh"],
+        list: ["gd", "hnd", "phm", "yd", "gh"],
       },
       cd: {
         name: "combined design",
