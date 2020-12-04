@@ -186,6 +186,13 @@ unmap("od");
     githubBaseCode = "https://github.com/search?o=desc&q={0}&s=&type=Code",
     githubBaseCommits = "https://github.com/search?q={0}&type=commits",
     githubBaseIssues = "https://github.com/search?q={0}&type=issues",
+    githubBaseDiscussions = "https://github.com/search?q={0}&type=discussions",
+    githubBaseRegistrypackages =
+      "https://github.com/search?q={0}&type=registrypackages",
+    githubBaseMarketplace = "https://github.com/search?q={0}&type=marketplace",
+    githubBaseTopics = "https://github.com/search?q={0}&type=topics",
+    githubBaseWikis = "https://github.com/search?q={0}&type=wikis",
+    githubBaseUsers = "https://github.com/search?q={0}&type=users",
     gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
     youtubeBase = "https://www.youtube.com/results?search_query={0}",
     youtubeChannel = youtubeBase + "&sp=EgIQAg%253D%253D",
@@ -232,8 +239,14 @@ unmap("od");
 
       gH: ["github", githubBaseRepo],
       ghc: ["github", githubBaseCode],
-      ghm: ["github", githubBaseCommits],
+      ghC: ["github", githubBaseCommits],
       ghi: ["github", githubBaseIssues],
+      ghd: ["github", githubBaseDiscussions],
+      ghr: ["github", githubBaseRegistrypackages],
+      ghm: ["github", githubBaseMarketplace],
+      ght: ["github", githubBaseTopics],
+      ghw: ["github", githubBaseWikis],
+      ghu: ["github", githubBaseUsers],
 
       G: ["Google", googleSearchBase],
       gm: ["googlemonth", tStr + "m"],
@@ -312,9 +325,13 @@ unmap("od");
         name: "Social networks searches",
         list: ["fb", "tw", "ig", "rd"],
       },
-      gc: {
-        name: "Google combined searches",
+      gg: {
+        name: "Google group searches",
         list: ["G", "gy", "gm", "gw", "gd", "gH"],
+      },
+      ghg: {
+        name: "Github group",
+        list: ["ghc", "ghC", "ghi", "ghd", "ghr", "ghm", "ght", "ghw", "ghu"],
       },
       hnc: {
         name: "Hacker News Combined",
@@ -326,15 +343,15 @@ unmap("od");
       },
       cpy: {
         name: "combined product search by year",
-        list: ["gy", "hny", "phy", "yy", "gh"],
+        list: ["gy", "hny", "phy", "yy", "gH"],
       },
       cpm: {
         name: "combined product search by month",
-        list: ["gm", "hnm", "phy", "ym", "gh"],
+        list: ["gm", "hnm", "phy", "ym", "gH"],
       },
       cpd: {
         name: "combined product search by day",
-        list: ["gd", "hnd", "phm", "yd", "gh"],
+        list: ["gd", "hnd", "phm", "yd", "gH"],
       },
       cd: {
         name: "combined design",
