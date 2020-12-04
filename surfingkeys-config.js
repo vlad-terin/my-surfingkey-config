@@ -230,7 +230,7 @@ unmap("od");
       hnw: ["hacker news week", hnTStr + "pastWeek"],
       hnd: ["hacker news day", hnTStr + "last24h"],
 
-      gh: ["github", githubBaseRepo],
+      gH: ["github", githubBaseRepo],
       ghc: ["github", githubBaseCode],
       ghm: ["github", githubBaseCommits],
       ghi: ["github", githubBaseIssues],
