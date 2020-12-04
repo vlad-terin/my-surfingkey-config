@@ -188,6 +188,7 @@ unmap("od");
     githubBaseIssues = "https://github.com/search?q={0}&type=issues",
     gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
     youtubeBase = "https://www.youtube.com/results?search_query={0}",
+    youtubeChannel = youtubeBase + "&sp=EgIQAg%253D%253D",
     // web design
     creativemarketBase = "https://creativemarket.com/search?q={0}",
     elementsenvatoBase = "https://elements.envato.com/all-items/{0}",
@@ -214,6 +215,7 @@ unmap("od");
       yw: ["youtube week", youtubeBase + "&sp=EgQIAxAB"],
       yd: ["youtube day", youtubeBase + "&sp=EgQIAhAB"],
       yh: ["youtube hour", youtubeBase + "&sp=EgQIARAB"],
+      yc: ["youtube channel", youtubeChannel],
 
       i: ["gmail search", gmailBase],
 
