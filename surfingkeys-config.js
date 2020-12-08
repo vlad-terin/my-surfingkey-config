@@ -1,5 +1,8 @@
 map("L", "R");
 map("H", "E");
+vmap("v", "zv");
+cmap("<Ctrl-n>", "<Tab>");
+cmap("<Ctrl-p>", "<Shift-Tab>");
 imap("<Ctrl-w>", "Alt-w>");
 // jj as escape
 imap("jj", "<Esc>");
