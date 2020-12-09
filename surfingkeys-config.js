@@ -190,6 +190,7 @@ unmap("od");
     phTStr = producthuntBase + "&postedDate=",
     //code reference
     mdnBase = "https://developer.mozilla.org/en-US/search?q={0}",
+    devdocBase = "http://devdocs.io/#q={0}",
     // github code
     githubBaseRepo = "https://github.com/search?q={0}&type=repositories",
     githubBaseCode = "https://github.com/search?o=desc&q={0}&s=&type=Code",
@@ -300,6 +301,7 @@ unmap("od");
 
       //code reference
       crm: ["code reference mdn", mdnBase],
+      crdd: ["code reference devdoc", devdocBase],
 
       G: ["Google", googleSearchBase],
       gm: ["googlemonth", tStr + "m"],
