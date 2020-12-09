@@ -219,6 +219,7 @@ unmap("od");
     youtubeUploadDate = youtubeBase + "&sp=CAI%253D",
     youtubeViewCount = youtubeBase + "&sp=CAM%253D",
     youtubeRating = youtubeBase + "&sp=CAE%253D",
+    youtubeHistory = "https://www.youtube.com/feed/history?query={0}",
     // web design
     creativemarketBase = "https://creativemarket.com/search?q={0}",
     elementsenvatoBase = "https://elements.envato.com/all-items/{0}",
@@ -245,6 +246,7 @@ unmap("od");
       yw: ["youtube week", youtubeBase + "&sp=EgQIAxAB"],
       yd: ["youtube day", youtubeBase + "&sp=EgQIAhAB"],
       yh: ["youtube hour", youtubeBase + "&sp=EgQIARAB"],
+      yH: ["youtube history", youtubeHistory],
       yc: ["youtube channel", youtubeChannel],
       yp: ["youtube Playlist", youtubePlaylist],
       yM: ["youtube Movie", youtubeMovie],
@@ -363,7 +365,7 @@ unmap("od");
     },
     // only 's' and 'o' prefixed mappings will be taken
     searchGroups = {
-      "0": {
+      0: {
         name: "Social networks searches",
         list: ["fb", "tw", "ig", "rd"],
       },
