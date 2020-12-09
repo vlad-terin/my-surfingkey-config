@@ -177,6 +177,8 @@ unmap("od");
   // @todo: registered key sequences are free for mapping, must decide if it should be so
   const googleSearchQ = "https://www.google.com/search?q=",
     googleSearchBase = googleSearchQ + "{0}",
+    googleSearchHistory =
+      "https://myactivity.google.com/myactivity?authuser=0&q={0}",
     tStr = googleSearchBase + "&tbs=qdr:",
     // hackernews
     hackernewsBase = "https://hn.algolia.com/?q={0}&page=0&prefix=false",
@@ -298,6 +300,7 @@ unmap("od");
       gy: ["googleyear", tStr + "y"],
       gd: ["googleday", tStr + "d"],
       gH: ["googlehour", tStr + "h"],
+      gsh: ["google search history", googleSearchHistory],
 
       // conflict, changed from l to ll
       ll: ["lucky", googleSearchBase + "&btnI"],
