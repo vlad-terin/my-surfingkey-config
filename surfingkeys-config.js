@@ -188,6 +188,8 @@ unmap("od");
     // product hunt
     producthuntBase = "https://www.producthunt.com/search?q={0}",
     phTStr = producthuntBase + "&postedDate=",
+    //code reference
+    mdnBase = "https://developer.mozilla.org/en-US/search?q={0}",
     // github code
     githubBaseRepo = "https://github.com/search?q={0}&type=repositories",
     githubBaseCode = "https://github.com/search?o=desc&q={0}&s=&type=Code",
@@ -295,6 +297,9 @@ unmap("od");
       ght: ["github", githubBaseTopics],
       ghw: ["github", githubBaseWikis],
       ghu: ["github", githubBaseUsers],
+
+      //code reference
+      crm: ["code reference mdn", mdnBase],
 
       G: ["Google", googleSearchBase],
       gm: ["googlemonth", tStr + "m"],
