@@ -180,6 +180,8 @@ unmap("od");
     googleSearchHistory =
       "https://myactivity.google.com/myactivity?authuser=0&q={0}",
     tStr = googleSearchBase + "&tbs=qdr:",
+    googleImages =
+      "https://www.google.com/search?q={0}&sxsrf=ALeKk009TUWmnI1QbFWPVq4D4qrIZgdo2w:1607544914807&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiu0-2828HtAhWMslkKHT5qALgQ_AUoAXoECBQQAw&biw=1745&bih=916",
     // hackernews
     hackernewsBase = "https://hn.algolia.com/?q={0}&page=0&prefix=false",
     hnTStr = hackernewsBase + "&dateRange=",
@@ -301,6 +303,7 @@ unmap("od");
       gd: ["googleday", tStr + "d"],
       gH: ["googlehour", tStr + "h"],
       gsh: ["google search history", googleSearchHistory],
+      gi: ["google images", googleImages],
 
       // conflict, changed from l to ll
       ll: ["lucky", googleSearchBase + "&btnI"],
