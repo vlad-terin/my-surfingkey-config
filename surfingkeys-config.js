@@ -1,32 +1,38 @@
-map('L', 'R');
-map('H', 'E');
-imap('<Ctrl-w>', 'Alt-w>');
+map("L", "R");
+map("H", "E");
+vmap("v", "zv");
+cmap("<Ctrl-n>", "<Tab>");
+cmap("<Ctrl-p>", "<Shift-Tab>");
+imap("<Ctrl-w>", "Alt-w>");
 // jj as escape
-imap('jj', '<Esc>');
-map('sU', 'su');
+imap("jj", "<Esc>");
+map("sU", "su");
 //map hh and ll to go forward and backward a page
-unmap('h');
-unmap('l');
-map('hh', 'S');
-map('ll', ']]');
-cmap('<Ctrl-n>', '<Tab>');
-cmap('<Ctrl-p>', '<Shift-Tab>');
+unmap("h");
+unmap("l");
+map("hh", "S");
+map("ll", "]]");
+cmap("<Ctrl-n>", "<Tab>");
+cmap("<Ctrl-p>", "<Shift-Tab>");
 
 settings.stealFocusOnLoad = true;
 
 // Removing default search aliases
-removeSearchAliasX('b');
-removeSearchAliasX('g');
-removeSearchAliasX('s');
-removeSearchAliasX('w');
-removeSearchAliasX('p');
+removeSearchAliasX("b");
+removeSearchAliasX("g");
+removeSearchAliasX("s");
+removeSearchAliasX("w");
+removeSearchAliasX("p");
 
 // [+] Remove omnibar mappings to removed search aliases
-unmap('ob');
-unmap('og');
-unmap('os');
-unmap('ow');
-unmap('op');
+unmap("oi");
+unmap("ob");
+unmap("og");
+unmap("os");
+unmap("ow");
+unmap("op");
+unmap("oy");
+unmap("od");
 
 //General
 
@@ -38,10 +44,10 @@ unmap('op');
       };
     },
     openSearchOmnibar = function () {
-      Front.openOmnibar({ type: 'SearchEngine', extra: this.extra });
+      Front.openOmnibar({ type: "SearchEngine", extra: this.extra });
     },
     openLink = function (url) {
-      RUNTIME('openLink', {
+      RUNTIME("openLink", {
         tab: { tabbed: true, active: false },
         url: url || this.url,
       });
@@ -56,7 +62,7 @@ unmap('op');
 
       if (nmEntry) {
         // if meta isn't present then we're blocking set of key sequences
-        cl('Override of ' + key, nmEntry.meta || nmEntry);
+        cl("Override of " + key, nmEntry.meta || nmEntry);
       }
     },
     // addSearchAliasX and omnibar mapping (removes previous omnibar mapping)
@@ -65,8 +71,8 @@ unmap('op');
       const a = arguments,
         key = a[0],
         desc = a[1],
-        okey = 'o' + key,
-        skey = 's' + key;
+        okey = "o" + key,
+        skey = "s" + key;
 
       nOF(key);
       nOF(okey);
@@ -89,19 +95,19 @@ unmap('op');
       // adds 'o'+ key mapping (open Omnibar to trigger search selected text in new tab on Enter, where selected text is value in Omnibar)
       mapkey(
         okey,
-        'Open with ' + desc,
+        "Open with " + desc,
         fcFactory(openSearchOmnibar, { extra: key })
       );
     },
     searchWithGroup = function (data) {
       const t = this;
       data = encodeURIComponent(
-        typeof data == 'string' && data.length > 1
+        typeof data == "string" && data.length > 1
           ? data
           : Visual.getWordUnderCursor()
       );
 
-      let url = '';
+      let url = "";
       for (let i = 0; i < t.length; i++) {
         url = t[i];
 
@@ -118,19 +124,21 @@ unmap('op');
     },
     openWithGroup = function (name, warn) {
       const msg =
-          'Enter query for "'+ name +'" group.' +
-          (typeof warn == 'string' && warn.length > 4 ? '\n' + warn : ''),
+          'Enter query for "' +
+          name +
+          '" group.' +
+          (typeof warn == "string" && warn.length > 4 ? "\n" + warn : ""),
         // @note: hacking Omnibar seems not possible
-        data = window.prompt(msg, Visual.getWordUnderCursor() || '');
+        data = window.prompt(msg, Visual.getWordUnderCursor() || "");
 
       if (!data || /^\s+$/g.test(data)) {
         return (
-          typeof data == 'string' &&
+          typeof data == "string" &&
           setTimeout(
             openWithGroup.bind(this),
-			16,
-			name,
-            'Please enter something or cancel group open'
+            16,
+            name,
+            "Please enter something or cancel group open"
           )
         );
       }
@@ -138,8 +146,8 @@ unmap('op');
       return searchWithGroup.call(this, data);
     },
     addSearchGroup = function (key, data, searches) {
-      const okey = 'o' + key,
-        skey = 's' + key,
+      const okey = "o" + key,
+        skey = "s" + key,
         gSearches = data.list.slice(0);
 
       nOF(okey);
@@ -167,113 +175,256 @@ unmap('op');
   // Searches
   // Mappings with 's' and 'o' prefixes also will be taken
   // @todo: registered key sequences are free for mapping, must decide if it should be so
-  const googleSearchQ = 'https://www.google.com/search?q='
-    ,googleSearchBase = googleSearchQ + '{0}'
-    ,tStr = googleSearchBase + '&tbs=qdr:'
-    ,hackernewsBase = 'https://hn.algolia.com/?q={0}&page=0&prefix=false'
-	,hnTStr = hackernewsBase +'&dateRange='
-
-    ,searches = {
+  const googleSearchQ = "https://www.google.com/search?q=",
+    googleSearchBase = googleSearchQ + "{0}",
+    googleSearchHistory =
+      "https://myactivity.google.com/myactivity?authuser=0&q={0}",
+    tStr = googleSearchBase + "&tbs=qdr:",
+    googleImages =
+      "https://www.google.com/search?q={0}&sxsrf=ALeKk009TUWmnI1QbFWPVq4D4qrIZgdo2w:1607544914807&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiu0-2828HtAhWMslkKHT5qALgQ_AUoAXoECBQQAw&biw=1745&bih=916",
+    // hackernews
+    hackernewsBase = "https://hn.algolia.com/?q={0}&page=0&prefix=false",
+    hnTStr = hackernewsBase + "&dateRange=",
+    // product hunt
+    producthuntBase = "https://www.producthunt.com/search?q={0}",
+    phTStr = producthuntBase + "&postedDate=",
+    //code reference
+    mdnBase = "https://developer.mozilla.org/en-US/search?q={0}",
+    devdocBase = "http://devdocs.io/#q={0}",
+    // github code
+    githubBaseRepo = "https://github.com/search?q={0}&type=repositories",
+    githubBaseCode = "https://github.com/search?o=desc&q={0}&s=&type=Code",
+    githubBaseCommits = "https://github.com/search?q={0}&type=commits",
+    githubBaseIssues = "https://github.com/search?q={0}&type=issues",
+    githubBaseDiscussions = "https://github.com/search?q={0}&type=discussions",
+    githubBaseRegistrypackages =
+      "https://github.com/search?q={0}&type=registrypackages",
+    githubBaseMarketplace = "https://github.com/search?q={0}&type=marketplace",
+    githubBaseTopics = "https://github.com/search?q={0}&type=topics",
+    githubBaseWikis = "https://github.com/search?q={0}&type=wikis",
+    githubBaseUsers = "https://github.com/search?q={0}&type=users",
+    gmailBase = "https://mail.google.com/mail/u/0/#search/{0}",
+    // youtube
+    youtubeBase = "https://www.youtube.com/results?search_query={0}",
+    youtubeChannel = youtubeBase + "&sp=EgIQAg%253D%253D",
+    youtubePlaylist = youtubeBase + "&sp=EgIQAw%253D%253D",
+    youtubeMovie = youtubeBase + "&sp=EgIQBA%253D%253D",
+    youtubeShow = youtubeBase + "&sp=EgIQBQ%253D%253D",
+    youtubeShort = youtubeBase + "&sp=EgIYAQ%253D%253D",
+    youtubeLong = youtubeBase + "&sp=EgIYAg%253D%253D",
+    youtubeLive = youtubeBase + "&sp=EgJAAQ%253D%253D",
+    youtube4k = youtubeBase + "&sp=EgJwAQ%253D%253D",
+    youtubeHD = youtubeBase + "&sp=EgIgAQ%253D%253D",
+    youtubeSubtitles = youtubeBase + "&sp=EgIoAQ%253D%253D",
+    youtubeCreativeCommons = youtubeBase + "&sp=EgIwAQ%253D%253D",
+    youtube360 = youtubeBase + "&sp=EgJ4AQ%253D%253D",
+    youtubeVR = youtubeBase + "&sp=EgPQAQE%253D",
+    youtube3d = youtubeBase + "&sp=EgI4AQ%253D%253D",
+    youtubeHDR = youtubeBase + "&sp=EgPIAQE%253D",
+    youtubeLocation = youtubeBase + "&sp=EgO4AQE%253D",
+    youtubePurchased = youtubeBase + "&sp=EgJIAQ%253D%253D",
+    youtubeUploadDate = youtubeBase + "&sp=CAI%253D",
+    youtubeViewCount = youtubeBase + "&sp=CAM%253D",
+    youtubeRating = youtubeBase + "&sp=CAE%253D",
+    youtubeHistory = "https://www.youtube.com/feed/history?query={0}",
+    // web design
+    creativemarketBase = "https://creativemarket.com/search?q={0}",
+    elementsenvatoBase = "https://elements.envato.com/all-items/{0}",
+    behanceBase = "https://www.behance.net/search?search={0}",
+    dribbleBase = "https://dribbble.com/search/{0}",
+    awwardsBase = "https://www.awwwards.com/inspiration/search?text={0}",
+    uisourcesBase = "https://www.uisources.com/search?query={0}",
+    searchmuzliBase = "https://search.muz.li/search/{0}",
+    pinterestBase = "https://www.pinterest.com/search/pins/?q={0}",
+    searches = {
       // search
-      hN: ['hacker news', hackernewsBase]
-      ,hny: ['hacker news year', hnTStr +'pastYear']
-      ,hnm: ['hacker news month', hnTStr +'pastMonth']
-      ,hnw: ['hacker news week', hnTStr +'pastWeek']
-      ,hnd: ['hacker news day', hnTStr +'last24h']
+      dcm: ["creative market", creativemarketBase],
+      dee: ["envato elements", elementsenvatoBase],
+      db: ["behance", behanceBase],
+      dd: ["dribble", dribbleBase],
+      daw: ["awwards", awwardsBase],
+      dui: ["uisources", uisourcesBase],
+      dm: ["muzli", searchmuzliBase],
+      dp: ["pinterest", pinterestBase],
 
-      ,G: ['Google', googleSearchBase]
-      ,gm: ['googlemonth', tStr + 'm']
-      ,gw: ['googleweek', tStr + 'w']
-      ,gy: ['googleyear', tStr + 'y']
-      ,gd: ['googleday', tStr + 'd']
-      ,gh: ['googlehour', tStr + 'h']
+      Y: ["youtube search", youtubeBase],
+      yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
+      ym: ["youtube month", youtubeBase + "&sp=EgQIBBAB"],
+      yw: ["youtube week", youtubeBase + "&sp=EgQIAxAB"],
+      yd: ["youtube day", youtubeBase + "&sp=EgQIAhAB"],
+      yh: ["youtube hour", youtubeBase + "&sp=EgQIARAB"],
+      yH: ["youtube history", youtubeHistory],
+      yc: ["youtube channel", youtubeChannel],
+      yp: ["youtube Playlist", youtubePlaylist],
+      yM: ["youtube Movie", youtubeMovie],
+      ySh: ["youtube Show", youtubeShow],
+      ys: ["youtube Short", youtubeShort],
+      ylo: ["youtube Long", youtubeLong],
+      yli: ["youtubeLive", youtubeLive],
+      y4k: ["youtube4k", youtube4k],
+      yHD: ["youtubeHD", youtubeHD],
+      ySu: ["youtubeSubtitles", youtubeSubtitles],
+      yCC: ["youtubeCreativeCommons", youtubeCreativeCommons],
+      y360: ["youtube360", youtube360],
+      yvr: ["youtubeVR", youtubeVR],
+      y3d: ["youtube3d", youtube3d],
+      yHDR: ["youtubeHDR", youtubeHDR],
+      yL: ["youtubeLocation", youtubeLocation],
+      yP: ["youtubePurchased", youtubePurchased],
+      yu: ["youtubeUploadDate", youtubeUploadDate],
+      uvc: ["youtubeViewCount", youtubeViewCount],
+      yr: ["youtubeRating", youtubeRating],
+
+      i: ["gmail search", gmailBase],
+
+      pH: ["product hunt", producthuntBase],
+      phy: ["product hunt year", phTStr + "12%3Amonths"],
+      ph3m: ["product hunt year", phTStr + "90%3Adays"],
+      phm: ["product hunt year", phTStr + "30%3Adays"],
+
+      hN: ["hacker news", hackernewsBase],
+      hny: ["hacker news year", hnTStr + "pastYear"],
+      hnm: ["hacker news month", hnTStr + "pastMonth"],
+      hnw: ["hacker news week", hnTStr + "pastWeek"],
+      hnd: ["hacker news day", hnTStr + "last24h"],
+
+      gH: ["github", githubBaseRepo],
+      ghc: ["github", githubBaseCode],
+      ghC: ["github", githubBaseCommits],
+      ghi: ["github", githubBaseIssues],
+      ghd: ["github", githubBaseDiscussions],
+      ghr: ["github", githubBaseRegistrypackages],
+      ghm: ["github", githubBaseMarketplace],
+      ght: ["github", githubBaseTopics],
+      ghw: ["github", githubBaseWikis],
+      ghu: ["github", githubBaseUsers],
+
+      //code reference
+      crm: ["code reference mdn", mdnBase],
+      crdd: ["code reference devdoc", devdocBase],
+
+      G: ["Google", googleSearchBase],
+      gm: ["googlemonth", tStr + "m"],
+      gw: ["googleweek", tStr + "w"],
+      gy: ["googleyear", tStr + "y"],
+      gd: ["googleday", tStr + "d"],
+      gH: ["googlehour", tStr + "h"],
+      gsh: ["google search history", googleSearchHistory],
+      gi: ["google images", googleImages],
 
       // conflict, changed from l to ll
-      ,ll: ['lucky', googleSearchBase + '&btnI']
+      ll: ["lucky", googleSearchBase + "&btnI"],
       // conflict, changed from t to tt
-      ,tt: ['onelook', 'https://www.onelook.com/?w={0}&ls=a']
-      ,s: ['onelook synonyms', 'https://www.onelook.com/thesaurus/?s={0}']
-      ,d: [
-        'google drive search',
-        'https://drive.google.com/drive/u/1/search?q={0}',
-      ]
+      tt: ["onelook", "https://www.onelook.com/?w={0}&ls=a"],
+      s: ["onelook synonyms", "https://www.onelook.com/thesaurus/?s={0}"],
+      D: [
+        "google drive search",
+        "https://drive.google.com/drive/u/1/search?q={0}",
+      ],
       // conflict, changed from c to cc
-      ,cc: ['technical translation', 'https://techterms.com/definition/{0}']
+      cc: ["technical translation", "https://techterms.com/definition/{0}"],
       // conflict, changed from w to ww to wk
-      ,wk: ['wiki', 'https://en.wikipedia.org/wiki/{0}']
-
-      // conflict, changed from p to ppp
-      ,ppp: ['duckHTML', 'https://duckduckgo.com/html/?q={0}']
+      wk: ["wiki", "https://en.wikipedia.org/wiki/{0}"],
 
       //map
-      ,gM: ['google maps', 'https://www.google.com/maps?q=']
+      gM: ["google maps", "https://www.google.com/maps?q="],
 
       //coding
-      ,C: ['search coding', 'https://searchcode.com/?q=']
-      ,cC: ['search coding', 'https://searchcode.com/?q=']
-      ,cw: ['chrome webstore', 'https://chrome.google.com/webstore/search/'] // chrome
-      ,cS: ['slant (editor 비교 사이트)', 'https://www.slant.co/search?query=']
-      ,gH: ['github', 'https://github.com/search?q=']
-      ,ghS: [
-        'githubStars'
-        ,'https://github.com/vlad-terin?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q='
-      ]
-      ,gC: ['githubCode', 'https://github.com/search?q={0}&type=Code']
+      C: ["search coding", "https://searchcode.com/?q="],
+      cC: ["search coding", "https://searchcode.com/?q="],
+      cw: ["chrome webstore", "https://chrome.google.com/webstore/search/"], // chrome
+      cS: ["slant (editor 비교 사이트)", "https://www.slant.co/search?query="],
+      gH: ["github", "https://github.com/search?q="],
 
       //language
-      ,lJ: ['language Javascript', googleSearchQ + 'Javascript+']
-      ,lj: ['language java', googleSearchQ + 'Java+']
-      ,lC: ['C++', googleSearchQ + 'C++']
-      ,lc: ['language c', googleSearchQ + 'c+language+']
-      ,'l#': ['language C#', googleSearchQ + 'c%23+']
-      ,lR: ['language R', googleSearchQ + 'languag+']
-      ,lr: ['language Ruby', googleSearchQ + 'Ruby+']
-      ,lP: ['language Python', googleSearchQ + 'Python+']
-      ,lp: ['language php', googleSearchQ + 'php+']
-      ,lK: ['language Kotlin', googleSearchQ + 'Kotlin+']
-      ,lS: ['language Swift', googleSearchQ + 'Swift+']
-      ,lQ: ['language SQL Query', googleSearchQ + 'SQL+']
-      ,ls: ['language Shell script', googleSearchQ + 'Shell+Schript+']
-      ,lT: ['language Typescript', googleSearchQ + 'TypeScript+']
-      ,lH: ['language HTML', googleSearchQ + 'HTML+']
+      lJ: ["language Javascript", googleSearchQ + "Javascript+"],
+      lj: ["language java", googleSearchQ + "Java+"],
+      lC: ["C++", googleSearchQ + "C++"],
+      lc: ["language c", googleSearchQ + "c+language+"],
+      "l#": ["language C#", googleSearchQ + "c%23+"],
+      lR: ["language R", googleSearchQ + "languag+"],
+      lr: ["language Ruby", googleSearchQ + "Ruby+"],
+      lP: ["language Python", googleSearchQ + "Python+"],
+      lp: ["language php", googleSearchQ + "php+"],
+      lK: ["language Kotlin", googleSearchQ + "Kotlin+"],
+      lS: ["language Swift", googleSearchQ + "Swift+"],
+      lQ: ["language SQL Query", googleSearchQ + "SQL+"],
+      ls: ["language Shell script", googleSearchQ + "Shell+Schript+"],
+      lT: ["language Typescript", googleSearchQ + "TypeScript+"],
+      lH: ["language HTML", googleSearchQ + "HTML+"],
 
       //sns
-      ,fb: ['faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=']
-      ,tw: ['tWitter', 'https://twitter.com/search?q=']
-      ,ig: ['InstaGram HashTag', 'https://www.instagram.com/explore/tags/']
-      ,rd: ['redDit', 'https://www.reddit.com/search?q=']
+      fb: ["faceBook(페이스북)", "https://www.facebook.com/search/top/?q="],
+      tw: ["tWitter", "https://twitter.com/search?q="],
+      ig: ["InstaGram HashTag", "https://www.instagram.com/explore/tags/"],
+      rd: ["redDit", "https://www.reddit.com/search?q="],
 
       //shorten - what is.. who is.. where is..
-      ,wa: ['advanced', googleSearchQ + 'advanced+']
-      ,wb: ['basic', googleSearchQ + 'basic+']
-      ,wc: ['classification', googleSearchQ + 'classfication+of+']
-      ,wd: ['difference', googleSearchQ + 'difference+between+']
-      ,we: ['example', googleSearchQ + 'example+of+']
-      ,ww: ['wherefrom', googleSearchQ + 'where+from+']
-      ,wg: ['goalof', googleSearchQ + 'what+is+goal+of+']
-      ,wh: ['historyof', googleSearchQ + 'history+of+']
-      ,wi: ['introductionof', googleSearchQ + 'Introduction+of']
+      wa: ["advanced", googleSearchQ + "advanced+"],
+      wb: ["basic", googleSearchQ + "basic+"],
+      wc: ["classification", googleSearchQ + "classfication+of+"],
+      wd: ["difference", googleSearchQ + "difference+between+"],
+      we: ["example", googleSearchQ + "example+of+"],
+      ww: ["wherefrom", googleSearchQ + "where+from+"],
+      wg: ["goalof", googleSearchQ + "what+is+goal+of+"],
+      wh: ["historyof", googleSearchQ + "history+of+"],
+      wi: ["introductionof", googleSearchQ + "Introduction+of"],
 
       //file
-      ,pdf: ['fppdf', googleSearchQ + 'filetype%3Apdf+']
-      ,cpp: ['fpcpp', googleSearchQ + 'filetype%3Acpp+']
-      ,hwp: ['fphwp', googleSearchQ + 'filetype%3Ahwp+']
-      ,ppt: ['fpppt', googleSearchQ + 'filetype%3Appt+']
-    }
+      pdf: ["fppdf", googleSearchQ + "filetype%3Apdf+"],
+      cpp: ["fpcpp", googleSearchQ + "filetype%3Acpp+"],
+      hwp: ["fphwp", googleSearchQ + "filetype%3Ahwp+"],
+      ppt: ["fpppt", googleSearchQ + "filetype%3Appt+"],
+    },
     // only 's' and 'o' prefixed mappings will be taken
-    ,searchGroups = {
-      '0': {
-        name: 'Social networks searches'
-        ,list: ['fb', 'tw', 'ig', 'rd']
-      }
-      ,gc: {
-        name: 'Google combined searches'
-        ,list: ['G', 'gy', 'gm', 'gw', 'gd', 'gh']
-      }
-      ,hnc: {
-        name: 'Hacker News Combined'
-        ,list: ['hN', 'hny', 'hnm', 'hnw', 'hnd']
-      }
+    searchGroups = {
+      0: {
+        name: "Social networks searches",
+        list: ["fb", "tw", "ig", "rd"],
+      },
+      gg: {
+        name: "Google group searches",
+        list: ["G", "gy", "gm", "gw", "gd", "gH"],
+      },
+      ghg: {
+        name: "Github group",
+        list: [
+          "gH",
+          "ghc",
+          "ghC",
+          "ghi",
+          "ghd",
+          "ghr",
+          "ghm",
+          "ght",
+          "ghw",
+          "ghu",
+        ],
+      },
+      hnc: {
+        name: "Hacker News Combined",
+        list: ["hN", "hny", "hnm", "hnw", "hnd"],
+      },
+      phc: {
+        name: "Product Hunt Combined",
+        list: ["phy", "ph3m", "phm"],
+      },
+      cpy: {
+        name: "combined product search by year",
+        list: ["gy", "hny", "phy", "yy", "gH"],
+      },
+      cpm: {
+        name: "combined product search by month",
+        list: ["gm", "hnm", "phy", "ym", "gH"],
+      },
+      cpd: {
+        name: "combined product search by day",
+        list: ["gd", "hnd", "phm", "yd", "gH"],
+      },
+      cd: {
+        name: "combined design",
+        list: ["dcm", "db", "dee", "dd", "daw", "dui", "dm", "dp"],
+      },
     };
 
   // register mappings for searches
@@ -286,73 +437,71 @@ unmap('op');
     addSearchGroup(k, searchGroups[k], searches);
   }
 
+  // Session command shortcuts (FF only right now)
+  // @todo: find a way to overcome limitation of chromium extension content script
+  // security model (content script inherits page origin instead of having extension origin)
+  const omnibarCmdArgs = { type: "Commands" },
+    mapToCmdPrefix = function (key, cmdPrefix, optionalOmnibarName) {
+      mapkey(
+        key,
+        (optionalOmnibarName || ":" + (cmdPrefix || "")) + "",
+        function () {
+          // open command omnibar (equivalent to ':' key press)
+          omnibarCmdArgs.extra = cmdPrefix;
+          Front.openOmnibar(omnibarCmdArgs);
+        }
+      );
+    };
 
-
-// Session command shortcuts (FF only right now)
-// @todo: find a way to overcome limitation of chromium extension content script
-// security model (content script inherits page origin instead of having extension origin)
-const
-omnibarCmdArgs = { type: 'Commands' }
-,mapToCmdPrefix = function(key, cmdPrefix, optionalOmnibarName){
-    mapkey(key, (optionalOmnibarName || (':'+ (cmdPrefix || ''))) +'', function(){
-		// open command omnibar (equivalent to ':' key press)
-		omnibarCmdArgs.extra = cmdPrefix;
-        Front.openOmnibar(omnibarCmdArgs);
-    });
-};
-
-// Temporary naming (better to build Huffman-like tree from all registered keybindings to test for possible conflicts)
-// @update: Normal.mappings, Visual.mappings, Instert.mappings provide methods to check if key sequence is taken
-// We can reuse existing Trie constructor to find and report conflicts inside this config only
-// [o]mnibar - main state
-// [s]ession - common part
-// [ ] - changing part - action name
-unmap(';s');
-mapToCmdPrefix(';sc', 'createSession ');
-mapToCmdPrefix(';sd', 'deleteSession ');
-mapToCmdPrefix(';sl', 'listSession');
-mapToCmdPrefix(';so', 'openSession ');
-
+  // Temporary naming (better to build Huffman-like tree from all registered keybindings to test for possible conflicts)
+  // @update: Normal.mappings, Visual.mappings, Instert.mappings provide methods to check if key sequence is taken
+  // We can reuse existing Trie constructor to find and report conflicts inside this config only
+  // [o]mnibar - main state
+  // [s]ession - common part
+  // [ ] - changing part - action name
+  unmap(";s");
+  mapToCmdPrefix(";sc", "createSession ");
+  mapToCmdPrefix(";sd", "deleteSession ");
+  mapToCmdPrefix(";sl", "listSession");
+  mapToCmdPrefix(";so", "openSession ");
 })();
 
-
-
 // Surfingkey Ctrl-p Ctrl-n in google
-if (window.origin === 'https://www.google.com') {
+if (window.origin === "https://www.google.com") {
   function cycleGoogleSuggestions(forward) {
-    var suggestions = document.querySelectorAll('ul>li.sbct');
-    var selected = document.querySelector('ul>li.sbct.sbhl');
+    var suggestions = document.querySelectorAll("ul>li.sbct");
+    var selected = document.querySelector("ul>li.sbct.sbhl");
     var next;
     if (selected) {
-      selected.classList.remove('sbhl');
+      selected.classList.remove("sbhl");
       var next = Array.from(suggestions).indexOf(selected) + (forward ? 1 : -1);
       if (next === suggestions.length || next === -1) {
         next = { innerText: window.userInput };
       } else {
         next = suggestions[next];
-        next.classList.add('sbhl');
+        next.classList.add("sbhl");
       }
     } else {
-      window.userInput = document.querySelector('input.gsfi').value;
+      window.userInput = document.querySelector("input.gsfi").value;
       next = forward ? suggestions[0] : suggestions[suggestions.length - 1];
-      next.classList.add('sbhl');
+      next.classList.add("sbhl");
     }
-    document.querySelector('input.gsfi').value = next.innerText;
+    document.querySelector("input.gsfi").value = next.innerText;
   }
-  imapkey('<Ctrl-p>', 'cycle google suggestions', function () {
+  imapkey("<Ctrl-p>", "cycle google suggestions", function () {
     cycleGoogleSuggestions(false);
   });
-  imapkey('<Ctrl-n>', 'cycle google suggestions', function () {
+  imapkey("<Ctrl-n>", "cycle google suggestions", function () {
     cycleGoogleSuggestions(true);
   });
 }
 
 // Youtube Fullscreen, credit github.com/okiptkn/dotfiles
 function ytFullscreen() {
-  $('.ytp-fullscreen-button.ytp-button').click();
+  $(".ytp-fullscreen-button.ytp-button").click();
 }
 
-const siteleader = 'x';
+const siteleader = "x";
 const ri = { repeatIgnore: true };
 
 function mapsitekey(domainRegex, key, desc, f, o) {
@@ -366,7 +515,7 @@ function mapsitekey(domainRegex, key, desc, f, o) {
 }
 
 function mapsitekeys(d, maps) {
-  const domain = d.replace('.', '\\.');
+  const domain = d.replace(".", "\\.");
   const domainRegex = new RegExp(
     `^http(s)?://(([a-zA-Z0-9-_]+\\.)*)(${domain})(/.*)?`
   );
@@ -375,7 +524,7 @@ function mapsitekeys(d, maps) {
   });
 }
 
-mapsitekeys('youtube.com', [['F', 'Toggle fullscreen', ytFullscreen]]);
+mapsitekeys("youtube.com", [["F", "Toggle fullscreen", ytFullscreen]]);
 
 /*
 Usage for Oxford dictionary in visual mode:
@@ -393,8 +542,8 @@ Enjoy!
 var setLanguages = function (langSettings) {
   // Enter the appropriate app_id and app_key here only
   var _oxfordHeaders = {
-    app_id: 'b9c84084',
-    app_key: 'b96b8e9a328df6d70563d04c6ec4dcf4',
+    app_id: "b9c84084",
+    app_key: "b96b8e9a328df6d70563d04c6ec4dcf4",
   };
 
   var _showOxfordQueryResult = function (queryResult) {
@@ -425,34 +574,34 @@ var setLanguages = function (langSettings) {
 
           var categoryEntriesHtml = entry.entries[0].senses
             .map(function (sense) {
-              var senseHtml = '';
-              if (sense.hasOwnProperty('definitions')) {
-                senseHtml = '<li><b>' + sense.definitions[0] + '</b>';
+              var senseHtml = "";
+              if (sense.hasOwnProperty("definitions")) {
+                senseHtml = "<li><b>" + sense.definitions[0] + "</b>";
               }
               if (
-                sense.hasOwnProperty('examples') &&
-                sense.hasOwnProperty('definitions')
+                sense.hasOwnProperty("examples") &&
+                sense.hasOwnProperty("definitions")
               ) {
                 var senseExamples = sense.examples
                   .map(function (ex) {
                     return '<i>"' + ex.text + '"</i><br/>';
                   })
-                  .join('');
+                  .join("");
                 senseHtml =
-                  senseHtml + '<br/>Examples:<br/>' + senseExamples + '</dd>';
+                  senseHtml + "<br/>Examples:<br/>" + senseExamples + "</dd>";
               }
               return senseHtml;
             })
-            .join('');
+            .join("");
 
           var categoryHtml =
-            '<b>' + category + '</b>' + '<ol>' + categoryEntriesHtml + '</ol>';
+            "<b>" + category + "</b>" + "<ol>" + categoryEntriesHtml + "</ol>";
 
           return categoryHtml;
         })
-        .join('');
+        .join("");
       var html =
-        '<div><h3>Definition of ' + word + '</h3>' + entryHtml + '</div>';
+        "<div><h3>Definition of " + word + "</h3>" + entryHtml + "</div>";
 
       return html;
     } catch (e) {
@@ -474,27 +623,27 @@ var setLanguages = function (langSettings) {
 
           var categoryEntriesHtml = entry.entries[0].senses
             .map(function (sense) {
-              var senseHtml = '<li>';
-              if (sense.hasOwnProperty('synonyms')) {
+              var senseHtml = "<li>";
+              if (sense.hasOwnProperty("synonyms")) {
                 var senseExamples = sense.synonyms
                   .map(function (ex) {
-                    return ex.text + ', ';
+                    return ex.text + ", ";
                   })
-                  .join('');
-                senseHtml = senseHtml + senseExamples + '</dd>';
+                  .join("");
+                senseHtml = senseHtml + senseExamples + "</dd>";
               }
               return senseHtml;
             })
-            .join('');
+            .join("");
 
           var categoryHtml =
-            '<b>' + category + '</b>' + '<ol>' + categoryEntriesHtml + '</ol>';
+            "<b>" + category + "</b>" + "<ol>" + categoryEntriesHtml + "</ol>";
 
           return categoryHtml;
         })
-        .join('');
+        .join("");
       var html =
-        '<div><h3>Synonyms for ' + word + '</h3>' + entryHtml + '</div>';
+        "<div><h3>Synonyms for " + word + "</h3>" + entryHtml + "</div>";
 
       return html;
     } catch (e) {
@@ -516,27 +665,27 @@ var setLanguages = function (langSettings) {
 
           var categoryEntriesHtml = entry.entries[0].senses
             .map(function (sense) {
-              var senseHtml = '<li>';
-              if (sense.hasOwnProperty('antonyms')) {
+              var senseHtml = "<li>";
+              if (sense.hasOwnProperty("antonyms")) {
                 var senseExamples = sense.antonyms
                   .map(function (ex) {
-                    return ex.text + ', ';
+                    return ex.text + ", ";
                   })
-                  .join('');
-                senseHtml = senseHtml + senseExamples + '</dd>';
+                  .join("");
+                senseHtml = senseHtml + senseExamples + "</dd>";
               }
               return senseHtml;
             })
-            .join('');
+            .join("");
 
           var categoryHtml =
-            '<b>' + category + '</b>' + '<ol>' + categoryEntriesHtml + '</ol>';
+            "<b>" + category + "</b>" + "<ol>" + categoryEntriesHtml + "</ol>";
 
           return categoryHtml;
         })
-        .join('');
+        .join("");
       var html =
-        '<div><h3>Antonyms for ' + word + '</h3>' + entryHtml + '</div>';
+        "<div><h3>Antonyms for " + word + "</h3>" + entryHtml + "</div>";
 
       return html;
     } catch (e) {
@@ -560,35 +709,35 @@ var setLanguages = function (langSettings) {
 
           var categoryEntriesHtml = entry.entries[0].senses
             .map(function (sense) {
-              var senseHtml = '';
-              if (sense.hasOwnProperty('translations')) {
-                senseHtml = '<li><b>' + sense.translations[0].text + '</b>';
+              var senseHtml = "";
+              if (sense.hasOwnProperty("translations")) {
+                senseHtml = "<li><b>" + sense.translations[0].text + "</b>";
               }
               if (
-                sense.hasOwnProperty('examples') &&
-                sense.hasOwnProperty('translations')
+                sense.hasOwnProperty("examples") &&
+                sense.hasOwnProperty("translations")
               ) {
                 var senseExamples = sense.examples
                   .map(function (ex) {
                     return '<i>"' + ex.text + '"</i><br/>';
                   })
-                  .join('');
+                  .join("");
                 senseHtml =
-                  senseHtml + '<br/>Examples:<br/>' + senseExamples + '</dd>';
+                  senseHtml + "<br/>Examples:<br/>" + senseExamples + "</dd>";
               }
               return senseHtml;
             })
-            .join('');
+            .join("");
 
           var categoryHtml =
-            '<b>' + category + '</b>' + '<ol>' + categoryEntriesHtml + '</ol>';
+            "<b>" + category + "</b>" + "<ol>" + categoryEntriesHtml + "</ol>";
 
           return categoryHtml;
         })
-        .join('');
+        .join("");
 
       var html =
-        '<div><h3>Translation of ' + word + '</h3>' + entryHtml + '</div>';
+        "<div><h3>Translation of " + word + "</h3>" + entryHtml + "</div>";
 
       return html;
     } catch (e) {
@@ -616,7 +765,7 @@ var setLanguages = function (langSettings) {
           );
         } else {
           var query = Visual.getWordUnderCursor();
-          _showOxfordQueryResult('<div>No match found for ' + query + '</div>');
+          _showOxfordQueryResult("<div>No match found for " + query + "</div>");
         }
       } catch (e) {
         _showOxfordQueryResult(res.text);
@@ -626,15 +775,15 @@ var setLanguages = function (langSettings) {
     var callback = obj.callback;
 
     var query = Visual.getWordUnderCursor();
-    var url = 'https://od-api.oxforddictionaries.com/api/v2/search/';
+    var url = "https://od-api.oxforddictionaries.com/api/v2/search/";
 
-    if (obj.hasOwnProperty('translate') && obj.translate) {
+    if (obj.hasOwnProperty("translate") && obj.translate) {
       var fromlang = langSettings.translate_from;
       var tolang = langSettings.translate_to;
-      url = url + fromlang + '/translations=' + tolang + '?q=' + query;
+      url = url + fromlang + "/translations=" + tolang + "?q=" + query;
     } else {
       var lang = langSettings.definitions;
-      url = url + lang + '?q=' + query;
+      url = url + lang + "?q=" + query;
     }
 
     httpRequest(
@@ -653,11 +802,11 @@ var setLanguages = function (langSettings) {
       var fromlang = langSettings.translate_from;
       var tolang = langSettings.translate_to;
       return (
-        'https://od-api.oxforddictionaries.com/api/v2/entries/' +
+        "https://od-api.oxforddictionaries.com/api/v2/entries/" +
         fromlang +
-        '/' +
+        "/" +
         query +
-        '/translations=' +
+        "/translations=" +
         tolang
       );
     },
@@ -665,16 +814,16 @@ var setLanguages = function (langSettings) {
     parseResult: parseTranslations,
   });
 
-  vmapkey('q', 'Translation of the selected word', function () {
+  vmapkey("q", "Translation of the selected word", function () {
     var urlCallback = function (best_match) {
       var fromlang = langSettings.translate_from;
       var tolang = langSettings.translate_to;
       return (url =
-        'https://od-api.oxforddictionaries.com/api/v2/entries/' +
+        "https://od-api.oxforddictionaries.com/api/v2/entries/" +
         fromlang +
-        '/' +
+        "/" +
         best_match +
-        '/translations=' +
+        "/translations=" +
         tolang);
     };
 
@@ -685,13 +834,13 @@ var setLanguages = function (langSettings) {
     });
   });
 
-  vmapkey('d', 'Definition of the selected word', function () {
+  vmapkey("d", "Definition of the selected word", function () {
     var urlCallback = function (best_match) {
       var lang = langSettings.definitions;
       return (
-        'https://od-api.oxforddictionaries.com/api/v2/entries/' +
+        "https://od-api.oxforddictionaries.com/api/v2/entries/" +
         lang +
-        '/' +
+        "/" +
         best_match
       );
     };
@@ -703,15 +852,15 @@ var setLanguages = function (langSettings) {
     });
   });
 
-  vmapkey('z', 'Synonyms of the selected word', function () {
+  vmapkey("z", "Synonyms of the selected word", function () {
     var urlCallback = function (best_match) {
       var lang = langSettings.definitions;
       return (
-        'https://od-api.oxforddictionaries.com/api/v2/entries/' +
+        "https://od-api.oxforddictionaries.com/api/v2/entries/" +
         lang +
-        '/' +
+        "/" +
         best_match +
-        '/synonyms'
+        "/synonyms"
       );
     };
 
@@ -722,15 +871,15 @@ var setLanguages = function (langSettings) {
     });
   });
 
-  vmapkey('a', 'Antonyms of the selected word', function () {
+  vmapkey("a", "Antonyms of the selected word", function () {
     var urlCallback = function (best_match) {
       var lang = langSettings.definitions;
       return (
-        'https://od-api.oxforddictionaries.com/api/v2/entries/' +
+        "https://od-api.oxforddictionaries.com/api/v2/entries/" +
         lang +
-        '/' +
+        "/" +
         best_match +
-        '/antonyms'
+        "/antonyms"
       );
     };
 
@@ -745,40 +894,40 @@ var setLanguages = function (langSettings) {
 // Here you set the languages to use for translations, and the language to use for definitions and synonyms.
 
 setLanguages({
-  translate_from: 'en',
-  translate_to: 'en',
-  definitions: 'en',
+  translate_from: "en",
+  translate_to: "en",
+  definitions: "en",
 });
 
 // tab swither
 
-mapkey('B', 'Choose a tab with omnibar', function () {
-  Front.openOmnibar({ type: 'Tabs' });
+mapkey("B", "Choose a tab with omnibar", function () {
+  Front.openOmnibar({ type: "Tabs" });
 });
 
 // Properties list
 Hints.numericHints = false;
 settings.omnibarSuggestion = true;
-settings.defaultSearchEngine = 'G'; // Google I'm Feeling Luckey
+settings.defaultSearchEngine = "G"; // Google I'm Feeling Luckey
 settings.focusFirstCandidate = true;
 
-mapkey(',s', 'opne new tab and split', function () {
-  RUNTIME('newWindow');
+mapkey(",s", "opne new tab and split", function () {
+  RUNTIME("newWindow");
 });
 
-mapkey('ymr', '#7Copy multiple link regex URLs to the clipboard', function () {
+mapkey("ymr", "#7Copy multiple link regex URLs to the clipboard", function () {
   var linksToYank = [];
   Hints.create(
-    '*[href]',
+    "*[href]",
     function (element) {
       linksToYank.push(
-        'domain: ' +
-          '/' +
-          element.href.slice(8).split('/')[0].replace(/\./g, '\\.') +
-          '/' +
-          'i'
+        "domain: " +
+          "/" +
+          element.href.slice(8).split("/")[0].replace(/\./g, "\\.") +
+          "/" +
+          "i"
       );
-      Clipboard.write(linksToYank.join('\n'));
+      Clipboard.write(linksToYank.join("\n"));
     },
     {
       multipleHits: true,
@@ -787,73 +936,73 @@ mapkey('ymr', '#7Copy multiple link regex URLs to the clipboard', function () {
 });
 
 mapkey(
-  'yE',
-  '#7 Yank Element info. copy link element id or classname',
+  "yE",
+  "#7 Yank Element info. copy link element id or classname",
   function () {
     var linksToYank = [];
-    Hints.create('', function (element) {
-      linksToYank.push('id: ' + element.id + '\n');
-      linksToYank.push('innertext: ' + element.innerText + '\n');
-      linksToYank.push('className: ' + element.className + '\n');
-      linksToYank.push('href: ' + element.href + '\n');
-      linksToYank.push('type: ' + element.type + '\n');
-      linksToYank.push('style: ' + element.style + '\n');
-      linksToYank.push('src: ' + element.src + '\n');
-      linksToYank.push('alt: ' + element.alt + '\n');
-      Clipboard.write(linksToYank.join('\n'));
+    Hints.create("", function (element) {
+      linksToYank.push("id: " + element.id + "\n");
+      linksToYank.push("innertext: " + element.innerText + "\n");
+      linksToYank.push("className: " + element.className + "\n");
+      linksToYank.push("href: " + element.href + "\n");
+      linksToYank.push("type: " + element.type + "\n");
+      linksToYank.push("style: " + element.style + "\n");
+      linksToYank.push("src: " + element.src + "\n");
+      linksToYank.push("alt: " + element.alt + "\n");
+      Clipboard.write(linksToYank.join("\n"));
     });
   }
 );
 
 // ADD: read like this yank element ~~~
 mapkey(
-  'yeI',
-  '#7 Yank Element info. copy link element id or classname',
+  "yeI",
+  "#7 Yank Element info. copy link element id or classname",
   function (element) {
-    Clipboard.write('element.id');
+    Clipboard.write("element.id");
   }
 );
 mapkey(
-  'yeC',
-  '#7 Yank Element info. copy link element id or classname',
+  "yeC",
+  "#7 Yank Element info. copy link element id or classname",
   function (element) {
-    Clipboard.write('element.className');
+    Clipboard.write("element.className");
   }
 );
 mapkey(
-  'yeT',
-  '#7 Yank Element info. copy link element id or classname',
+  "yeT",
+  "#7 Yank Element info. copy link element id or classname",
   function (element) {
-    Clipboard.write('element.type');
+    Clipboard.write("element.type");
   }
 );
 mapkey(
-  'yeS',
-  '#7 Yank Element info. copy link element id or classname',
+  "yeS",
+  "#7 Yank Element info. copy link element id or classname",
   function (element) {
-    Clipboard.write('element.style');
+    Clipboard.write("element.style");
   }
 );
 mapkey(
-  'yeA',
-  '#7 Yank Element info. copy link element id or classname',
+  "yeA",
+  "#7 Yank Element info. copy link element id or classname",
   function (element) {
-    Clipboard.write('element.alt');
+    Clipboard.write("element.alt");
   }
 );
 
 mapkey(
-  'ymE',
-  '#7 Yank Multiple Element info  (copy multiple link element id or classname)',
+  "ymE",
+  "#7 Yank Multiple Element info  (copy multiple link element id or classname)",
   function () {
     var linksToYank = [];
     Hints.create(
-      '*[href]',
+      "*[href]",
       function (element) {
-        linksToYank.push('id: ' + element.id + '\n');
-        linksToYank.push('innertext: ' + element.innerText + '\n');
-        linksToYank.push('className: ' + element.className + '\n');
-        Clipboard.write(linksToYank.join('\n'));
+        linksToYank.push("id: " + element.id + "\n");
+        linksToYank.push("innertext: " + element.innerText + "\n");
+        linksToYank.push("className: " + element.className + "\n");
+        Clipboard.write(linksToYank.join("\n"));
       },
       {
         multipleHits: true,
@@ -864,10 +1013,10 @@ mapkey(
 
 //git clone
 mapkey(
-  'yg',
-  '#7 git clone',
+  "yg",
+  "#7 git clone",
   function () {
-    Clipboard.write('git clone ' + window.location.href + '.git');
+    Clipboard.write("git clone " + window.location.href + ".git");
   },
   {
     domain: /github\.com/i,
@@ -877,108 +1026,108 @@ mapkey(
 //////////////////////////////////////////////////////////
 // visualmode setting
 //////////////////////////////////////////////////////////
-vmapkey('"y', 'surround selection with doube quotation mark', function () {
+vmapkey('"y', "surround selection with doube quotation mark", function () {
   Clipboard.write(
-    '"' + window.getSelection().toString().replace(/\n/g, ' ') + '"'
+    '"' + window.getSelection().toString().replace(/\n/g, " ") + '"'
   );
 });
-vmapkey('<y', 'surround selection ', function () {
-  Clipboard.write('<' + window.getSelection().toString() + '>');
+vmapkey("<y", "surround selection ", function () {
+  Clipboard.write("<" + window.getSelection().toString() + ">");
 });
-vmapkey('(y', 'surround selection ', function () {
-  Clipboard.write('(' + window.getSelection().toString() + ')');
+vmapkey("(y", "surround selection ", function () {
+  Clipboard.write("(" + window.getSelection().toString() + ")");
 });
-vmapkey('[y', 'surround selection ', function () {
-  Clipboard.write('[' + window.getSelection().toString() + ']');
+vmapkey("[y", "surround selection ", function () {
+  Clipboard.write("[" + window.getSelection().toString() + "]");
 });
-vmapkey('{y', 'surround selection ', function () {
-  Clipboard.write('{' + window.getSelection().toString() + '}');
+vmapkey("{y", "surround selection ", function () {
+  Clipboard.write("{" + window.getSelection().toString() + "}");
 });
-vmapkey('/*y', 'surround selection ', function () {
-  Clipboard.write('/*' + window.getSelection().toString() + '*/');
+vmapkey("/*y", "surround selection ", function () {
+  Clipboard.write("/*" + window.getSelection().toString() + "*/");
 });
-vmapkey('<--!y', 'surround selection ', function () {
-  Clipboard.write('<--!' + window.getSelection().toString() + '-->');
+vmapkey("<--!y", "surround selection ", function () {
+  Clipboard.write("<--!" + window.getSelection().toString() + "-->");
 });
-vmapkey('~y', 'surround selection ', function () {
+vmapkey("~y", "surround selection ", function () {
   var UpperSelected = window.getSelection().toString();
   Clipboard.write(UpperSelected.toUpperCase());
 });
-vmapkey('~jy', 'Remove enter', function () {
-  Clipboard.write(window.getSelection().toString().replace(/\n/g, ' '));
+vmapkey("~jy", "Remove enter", function () {
+  Clipboard.write(window.getSelection().toString().replace(/\n/g, " "));
 });
-vmapkey('~cy', 'Added comma', function () {
-  Clipboard.write(window.getSelection().toString().replace(/[ ,]+/g, ','));
+vmapkey("~cy", "Added comma", function () {
+  Clipboard.write(window.getSelection().toString().replace(/[ ,]+/g, ","));
 });
-vmapkey('~dy', 'Delete first 1 character', function () {
+vmapkey("~dy", "Delete first 1 character", function () {
   Clipboard.write(window.getSelection().toString().substr(1));
 });
-vmapkey('~Dy', 'Delete surrounded', function () {
+vmapkey("~Dy", "Delete surrounded", function () {
   Clipboard.write(window.getSelection().toString().slice(1, -1));
 });
 vmapkey(
-  '~sy',
-  'Remove special character (blank is not considered as special character',
+  "~sy",
+  "Remove special character (blank is not considered as special character",
   function () {
     //TODO: Black is not work
     Clipboard.write(
       window
         .getSelection()
         .toString()
-        .replace(/[^A-Z0-9:blank:]/gi, '')
+        .replace(/[^A-Z0-9:blank:]/gi, "")
     );
   }
 );
-vmapkey('~dy', 'Markdown Strikethrough', function () {
-  Clipboard.write('~~ ' + window.getSelection().toString() + ' ~~');
+vmapkey("~dy", "Markdown Strikethrough", function () {
+  Clipboard.write("~~ " + window.getSelection().toString() + " ~~");
 });
 //TODO: multiple clipboard test
 vmapkey(
-  'my',
-  '#7Copy multiple  동작하지 않음 FIXlink URLs to the clipboard',
+  "my",
+  "#7Copy multiple  동작하지 않음 FIXlink URLs to the clipboard",
   function () {
     var textToYank = [];
     textToYank.push(window.getSelection.toString());
-    Clipboard.write('"' + textToYank.join('\n') + '"');
+    Clipboard.write('"' + textToYank.join("\n") + '"');
   }
 );
 
 // markdown
-vmapkey('miy', 'Markdown italic', function () {
-  Clipboard.write('*' + window.getSelection().toString() + '*');
+vmapkey("miy", "Markdown italic", function () {
+  Clipboard.write("*" + window.getSelection().toString() + "*");
 });
-vmapkey('mby', 'Markdown bold', function () {
-  Clipboard.write('**' + window.getSelection().toString() + '**');
+vmapkey("mby", "Markdown bold", function () {
+  Clipboard.write("**" + window.getSelection().toString() + "**");
 });
-vmapkey('mly', 'Markdown link', function () {
-  Clipboard.write('[replaceit](' + window.getSelection().toString() + ')');
+vmapkey("mly", "Markdown link", function () {
+  Clipboard.write("[replaceit](" + window.getSelection().toString() + ")");
 });
-mapkey('yml', 'Markdown link', function () {
+mapkey("yml", "Markdown link", function () {
   Clipboard.write(`[${document.title}](${window.location.href})`);
 });
-vmapkey('msy', 'Markdown Strikethrough', function () {
-  Clipboard.write('~~ ' + window.getSelection().toString() + ' ~~');
+vmapkey("msy", "Markdown Strikethrough", function () {
+  Clipboard.write("~~ " + window.getSelection().toString() + " ~~");
 });
 
 //setting
-mapkey('gs', '#12 go Setting - Open Chrome Settings', function () {
-  tabOpenLink('chrome://settings/');
+mapkey("gs", "#12 go Setting - Open Chrome Settings", function () {
+  tabOpenLink("chrome://settings/");
 });
 mapkey(
-  'gE',
-  '#12 go Extensions - Open Chrome extensions Shortcut setting',
+  "gE",
+  "#12 go Extensions - Open Chrome extensions Shortcut setting",
   function () {
-    tabOpenLink('chrome://extensions/shortcuts');
+    tabOpenLink("chrome://extensions/shortcuts");
   }
 );
 
 //github shortcuts
 mapkey(
-  'gC',
-  'Go to the code tab',
+  "gC",
+  "Go to the code tab",
   function () {
     document
-      .querySelectorAll('.js-selected-navigation-item.reponav-item')[0]
+      .querySelectorAll(".js-selected-navigation-item.reponav-item")[0]
       .click();
   },
   {
@@ -987,11 +1136,11 @@ mapkey(
 );
 
 mapkey(
-  'gI',
-  'Go to the Issues tab. ',
+  "gI",
+  "Go to the Issues tab. ",
   function () {
     document
-      .querySelectorAll('.js-selected-navigation-item.reponav-item')[1]
+      .querySelectorAll(".js-selected-navigation-item.reponav-item")[1]
       .click();
   },
   {
@@ -1000,11 +1149,11 @@ mapkey(
 );
 
 mapkey(
-  'gP',
-  'Go to the Pull requests tab. ',
+  "gP",
+  "Go to the Pull requests tab. ",
   function () {
     document
-      .querySelectorAll('.js-selected-navigation-item.reponav-item')[2]
+      .querySelectorAll(".js-selected-navigation-item.reponav-item")[2]
       .click();
   },
   {
@@ -1012,24 +1161,11 @@ mapkey(
   }
 );
 mapkey(
-  'gB',
-  'Go to the Projects tab. ',
+  "gB",
+  "Go to the Projects tab. ",
   function () {
     document
-      .querySelectorAll('.js-selected-navigation-item.reponav-item')[3]
-      .click();
-  },
-  {
-    domain: /github\.com/i,
-  }
-);
-
-mapkey(
-  'gW',
-  'Go to the Wiki tab. ',
-  function () {
-    document
-      .querySelectorAll('.js-selected-navigation-item.reponav-item')[4]
+      .querySelectorAll(".js-selected-navigation-item.reponav-item")[3]
       .click();
   },
   {
@@ -1038,30 +1174,43 @@ mapkey(
 );
 
 mapkey(
-  'gO',
-  'Go to the Overview tab. ',
+  "gW",
+  "Go to the Wiki tab. ",
   function () {
-    document.querySelectorAll('.UnderlineNav-item')[0].click();
+    document
+      .querySelectorAll(".js-selected-navigation-item.reponav-item")[4]
+      .click();
+  },
+  {
+    domain: /github\.com/i,
+  }
+);
+
+mapkey(
+  "gO",
+  "Go to the Overview tab. ",
+  function () {
+    document.querySelectorAll(".UnderlineNav-item")[0].click();
   },
   {
     domain: /github\.com/i,
   }
 );
 mapkey(
-  'gR',
-  'Go to the Repository tab. ',
+  "gR",
+  "Go to the Repository tab. ",
   function () {
-    document.querySelectorAll('.UnderlineNav-item')[1].click();
+    document.querySelectorAll(".UnderlineNav-item")[1].click();
   },
   {
     domain: /github\.com/i,
   }
 );
 mapkey(
-  'gS',
-  'Go to the Stars tab. ',
+  "gS",
+  "Go to the Stars tab. ",
   function () {
-    document.querySelectorAll('.UnderlineNav-item')[2].click();
+    document.querySelectorAll(".UnderlineNav-item")[2].click();
   },
   {
     domain: /github\.com/i,
@@ -1069,307 +1218,64 @@ mapkey(
 );
 
 // goto comment - Usually comments are in textarea format
-mapkey('gT', 'Goto Text Area', function () {
-  documents.getElementsByClassName('.textarea')[0].click();
+mapkey("gT", "Goto Text Area", function () {
+  documents.getElementsByClassName(".textarea")[0].click();
 });
 
-//credit https://github.com/Foldex/surfingkeys-config/blob/master/themes.js
-
-// ---- Hints ----
-// Hints have to be defined separately
-// Uncomment to enable
-
-// Tomorrow-Night
-
-Hints.style(
-  'border: solid 2px #373B41; color:#52C196; background: initial; background-color: #1D1F21;'
-);
-Hints.style(
-  'border: solid 2px #373B41 !important; padding: 1px !important; color: #C5C8C6 !important; background: #1D1F21 !important;',
-  'text'
-);
-Visual.style('marks', 'background-color: #52C19699;');
-Visual.style('cursor', 'background-color: #81A2BE;');
-
-// Nord
-/* -- DELETE LINE TO ENABLE THEME
-Hints.style('border: solid 2px #4C566A; color:#A3BE8C; background: initial; background-color: #3B4252;');
-Hints.style('border: solid 2px #4C566A !important; padding: 1px !important; color: #E5E9F0 !important; background: #3B4252 !important;', 'text');
-Visual.style('marks', 'background-color: #A3BE8C99;');
-Visual.style('cursor', 'background-color: #88C0D0;');
--- DELETE LINE TO ENABLE THEME */
-
-// Doom One
-/* -- DELETE LINE TO ENABLE THEME
-Hints.style('border: solid 2px #282C34; color:#98be65; background: initial; background-color: #2E3440;');
-Hints.style('border: solid 2px #282C34 !important; padding: 1px !important; color: #51AFEF !important; background: #2E3440 !important;', 'text');
-Visual.style('marks', 'background-color: #98be6599;');
-Visual.style('cursor', 'background-color: #51AFEF;');
--- DELETE LINE TO ENABLE THEME */
-
-// Monokai
-/* -- DELETE LINE TO ENABLE THEME
-Hints.style('border: solid 2px #2D2E2E; color:#F92660; background: initial; background-color: #272822;');
-Hints.style('border: solid 2px #2D2E2E !important; padding: 1px !important; color: #A6E22E !important; background: #272822 !important;', 'text');
-Visual.style('marks', 'background-color: #A6E22E99;');
-Visual.style('cursor', 'background-color: #F92660;');
--- DELETE LINE TO ENABLE THEME */
-
+// solarized dark
 settings.theme = `
-/* Edit these variables for easy theme making */
-:root {
-  /* Font */
-  --font: 'Source Code Pro', Ubuntu, sans;
-  --font-size: 16;
-  --font-weight: normal;
-  /* -------------- */
-  /* --- THEMES --- */
-  /* -------------- */
-  /* -------------------- */
-  /* -- Tomorrow Night -- */
-  /* -------------------- */
-
-  /* -- DELETE LINE TO ENABLE THEME
-  --fg: #C5C8C6;
-  --bg: #282A2E;
-  --bg-dark: #1D1F21;
-  --border: #373b41;
-  --main-fg: #81A2BE;
-  --accent-fg: #52C196;
-  --info-fg: #AC7BBA;
-  --select: #585858;
-  -- DELETE LINE TO ENABLE THEME */
-  /* Unused Alternate Colors */
-  /* --cyan: #4CB3BC; */
-  /* --orange: #DE935F; */
-  /* --red: #CC6666; */
-  /* --yellow: #CBCA77; */
-  /* -------------------- */
-  /* --      NORD      -- */
-  /* -------------------- */
-  /* -- DELETE LINE TO ENABLE THEME
-  --fg: #E5E9F0;
-  --bg: #3B4252;
-  --bg-dark: #2E3440;
-  --border: #4C566A;
-  --main-fg: #88C0D0;
-  --accent-fg: #A3BE8C;
-  --info-fg: #5E81AC;
-  --select: #4C566A;
-  -- DELETE LINE TO ENABLE THEME */
-  /* Unused Alternate Colors */
-  /* --orange: #D08770; */
-  /* --red: #BF616A; */
-  /* --yellow: #EBCB8B; */
-  /* -------------------- */
-  /* --    DOOM ONE    -- */
-  /* -------------------- */
-  --fg: #51AFEF;
-  --bg: #2E3440;
-  --bg-dark: #21242B;
-  --border: #FFFFFF;
-  --main-fg: #51AFEF;
-  --accent-fg: #98be65;
-  --info-fg: #C678DD;
-  --select: #4C566A;
-  /* Unused Alternate Colors */
-  /* --bg-dark: #21242B; */
-  /* --main-fg-alt: #2257A0; */
-  /* --cyan: #46D9FF; */
-  /* --orange: #DA8548; */
-  /* --red: #FF6C6B; */
-  /* --yellow: #ECBE7B; */
-  /* -------------------- */
-  /* --    MONOKAI    -- */
-  /* -------------------- */
-  /* -- DELETE LINE TO ENABLE THEME
-  --fg: #F8F8F2;
-  --bg: #272822;
-  --bg-dark: #1D1E19;
-  --border: #2D2E2E;
-  --main-fg: #F92660;
-  --accent-fg: #E6DB74;
-  --info-fg: #A6E22E;
-  --select: #556172;
-  /* Unused Alternate Colors */
-  /* --red: #E74C3C; */
-  /* --orange: #FD971F; */
-  /* --blue: #268BD2; */
-  /* --violet: #9C91E4; */
-  /* --cyan: #66D9EF; */
-  -- DELETE LINE TO ENABLE THEME */
-  /* Unused Alternate Colors */
-}
-/* ---------- Generic ---------- */
 .sk_theme {
-background: var(--bg);
-color: var(--fg);
-  background-color: var(--bg);
-  border-color: var(--border);
-  font-family: var(--font);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
-}
-input {
-  font-family: var(--font);
-  font-weight: var(--font-weight);
-}
-.sk_theme tbody {
-  color: var(--fg);
+  font-family: Input Sans Condensed, Charcoal, sans-serif;
+  font-size: 10pt;
+  background: #002B36;
+  color: #93A1A1;
 }
 .sk_theme input {
-  color: var(--fg);
-}
-/* Hints */
-#sk_hints .begin {
-  color: var(--accent-fg) !important;
-}
-#sk_tabs .sk_tab {
-  background: var(--bg-dark);
-  border: 1px solid var(--border);
-  color: var(--fg);
-}
-#sk_tabs .sk_tab_hint {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--accent-fg);
-}
-.sk_theme #sk_frame {
-  background: var(--bg);
-  opacity: 0.2;
-  color: var(--accent-fg);
-}
-/* ---------- Omnibar ---------- */
-/* Uncomment this and use settings.omnibarPosition = 'bottom' for Pentadactyl/Tridactyl style bottom bar */
-/* .sk_theme#sk_omnibar {
-  width: 100%;
-  left: 0;
-} */
-// .sk_theme .title {
-  color: var(--accent-fg);
+  color: #93A1A1;
 }
 .sk_theme .url {
-  color: var(--main-fg);
+  color: #268BD2;
 }
 .sk_theme .annotation {
-  color: var(--accent-fg);
-}
-.sk_theme .omnibar_highlight {
-  color: var(--accent-fg);
-}
-.sk_theme .omnibar_timestamp {
-  color: var(--info-fg);
-}
-.sk_theme .omnibar_visitcount {
-  color: var(--accent-fg);
-}
-.sk_theme #sk_omnibarSearchResult ul li:nth-child(odd) {
-  background: var(--bg-dark);
-}
-.sk_theme #sk_omnibarSearchResult ul li.focused {
-  background: var(--border);
-}
-.sk_theme #sk_omnibarSearchArea {
-  border-top-color: var(--border);
-  border-bottom-color: var(--border);
-}
-.sk_theme #sk_omnibarSearchArea input,
-.sk_theme #sk_omnibarSearchArea span {
-  font-size: var(--font-size);
-}
-.sk_theme .separator {
-  color: var(--accent-fg);
-}
-/* ---------- Popup Notification Banner ---------- */
-#sk_banner {
-  font-family: var(--font);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
-  background: var(--bg);
-  border-color: var(--border);
-  color: var(--fg);
-  opacity: 0.9;
-}
-/* ---------- Popup Keys ---------- */
-#sk_keystroke {
-  background-color: var(--bg);
-}
-.sk_theme kbd .candidates {
-  color: var(--info-fg);
-}
-.sk_theme span.annotation {
-  color: var(--accent-fg);
-}
-/* ---------- Popup Translation Bubble ---------- */
-#sk_bubble {
-  background-color: var(--bg) !important;
-  color: var(--fg) !important;
-  border-color: var(--border) !important;
-}
-#sk_bubble * {
-  color: var(--fg) !important;
-}
-#sk_bubble div.sk_arrow div:nth-of-type(1) {
-  border-top-color: var(--border) !important;
-  border-bottom-color: var(--border) !important;
-}
-#sk_bubble div.sk_arrow div:nth-of-type(2) {
-  border-top-color: var(--bg) !important;
-  border-bottom-color: var(--bg) !important;
-}
-/* ---------- Search ---------- */
-#sk_status,
-#sk_find {
-  font-size: var(--font-size);
-  border-color: var(--border);
+  color: #93A1A1;
 }
 .sk_theme kbd {
-  background: var(--bg-dark);
-  border-color: var(--border);
-  box-shadow: none;
-  color: var(--fg);
+  background: #EEE8D5;
+  color: #111;
 }
-.sk_theme .feature_name span {
-  color: var(--main-fg);
+.sk_theme .omnibar_highlight {
+  color: #CB4B16;
 }
-/* ---------- ACE Editor ---------- */
-#sk_editor {
-  background: var(--bg-dark) !important;
-  height: 50% !important;
-  /* Remove this to restore the default editor size */
+.sk_theme .omnibar_folder {
+  color: #2AA198;
 }
-.ace_dialog-bottom {
-  border-top: 1px solid var(--bg) !important;
+.sk_theme .omnibar_timestamp {
+  color: #657B83;
 }
-.ace-chrome .ace_print-margin,
-.ace_gutter,
-.ace_gutter-cell,
-.ace_dialog {
-  background: var(--bg) !important;
+.sk_theme .omnibar_visitcount {
+  color: #B58900;
 }
-.ace-chrome {
-  color: var(--fg) !important;
+.sk_theme .prompt, .sk_theme .resultPage {
+  color: #93A1A1;
 }
-.ace_gutter,
-.ace_dialog {
-  color: var(--fg) !important;
+.sk_theme .feature_name {
+  color: #859900;
 }
-.ace_cursor {
-  color: var(--fg) !important;
+.sk_theme .separator {
+  color: #859900;
 }
-.normal-mode .ace_cursor {
-  background-color: var(--fg) !important;
-  border: var(--fg) !important;
-  opacity: 0.7 !important;
+.sk_theme #sk_omnibarSearchResult ul li:nth-child(odd) {
+  background: #002F3B;
 }
-.ace_marker-layer .ace_selection {
-  background: var(--select) !important;
+.sk_theme #sk_omnibarSearchResult ul li.focused {
+  background: #083D4A;
 }
-.ace_editor,
-.ace_dialog span,
-.ace_dialog input {
-  font-family: var(--font);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
+#sk_status, #sk_find {
+  font-size: 12pt;
 }
-`;
+#sk_keystroke {
+  background: #002B36;
+}
+.expandRichHints span.annotation {
+  color: #93A1A1;
+}`;
