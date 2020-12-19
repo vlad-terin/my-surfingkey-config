@@ -464,7 +464,230 @@ unmap("od");
   mapToCmdPrefix(";sd", "deleteSession ");
   mapToCmdPrefix(";sl", "listSession");
   mapToCmdPrefix(";so", "openSession ");
+  
 })();
+
+
+
+// headings navigation
+(function(){
+var w = window,
+d = w.document,
+// querySelector/querySelectorAll shorthand
+qs = function(selector, parent, all){
+    return (parent || d)['querySelector'+ (all ? 'All' : '')](selector);
+},
+isHidden = function(el){
+    if (el.hidden){ return true; }
+
+    var style = w.getComputedStyle(el);
+
+    return !(el.offsetWidth > 0 && el.offsetHeight > 0) && style.getPropertyValue('overflow') != 'visible'
+        || style.getPropertyValue('display') == 'none'
+        || parseFloat(style.getPropertyValue('opacity')) < 0.015;
+},
+current_heading = 0,
+headings = [],
+headingsSelectors = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+update = function(key){
+    var diff = -6,
+    topNotFound = true,
+    cTop = -Infinity;
+    current_heading = 0;
+
+    // @note: not optimal but fast enough to not care
+    headings = Array
+        .from(qs(headingsSelectors.join(','), null, true))
+        // filter out invisible elements
+        .filter(function(el){
+            el.__top = el.getBoundingClientRect().top |0;
+            return !isHidden(el);
+        })
+        // sort in ascending order by rendered position
+        .sort(function(a, b){
+            return a.__top - b.__top;
+        });
+    
+
+    headings.forEach(function(el, i){
+        if (topNotFound){
+            var top = el.__top;
+
+            if (Math.abs(cTop) > Math.abs(top)){
+                cTop = top;
+                current_heading = i;
+            } else {
+                topNotFound = false;
+            }
+        }
+
+        delete el.__top;
+    });
+    
+    
+},
+selectNodeContents = function(node){
+    var range = document.createRange();
+    range.selectNodeContents(node);
+    w.getSelection().removeAllRanges();
+    w.getSelection().addRange(range);
+
+    return range;
+},
+goToBeginningOfCurrentHeading = function(){
+    var el = headings[current_heading];
+    el && el.scrollIntoView(true);
+    selectNodeContents(el);
+},
+goToFirstHeading = function(){
+    current_heading = 0;
+    return goToBeginningOfCurrentHeading();
+},
+goToLastHeading = function(){
+    current_heading = headings.length - 1;
+    return goToBeginningOfCurrentHeading();
+},
+goToPrevHeading = function(){
+    if (current_heading == 0){
+        current_heading = headings.length;
+    }
+    
+    --current_heading;
+
+    return goToBeginningOfCurrentHeading();
+},
+goToNextHeading = function(){
+    ++current_heading;
+
+    if (current_heading == headings.length){
+        current_heading = 0;
+    }
+
+    return goToBeginningOfCurrentHeading();
+},
+goToPrevSameLevelHeading = function(){
+    var i = current_heading,
+    tagName = headings[i].tagName;
+
+    for (; i > 0; i--){
+        if (current_heading != i && headings[i].tagName == tagName){
+            current_heading = i;
+            return goToBeginningOfCurrentHeading();
+        }
+    }
+
+    for (i = headings.length; i > current_heading; i--){
+        if (current_heading != i && headings[i].tagName == tagName){
+            current_heading = i;
+            return goToBeginningOfCurrentHeading();
+        }
+    }
+},
+goToNextSameLevelHeading = function(){
+    var i = current_heading,
+    tagName = headings[i].tagName;
+
+    for (; i < headings.length; i++){
+        if (current_heading != i && headings[i].tagName == tagName){
+            current_heading = i;
+            return goToBeginningOfCurrentHeading();
+        }
+    }
+
+    for (i = 0; i < current_heading; i++){
+        if (current_heading != i && headings[i].tagName == tagName){
+            current_heading = i;
+            return goToBeginningOfCurrentHeading();
+        }
+    }
+},
+pickHeadingSpecifiedByName = function(){
+    var res = (w.prompt('String to search in headings:') || '').toLowerCase();
+
+    if (res){
+        for (var i = current_heading; i < headings.length; i++){
+            if (headings[i].textContent.toLowerCase().indexOf(res) != -1){
+                current_heading = i;
+                goToBeginningOfCurrentHeading();
+                selectNodeContents(headings[i]);
+
+                return false;
+            }
+        }
+
+        for (var i = 0; i <= current_heading; i++){
+            if (headings[i].textContent.toLowerCase().indexOf(res) != -1){
+                current_heading = i;
+                goToBeginningOfCurrentHeading();
+                selectNodeContents(headings[i]);
+
+                return false;
+            }
+        }
+    }
+
+    return false;
+},
+enabled = false,
+oldKeyDown = null,
+onDisable = function(){
+    headings = [];
+    current_heading = 0;
+    d.body.onkeydown = oldKeyDown;
+    // enable back normal handling
+    Normal.enter();
+    Normal.enable();
+    enabled = false;
+},
+mappings = {
+    'Esc': onDisable,
+    'Escape': onDisable,
+    'b': function(){
+        update();
+        goToBeginningOfCurrentHeading();
+    },
+    ',': goToFirstHeading,
+    '.': goToLastHeading,
+    '[': goToPrevHeading,
+    ']': goToNextHeading,
+    'p': goToPrevSameLevelHeading,
+    'n': goToNextSameLevelHeading,
+    'm': pickHeadingSpecifiedByName
+    //'^' - didn't get what `Move "up" from this heading` means regarding heading navigation in https://github.com/brookhong/Surfingkeys/issues/1353
+},
+onKeyDown = function(e){
+    if (enabled){
+        var code = e.key;
+        
+        console.log(code);
+        
+        if (typeof mappings[code] == 'function'){
+            e.preventDefault();
+            
+            mappings[code]();
+            
+            return false;
+        }
+    }
+    
+    if (typeof oldKeyDown == 'function'){
+        return oldKeyDown(e);
+    }
+};
+
+mapkey("h0", "Enter headings mode", function(){
+    update();
+    // disable normal handling
+    Normal.exit();
+    Normal.disable();
+    d.body.focus();
+    oldKeyDown = d.body.onkeydown;
+    d.body.onkeydown = onKeyDown;
+    enabled = true;
+});
+})();
+
+
 
 // Surfingkey Ctrl-p Ctrl-n in google
 if (window.origin === "https://www.google.com") {
