@@ -238,6 +238,7 @@ unmap("od");
     pinterestBase = "https://www.pinterest.com/search/pins/?q={0}",
     searches = {
       // search
+      hs: ["history search", "https://historysearch.com/search/list?q={0}"],
       dcm: ["creative market", creativemarketBase],
       dee: ["envato elements", elementsenvatoBase],
       db: ["behance", behanceBase],
