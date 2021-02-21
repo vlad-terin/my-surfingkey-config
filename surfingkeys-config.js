@@ -389,9 +389,13 @@ unmap("od");
         name: "combined product search by day",
         list: ["gd", "hnd", "phm", "yd", "gH"],
       },
-      cd: {
+      cD: {
         name: "combined design",
         list: ["dcm", "db", "dee", "dd", "daw", "dui", "dm"],
+      },
+      cdp: {
+        name: "combined design photos",
+        list: ["dpu", "dps", "dpp"],
       },
     };
 
