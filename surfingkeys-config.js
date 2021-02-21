@@ -292,14 +292,14 @@ unmap("od");
 
       gH: ["github", githubBaseRepo],
       ghc: ["github", githubBaseCode],
-      ghC: ["github", githubBaseCommits],
-      ghi: ["github", githubBaseIssues],
-      ghd: ["github", githubBaseDiscussions],
-      ghr: ["github", githubBaseRegistrypackages],
-      ghm: ["github", githubBaseMarketplace],
-      ght: ["github", githubBaseTopics],
-      ghw: ["github", githubBaseWikis],
-      ghu: ["github", githubBaseUsers],
+      ghC: ["github commits", githubBaseCommits],
+      ghi: ["github issues", githubBaseIssues],
+      ghd: ["github discussions", githubBaseDiscussions],
+      ghr: ["github registry", githubBaseRegistrypackages],
+      ghm: ["github marketplace", githubBaseMarketplace],
+      ght: ["github topics", githubBaseTopics],
+      ghw: ["github wiki", githubBaseWikis],
+      ghu: ["github users", githubBaseUsers],
 
       //code reference
       crm: ["code reference mdn", mdnBase],
@@ -318,7 +318,7 @@ unmap("od");
       ll: ["lucky", googleSearchBase + "&btnI"],
       // conflict, changed from t to tt
       tt: ["onelook", "https://www.onelook.com/?w={0}&ls=a"],
-      s: ["onelook synonyms", "https://www.onelook.com/thesaurus/?s={0}"],
+      S: ["onelook synonyms", "https://www.onelook.com/thesaurus/?s={0}"],
       D: [
         "google drive search",
         "https://drive.google.com/drive/u/1/search?q={0}",
@@ -335,27 +335,10 @@ unmap("od");
       C: ["search coding", "https://searchcode.com/?q="],
       cC: ["search coding", "https://searchcode.com/?q="],
       cw: ["chrome webstore", "https://chrome.google.com/webstore/search/"], // chrome
-      S: ["slant", "https://www.slant.co/search?query="],
-
-      //language
-      lJ: ["language Javascript", googleSearchQ + "Javascript+"],
-      lj: ["language java", googleSearchQ + "Java+"],
-      lC: ["C++", googleSearchQ + "C++"],
-      lc: ["language c", googleSearchQ + "c+language+"],
-      "l#": ["language C#", googleSearchQ + "c%23+"],
-      lR: ["language R", googleSearchQ + "languag+"],
-      lr: ["language Ruby", googleSearchQ + "Ruby+"],
-      lP: ["language Python", googleSearchQ + "Python+"],
-      lp: ["language php", googleSearchQ + "php+"],
-      lK: ["language Kotlin", googleSearchQ + "Kotlin+"],
-      lS: ["language Swift", googleSearchQ + "Swift+"],
-      lQ: ["language SQL Query", googleSearchQ + "SQL+"],
-      ls: ["language Shell script", googleSearchQ + "Shell+Schript+"],
-      lT: ["language Typescript", googleSearchQ + "TypeScript+"],
-      lH: ["language HTML", googleSearchQ + "HTML+"],
+      s: ["slant", "https://www.slant.co/search?query="],
 
       //sns
-      fb: ["faceBook(페이스북)", "https://www.facebook.com/search/top/?q="],
+      fb: ["faceBook", "https://www.facebook.com/search/top/?q="],
       tw: ["tWitter", "https://twitter.com/search?q="],
       ig: ["InstaGram HashTag", "https://www.instagram.com/explore/tags/"],
       rd: ["redDit", "https://www.reddit.com/search?q="],
