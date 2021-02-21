@@ -342,23 +342,6 @@ unmap("od");
       tw: ["tWitter", "https://twitter.com/search?q="],
       ig: ["InstaGram HashTag", "https://www.instagram.com/explore/tags/"],
       rd: ["redDit", "https://www.reddit.com/search?q="],
-
-      //shorten - what is.. who is.. where is..
-      wa: ["advanced", googleSearchQ + "advanced+"],
-      wb: ["basic", googleSearchQ + "basic+"],
-      wc: ["classification", googleSearchQ + "classfication+of+"],
-      wd: ["difference", googleSearchQ + "difference+between+"],
-      we: ["example", googleSearchQ + "example+of+"],
-      ww: ["wherefrom", googleSearchQ + "where+from+"],
-      wg: ["goalof", googleSearchQ + "what+is+goal+of+"],
-      wh: ["historyof", googleSearchQ + "history+of+"],
-      wi: ["introductionof", googleSearchQ + "Introduction+of"],
-
-      //file
-      pdf: ["fppdf", googleSearchQ + "filetype%3Apdf+"],
-      cpp: ["fpcpp", googleSearchQ + "filetype%3Acpp+"],
-      hwp: ["fphwp", googleSearchQ + "filetype%3Ahwp+"],
-      ppt: ["fpppt", googleSearchQ + "filetype%3Appt+"],
     },
     // only 's' and 'o' prefixed mappings will be taken
     searchGroups = {
