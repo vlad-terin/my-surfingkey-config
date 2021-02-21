@@ -228,7 +228,6 @@ unmap("od");
     youtubeRating = youtubeBase + "&sp=CAE%253D",
     youtubeHistory = "https://www.youtube.com/feed/history?query={0}",
     // web design
-    creativemarketBase = "https://creativemarket.com/search?q={0}",
     elementsenvatoBase = "https://elements.envato.com/all-items/{0}",
     behanceBase = "https://www.behance.net/search?search={0}",
     dribbleBase = "https://dribbble.com/search/{0}",
@@ -239,7 +238,6 @@ unmap("od");
       // search
       os: ["one search", "https://historysearch.com/search/list?q={0}"],
       hs: ["history search", "https://historysearch.com/search/list?q={0}"],
-      dcm: ["creative market", creativemarketBase],
       dee: ["envato elements", elementsenvatoBase],
       db: ["behance", behanceBase],
       dd: ["dribble", dribbleBase],
@@ -391,7 +389,7 @@ unmap("od");
       },
       cD: {
         name: "combined design",
-        list: ["dcm", "db", "dee", "dd", "daw", "dui", "dm"],
+        list: ["db", "dee", "dd", "daw", "dui", "dm"],
       },
       cdp: {
         name: "combined design photos",
