@@ -235,7 +235,6 @@ unmap("od");
     awwardsBase = "https://www.awwwards.com/inspiration/search?text={0}",
     uisourcesBase = "https://www.uisources.com/search?query={0}",
     searchmuzliBase = "https://search.muz.li/search/{0}",
-    pinterestBase = "https://www.pinterest.com/search/pins/?q={0}",
     searches = {
       // search
       os: ["one search", "https://historysearch.com/search/list?q={0}"],
@@ -247,7 +246,6 @@ unmap("od");
       daw: ["awwards", awwardsBase],
       dui: ["uisources", uisourcesBase],
       dm: ["muzli", searchmuzliBase],
-      dp: ["pinterest", pinterestBase],
 
       Y: ["youtube search", youtubeBase],
       yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
@@ -390,7 +388,7 @@ unmap("od");
       },
       cd: {
         name: "combined design",
-        list: ["dcm", "db", "dee", "dd", "daw", "dui", "dm", "dp"],
+        list: ["dcm", "db", "dee", "dd", "daw", "dui", "dm"],
       },
     };
 
