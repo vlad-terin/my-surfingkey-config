@@ -300,6 +300,17 @@ unmap("od");
       ghw: ["github wiki", githubBaseWikis],
       ghu: ["github users", githubBaseUsers],
 
+      //code snippets
+      csc: ["code snippet codepen", "https://codepen.io/search/pens?q={0}"],
+      csj: [
+        "code snippet jsfiddle",
+        "https://www.google.com/search?q=site:jsfiddle.net+{0}",
+      ],
+      css: [
+        "code snippet codesandbox",
+        "https://www.google.com/search?q=site:codesandbox+{0}",
+      ],
+
       //code reference
       crm: ["code reference mdn", mdnBase],
       crdd: ["code reference devdoc", devdocBase],
@@ -394,6 +405,10 @@ unmap("od");
       cdp: {
         name: "combined design photos",
         list: ["dpu", "dps", "dpp"],
+      },
+      ccr: {
+        name: "code references",
+        list: ["crdd", "crm"],
       },
     };
 
