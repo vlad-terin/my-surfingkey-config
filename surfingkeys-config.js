@@ -343,7 +343,11 @@ unmap("od");
       C: ["search coding", "https://searchcode.com/?q="],
       cC: ["search coding", "https://searchcode.com/?q="],
       cw: ["chrome webstore", "https://chrome.google.com/webstore/search/"], // chrome
-      s: ["slant", "https://www.slant.co/search?query="],
+
+      //alternative websites
+      as: ["slant", "https://www.slant.co/search?query="],
+      aa: ["alternativeto", "https://alternativeto.net/browse/search?q={0}"],
+      ag: ["g2", "https://www.g2.com/products/{0}/competitors/alternatives"],
 
       //sns
       fb: ["faceBook", "https://www.facebook.com/search/top/?q="],
