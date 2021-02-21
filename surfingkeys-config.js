@@ -333,8 +333,6 @@ unmap("od");
         "google drive search",
         "https://drive.google.com/drive/u/1/search?q={0}",
       ],
-      // conflict, changed from c to cc
-      cc: ["technical translation", "https://techterms.com/definition/{0}"],
       // conflict, changed from w to ww to wk
       wk: ["wiki", "https://en.wikipedia.org/wiki/{0}"],
 
