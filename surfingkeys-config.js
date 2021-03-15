@@ -1,7 +1,5 @@
 map("L", "R");
 map("H", "E");
-map("j", "D");
-map("D", "j");
 vmap("v", "zv");
 cmap("<Ctrl-n>", "<Tab>");
 cmap("<Ctrl-p>", "<Shift-Tab>");
