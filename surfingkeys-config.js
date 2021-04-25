@@ -1,5 +1,4 @@
 map("L", "R");
-map("L", "R");
 map("H", "E");
 vmap("v", "zv");
 cmap("<Ctrl-n>", "<Tab>");
@@ -325,6 +324,8 @@ unmap("od");
       gsh: ["google search history", googleSearchHistory],
       gi: ["google images", googleImages],
 
+      // forums
+      ofa: ["arch linux", "https://wiki.archlinux.org/index.php?search={0}"],
       // conflict, changed from l to ll
       ll: ["lucky", googleSearchBase + "&btnI"],
       // conflict, changed from t to tt
