@@ -30,7 +30,7 @@ if (window.origin === "https://www.google.com") {
 
 // limit to certain origin
 if (window.origin === "https://www.google.com") {
-mapkey('zzzz', 'first google result', function() {
+mapkey('1', 'first google result', function() {
 var cssSelector = '#search h1+div>div:first-child>div:first-child a';
 // open browser console (F12) on page with search engine results to test CSS selector you build from left to right (look at elements tree)
 document.querySelector(cssSelector).click();
