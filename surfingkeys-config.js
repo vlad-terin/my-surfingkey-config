@@ -279,14 +279,15 @@ unmap("od");
       os: ["one search", "https://historysearch.com/search/list?q={0}"],
       hs: ["history search", "https://historysearch.com/search/list?q={0}"],
       dee: ["envato elements", elementsenvatoBase],
-      db: ["behance", behanceBase],
+    /* db: ["behance", behanceBase],
       dd: ["dribble", dribbleBase],
       daw: ["awwards", awwardsBase],
       dui: ["uisources", uisourcesBase],
       dm: ["muzli", searchmuzliBase],
       dpu: ["unsplash", "https://unsplash.com/s/photos/{0}"],
       dps: ["shutterstock", "https://www.shutterstock.com/search/{0}"],
-      dpp: ["pexels", "https://www.pexels.com/search/{0}/"],
+      dpp: ["pexels", "https://www.pexels.com/search/{0}/"], */
+      d: ["dotdoggo", "https://dotdoggo.com:8080/.doggo?{0}],
 
       Y: ["youtube search", youtubeBase],
       yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
