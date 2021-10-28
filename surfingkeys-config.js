@@ -287,7 +287,7 @@ unmap("od");
       dpu: ["unsplash", "https://unsplash.com/s/photos/{0}"],
       dps: ["shutterstock", "https://www.shutterstock.com/search/{0}"],
       dpp: ["pexels", "https://www.pexels.com/search/{0}/"], */
-      d: ["dotdoggo", "https://dotdoggo.com:8080/.doggo?{0}],
+      d: ["dotdoggo", "https://dotdoggo.com:8080/.doggo?{0}"],
 
       Y: ["youtube search", youtubeBase],
       yy: ["youtube year", youtubeBase + "&sp=EgIIBQ%253D%253D"],
