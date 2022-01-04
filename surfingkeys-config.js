@@ -1,3 +1,4 @@
+
 if (window.origin === "https://www.google.com") {
     function cycleGoogleSuggestions(forward) {
         var suggestions = document.querySelectorAll("ul>li.sbct");
