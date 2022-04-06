@@ -114,14 +114,7 @@ unmap("od");
     // @todo: consider removing all registered mappings that can be [before|after] key sequence
     // fix overrides so this block of code can be replaced by NOOP
     // normalOverrideFix
-    nOF = function (key) {
-      const nmEntry = Normal.mappings.find(key);
-
-      if (nmEntry) {
-        // if meta isn't present then we're blocking set of key sequences
-        cl("Override of " + key, nmEntry.meta || nmEntry);
-      }
-    },
+    
     // addSearchAliasX and omnibar mapping (removes previous omnibar mapping)
     // addSAXWithOmnibargoogle
     saxo = function () {
