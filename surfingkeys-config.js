@@ -1,3 +1,26 @@
+const {
+    aceVimMap,
+    mapkey,
+    imap,
+    imapkey,
+    getClickableElements,
+    vmapkey,
+    map,
+    unmap,
+    unmapAllExcept,
+    vunmap,
+    cmap,
+    addSearchAlias,
+    removeSearchAlias,
+    tabOpenLink,
+    readText,
+    Clipboard,
+    Front,
+    Hints,
+    Visual,
+    RUNTIME
+} = api;
+
 
 if (window.origin === "https://www.google.com") {
     function cycleGoogleSuggestions(forward) {
