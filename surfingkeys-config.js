@@ -131,7 +131,7 @@ api.unmap("od");
       hnd: ["hacker news day", hnTStr + "last24h"],
 
       gH: ["github", githubBaseRepo],
-      ghc: ["github", githubBaseCode],
+      api.map('ghc', 'github', githubBaseCode);
       ghC: ["github commits", githubBaseCommits],
       ghi: ["github issues", githubBaseIssues],
       ghd: ["github discussions", githubBaseDiscussions],
