@@ -15,22 +15,22 @@ api.unmap("op");
 api.unmap("oy");
 api.unmap("od");
 
-api.mapkey(
-  "yg",
-  "git clone",
-  function () {
-    api.Hints.create(
-      "git clone " + window.location.href + ".git",
-      function (element) {
-        api.Clipboard.write("git clone " + window.location.href + ".git");
-      },
-    );
-  },
-  {
-    domain: /github\.com/i,
-  },
-);
+// Map 'yg' to copy the git clone command for GitHub repositories
+api.mapkey("yg", "Copy git clone command", function () {
+  // Check if the current page is a GitHub repository
+  if (/github\.com/i.test(window.location.href)) {
+    // Construct the git clone command
+    var gitCommand = "git clone " + window.location.href + ".git";
 
+    // Copy the command to the clipboard
+    api.Clipboard.write(gitCommand);
+
+    // Optionally, you can display a message to the user
+    api.Front.showBanner(`Copied to clipboard: ${gitCommand}`);
+  } else {
+    api.Front.showBanner("Not a GitHub repository page", 3000);
+  }
+});
 api.addSearchAlias("G", "Google Search", "https://www.google.com/search?q={0}");
 api.addSearchAlias(
   "gm",
