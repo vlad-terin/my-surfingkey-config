@@ -26,10 +26,10 @@ unmap("od");
       };
     },
     openSearchOmnibar = function () {
-      Front.openOmnibar({ type: "SearchEngine", extra: this.extra });
+      api.Front.openOmnibar({ type: "SearchEngine", extra: this.extra });
     },
     openLink = function (url) {
-      RUNTIME("openLink", {
+      api.RUNTIME("openLink", {
         tab: { tabbed: true, active: false },
         url: url || this.url,
       });
@@ -60,15 +60,15 @@ unmap("od");
       // adds key and 's'+ key mappings:
       // open new search tab (doesn't work, fix below)
       // search selected text in new tab (works)
-      addSearchAliasX.apply(null, a);
+      api.addSearchAliasX.apply(null, a);
 
       // 1 character hotkeys break whole thing
       // unmap(key);
       // mapkey(key, a[0], fcFactory(openLink, { url: a[2].split('{0}')[0] }));
 
-      unmap(okey);
+      api.unmap(okey);
       // adds 'o'+ key mapping (open Omnibar to trigger search selected text in new tab on Enter, where selected text is value in Omnibar)
-      mapkey(
+      api.mapkey(
         okey,
         "Open with " + desc,
         fcFactory(openSearchOmnibar, { extra: key })
