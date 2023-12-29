@@ -1,10 +1,10 @@
 
 // Removing default search aliases
-removeSearchAliasX("b");
-removeSearchAliasX("g");
-removeSearchAliasX("s");
-removeSearchAliasX("w");
-removeSearchAliasX("p");
+removeSearchAlias("b");
+removeSearchAlias("g");
+removeSearchAlias("s");
+removeSearchAlias("w");
+removeSearchAlias("p");
 
 // [+] Remove omnibar mappings to removed search aliases
 unmap("oi");
