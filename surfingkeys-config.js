@@ -1,20 +1,20 @@
 
 // Removing default search aliases
-removeSearchAlias("b");
-removeSearchAlias("g");
-removeSearchAlias("s");
-removeSearchAlias("w");
-removeSearchAlias("p");
+api.removeSearchAlias("b");
+api.removeSearchAlias("g");
+api.removeSearchAlias("s");
+api.removeSearchAlias("w");
+api.removeSearchAlias("p");
 
 // [+] Remove omnibar mappings to removed search aliases
-unmap("oi");
-unmap("ob");
-unmap("og");
-unmap("os");
-unmap("ow");
-unmap("op");
-unmap("oy");
-unmap("od");
+api.unmap("oi");
+api.unmap("ob");
+api.unmap("og");
+api.unmap("os");
+api.unmap("ow");
+api.unmap("op");
+api.unmap("oy");
+api.unmap("od");
 
 //General
 
@@ -133,7 +133,7 @@ unmap("od");
       }
 
       unmap(okey);
-      mapkey(
+      api.mapkey(
         okey,
         'Open with "' + data.name + '"',
         fcFactory(openWithGroup, gSearches, data.name)
