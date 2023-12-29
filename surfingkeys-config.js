@@ -15,6 +15,22 @@ api.unmap("op");
 api.unmap("oy");
 api.unmap("od");
 
+api.mapkey(
+  "yg",
+  "git clone",
+  function () {
+    api.Hints.create(
+      "git clone " + window.location.href + ".git",
+      function (element) {
+        api.Clipboard.write("git clone " + window.location.href + ".git");
+      },
+    );
+  },
+  {
+    domain: /github\.com/i,
+  },
+);
+
 api.addSearchAlias("G", "Google Search", "https://www.google.com/search?q={0}");
 api.addSearchAlias(
   "gm",
