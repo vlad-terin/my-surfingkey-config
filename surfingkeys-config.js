@@ -15,6 +15,192 @@ api.unmap("op");
 api.unmap("oy");
 api.unmap("od");
 
+api.addSearchAlias("G", "Google Search", "https://www.google.com/search?q={0}");
+api.addSearchAlias(
+  "gm",
+  "Google Month",
+  "https://www.google.com/search?q={0}&tbs=qdr:m",
+);
+api.addSearchAlias(
+  "gw",
+  "Google Week",
+  "https://www.google.com/search?q={0}&tbs=qdr:w",
+);
+api.addSearchAlias(
+  "gy",
+  "Google Year",
+  "https://www.google.com/search?q={0}&tbs=qdr:y",
+);
+api.addSearchAlias(
+  "gd",
+  "Google Day",
+  "https://www.google.com/search?q={0}&tbs=qdr:d",
+);
+api.addSearchAlias(
+  "gH",
+  "Google Hour",
+  "https://www.google.com/search?q={0}&tbs=qdr:h",
+);
+api.addSearchAlias(
+  "gsh",
+  "Google Search History",
+  "https://myactivity.google.com/myactivity?authuser=0&q={0}",
+);
+api.addSearchAlias(
+  "gi",
+  "Google Images",
+  "https://www.google.com/search?q={0}&tbm=isch",
+);
+
+api.addSearchAlias(
+  "os",
+  "One Search",
+  "https://historysearch.com/search/list?q={0}",
+);
+api.addSearchAlias(
+  "hs",
+  "History Search",
+  "https://historysearch.com/search/list?q={0}",
+);
+api.addSearchAlias(
+  "dee",
+  "Envato Elements",
+  "https://elements.envato.com/all-items/{0}",
+);
+api.addSearchAlias(
+  "db",
+  "Behance",
+  "https://www.behance.net/search?search={0}",
+);
+api.addSearchAlias("dd", "Dribble", "https://dribbble.com/search/{0}");
+api.addSearchAlias(
+  "daw",
+  "Awwards",
+  "https://www.awwwards.com/inspiration/search?text={0}",
+);
+api.addSearchAlias(
+  "dui",
+  "UI Sources",
+  "https://www.uisources.com/search?query={0}",
+);
+api.addSearchAlias("dm", "Muzli", "https://search.muz.li/search/{0}");
+api.addSearchAlias("dpu", "Unsplash", "https://unsplash.com/s/photos/{0}");
+api.addSearchAlias(
+  "dps",
+  "Shutterstock",
+  "https://www.shutterstock.com/search/{0}",
+);
+api.addSearchAlias("dpp", "Pexels", "https://www.pexels.com/search/{0}/");
+api.addSearchAlias(
+  "yy",
+  "YouTube Year",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIIBQ%253D%253D",
+);
+api.addSearchAlias(
+  "ym",
+  "YouTube Month",
+  "https://www.youtube.com/results?search_query={0}&sp=EgQIBBAB",
+);
+api.addSearchAlias(
+  "yw",
+  "YouTube Week",
+  "https://www.youtube.com/results?search_query={0}&sp=EgQIAxAB",
+);
+api.addSearchAlias(
+  "yd",
+  "YouTube Day",
+  "https://www.youtube.com/results?search_query={0}&sp=EgQIAhAB",
+);
+api.addSearchAlias(
+  "yh",
+  "YouTube Hour",
+  "https://www.youtube.com/results?search_query={0}&sp=EgQIARAB",
+);
+api.addSearchAlias(
+  "yc",
+  "YouTube Channel",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIQAg%253D%253D",
+);
+api.addSearchAlias(
+  "yp",
+  "YouTube Playlist",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIQAw%253D%253D",
+);
+api.addSearchAlias(
+  "yM",
+  "YouTube Movie",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIQBA%253D%253D",
+);
+api.addSearchAlias(
+  "ySh",
+  "YouTube Show",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIQBQ%253D%253D",
+);
+api.addSearchAlias(
+  "ys",
+  "YouTube Short",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIYAQ%253D%253D",
+);
+api.addSearchAlias(
+  "ylo",
+  "YouTube Long",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIYAg%253D%253D",
+);
+api.addSearchAlias(
+  "yli",
+  "YouTube Live",
+  "https://www.youtube.com/results?search_query={0}&sp=EgJAAQ%253D%253D",
+);
+api.addSearchAlias(
+  "y4k",
+  "YouTube 4K",
+  "https://www.youtube.com/results?search_query={0}&sp=EgJwAQ%253D%253D",
+);
+api.addSearchAlias(
+  "yHD",
+  "YouTube HD",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIgAQ%253D%253D",
+);
+api.addSearchAlias(
+  "ySu",
+  "YouTube Subtitles",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIoAQ%253D%253D",
+);
+api.addSearchAlias(
+  "yCC",
+  "YouTube Creative Commons",
+  "https://www.youtube.com/results?search_query={0}&sp=EgIwAQ%253D%253D",
+);
+api.addSearchAlias(
+  "y360",
+  "YouTube 360",
+  "https://www.youtube.com/results?search_query={0}&sp=EgJ4AQ%253D%253D",
+);
+api.addSearchAlias(
+  "yvr",
+  "YouTube VR",
+  "https://www.youtube.com/results?search_query={0}&sp=EgPQAQE%253D",
+);
+api.addSearchAlias(
+  "y3d",
+  "YouTube 3D",
+  "https://www.youtube.com/results?search_query={0}&sp=EgI4AQ%253D%253D",
+);
+api.addSearchAlias(
+  "yHDR",
+  "YouTube HDR",
+  "https://www.youtube.com/results?search_query={0}&sp=EgPIAQE%253D",
+);
+api.addSearchAlias(
+  "yL",
+  "YouTube Location",
+  "https://www.youtube.com/results?search_query={0}&sp=EgO4AQE%253D",
+);
+api.addSearchAlias(
+  "yP",
+  "YouTube Purchased",
+  "https://www.youtube.com/results?search_query={0}&sp=EgJIAQ%253D%253D",
+);
 api.addSearchAlias("G", "Google", "https://www.google.com/search?q={0}");
 api.addSearchAlias(
   "gH",
