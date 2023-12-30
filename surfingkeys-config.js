@@ -16,7 +16,7 @@ api.unmap("oy");
 api.unmap("od");
 
 // Go to https://dictionaryapi.com/ and get an API key for Learners Dictionary.
-const API_KEY = "8c985a7d-86ca-4871-9de0-cc022a9075b6";
+const API_KEY = "your-valid-api-key";
 const API_URL = "https://dictionaryapi.com/api/v3";
 
 api.Front.registerInlineQuery({
