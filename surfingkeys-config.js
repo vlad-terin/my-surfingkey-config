@@ -20,6 +20,13 @@ settings.tabsThreshold = 0;
 const API_KEY = "af712d02-1689-4378-8590-cba02e8341a0";
 const API_URL = "https://dictionaryapi.com/api/v3";
 
+mapkey("h", "Go to first Google result", function () {
+  var firstResult = document.querySelector('a[href^="/url?q="]');
+  if (firstResult) {
+    window.location.href = firstResult.href;
+  }
+});
+
 api.Front.registerInlineQuery({
   url: function (q) {
     const url = `${API_URL}/references/learners/json/${q}?key=${API_KEY}`;
