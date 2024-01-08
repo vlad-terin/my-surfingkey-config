@@ -20,10 +20,16 @@ settings.tabsThreshold = 0;
 const API_KEY = "af712d02-1689-4378-8590-cba02e8341a0";
 const API_URL = "https://dictionaryapi.com/api/v3";
 
-api.mapkey("h", "Go to first Google result", function () {
-  var firstResult = document.querySelector('a[href^="/url?q="]');
-  if (firstResult) {
-    window.location.href = firstResult.href;
+api.mapkey("t", "Go to the first Google result", function () {
+  // Selector for the first search result title
+  var firstResult = document.querySelector(".LC20lb");
+  // Ensure the element exists and has a parent node which should be the anchor tag
+  if (firstResult && firstResult.parentNode) {
+    // Navigate to the href of the parent node
+    window.location.href = firstResult.parentNode.href;
+  } else {
+    // Alert if no result is found
+    alert("No search result link found.");
   }
 });
 
