@@ -32,15 +32,15 @@ const API_URL = "https://dictionaryapi.com/api/v3";
 //     alert("No search result link found.");
 //   } });
 //
-api.mapkey("h", "Go to the first Google result", function () {
+api.mapkey("hg", "Go to the first Google result", function () {
   goToLink(0);
 });
 
-api.mapkey("2g", "Go to the second Google result", function () {
+api.mapkey("h2", "Go to the second Google result", function () {
   goToLink(1);
 });
 
-api.mapkey("3g", "Go to the third Google result", function () {
+api.mapkey("h3", "Go to the third Google result", function () {
   goToLink(2);
 });
 
