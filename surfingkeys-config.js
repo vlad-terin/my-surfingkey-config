@@ -47,20 +47,20 @@ api.mapkey("3h", "Go to the third Google result", function () {
 function goToLink(index) {
   // Selector for search result titles
   var results = document.querySelectorAll(".LC20lb");
-  // Check if there are enough results
+  // Ensure the selected result exists
   if (results.length > index) {
-    // Find the closest anchor tag parent
-    var link = results[index].closest("a");
-    if (link) {
+    // Find the closest anchor tag
+    var anchor = results[index].closest("a");
+    if (anchor && anchor.href) {
       // Navigate to the href of the anchor tag
-      window.location.href = link.href;
+      window.location.href = anchor.href;
     } else {
-      // Alert if no anchor tag is found
-      alert("No link found for search result at position " + (index + 1));
+      // Alert if no anchor is found or if it does not contain an href
+      alert("No navigable link found at position " + (index + 1));
     }
   } else {
     // Alert if the specified result is not found
-    alert("Not enough search results to go to position " + (index + 1));
+    alert("No search result link found at position " + (index + 1));
   }
 }
 
