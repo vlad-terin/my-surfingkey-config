@@ -36,11 +36,11 @@ api.mapkey("h", "Go to the first Google result", function () {
   goToLink(0);
 });
 
-api.mapkey("2h", "Go to the second Google result", function () {
+api.mapkey("2g", "Go to the second Google result", function () {
   goToLink(1);
 });
 
-api.mapkey("3h", "Go to the third Google result", function () {
+api.mapkey("3g", "Go to the third Google result", function () {
   goToLink(2);
 });
 
