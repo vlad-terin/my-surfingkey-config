@@ -151,6 +151,11 @@ api.addSearchAlias(
   "https://www.google.com/search?q={0}&tbs=qdr:m",
 );
 api.addSearchAlias(
+  "gM",
+  "MDN Docs",
+  "https://www.google.com/search?btnI=1&q=mdn+{0}",
+);
+api.addSearchAlias(
   "gw",
   "Google Week",
   "https://www.google.com/search?q={0}&tbs=qdr:w",
