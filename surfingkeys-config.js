@@ -153,7 +153,7 @@ api.addSearchAlias(
 api.addSearchAlias(
   "gM",
   "MDN Docs",
-  "https://www.google.com/search?btnI=1&q=mdn+{0}",
+  "www.google.com/search?btnI=1&q=mdn+{0}",
 );
 api.addSearchAlias(
   "gw",
