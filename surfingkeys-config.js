@@ -16,20 +16,28 @@ api.unmap("op");
 api.unmap("oy");
 api.unmap("od");
 
-// Add a custom key mapping in SurfingKeys to trigger the block selection mode
-api.mapkey('B', 'Block Highlight Mode', function() {
-  // Enter visual mode, allowing the user to select an element
-  // This part requires you to implement or utilize a method for element selection
-  // For demonstration, let's assume we have a function selectElement that lets the user select an element and returns it
-  selectElement(function(selectedElement) {
-      // Apply CSS to dim or hide all elements except the selected one
-      document.querySelectorAll('body *').forEach(function(el) {
-          el.style.opacity = '0.1'; // Dim all elements
-      });
-      selectedElement.style.opacity = '1'; // Highlight the selected element
-      // You might want to add more styles or logic to handle visibility and focus appropriately
-  });
+api.mapkey('B', 'Select a block and hide others', function() {
+    // Override the create function to modify its behavior
+    Hints.create("", function(element) {
+        // Assuming the element clicked is within the desired div or is the div itself
+        let targetDiv = element.closest('div'); // Finds the closest ancestor which is a div
+
+        if (targetDiv) {
+            // Apply styles or classes to dim or hide all other elements
+            document.querySelectorAll('body > *').forEach(function(el) {
+                // Check if the current element is not the targetDiv or its ancestor
+                if (!targetDiv.contains(el) && el !== targetDiv) {
+                    el.style.display = 'none'; // Hide elements outside the target div
+                }
+            });
+        }
+
+        // Optionally, dispatch a click on the element if needed
+        // element.click(); // Uncomment if you actually need to simulate the click
+
+    }, {repeatIgnore: true});
 });
+
 
 settings.tabsThreshold = 0;
 // Go to https://dictionaryapi.com/ and get an API key for Learners Dictionary.
