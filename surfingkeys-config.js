@@ -894,3 +894,62 @@ api.Front.registerInlineQuery({
     }
   },
 });
+
+
+// Gruvbox Hard
+settings.theme = `
+.sk_theme {
+  font-family: Input Sans Condensed, Charcoal, sans-serif;
+  font-size: 10pt;
+  background: #1d2021;
+  color: #d5c4a1;
+}
+.sk_theme input {
+  color: #d5c4a1;
+}
+.sk_theme .url {
+  color: #83a598;
+}
+.sk_theme .annotation {
+  color: #d5c4a1;
+}
+.sk_theme kbd {
+  background: #665c54;
+  color: #fbf1c7;
+}
+.sk_theme .omnibar_highlight {
+  color: #fe8019;
+}
+.sk_theme .omnibar_folder {
+  color: #b8bb26;
+}
+.sk_theme .omnibar_timestamp {
+  color: #bdae93;
+}
+.sk_theme .omnibar_visitcount {
+  color: #fabd2f;
+}
+.sk_theme .prompt, .sk_theme .resultPage {
+  color: #d5c4a1;
+}
+.sk_theme .feature_name {
+  color: #8ec07c;
+}
+.sk_theme .separator {
+  color: #8ec07c;
+}
+.sk_theme #sk_omnibarSearchResult ul li:nth-child(odd) {
+  background: #282828;
+}
+.sk_theme #sk_omnibarSearchResult ul li.focused {
+  background: #3c3836;
+}
+#sk_status, #sk_find {
+  font-size: 12pt;
+}
+#sk_keystroke {
+  background: #1d2021;
+}
+.expandRichHints span.annotation {
+  color: #d5c4a1;
+}`;
