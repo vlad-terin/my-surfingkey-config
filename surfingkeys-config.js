@@ -76,8 +76,29 @@ api.removeSearchAlias('s');
 // document.getElementById('slide-close').click(); // NULL 실행 안됨
 // document.getElementByClassName('slide-close').click();
 // })();
-api.mapkey('oo', 'Search Commands', function() {
-  Front.openOmnibar({type: "Commands"});
+
+
+mapkey('ou', '#8Open AWS services', function() {
+  var services = Array.from(top.document.querySelectorAll('#awsc-services-container li[data-service-href]')).map(function(li) {
+      return {
+          title: li.querySelector("span.service-label").textContent,
+          url: li.getAttribute('data-service-href')
+      };
+  });
+  if (services.length === 0) {
+      services = Array.from(top.document.querySelectorAll('div[data-testid="awsc-nav-service-list"] li[data-testid]>a')).map(function(a) {
+          return {
+              title: a.innerText,
+              url: a.href
+          };
+      });
+  }
+  Front.openOmnibar({type: "UserURLs", extra: services});
+}, {domain: /console.amazonaws|console.aws.amazon.com/i});
+
+
+mapkey('oo', '#8Open omnibar for commands', function() {
+    Front.openOmnibar({type: "Commands"});
 });
 
 api.mapkey('on', '#3Open newtab', function () {
@@ -159,7 +180,7 @@ api.addSearchAlias('rmA', 'rate your music artist', 'https://rateyourmusic.com/s
 api.addSearchAlias('rmR', 'rate your music releases', 'https://rateyourmusic.com/search?bx=dfd8f4911473234b6e1362952e1b29e4&searchtype=l&searchterm=');
 
 //sns
-api.addSearchAlias('fB', 'faceBook(페이스북)', 'https://www.facebook.com/search/top/?q=');
+api.addSearchAlias('fB', 'faceBook', 'https://www.facebook.com/search/top/?q=');
 api.addSearchAlias('tW', 'tWitter', 'https://twitter.com/search?q=');
 api.addSearchAlias('ig', 'InstaGram HashTag', 'https://www.instagram.com/explore/tags/');
 api.addSearchAlias('rD', 'redDit', 'https://www.reddit.com/search?q=');
