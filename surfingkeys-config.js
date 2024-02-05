@@ -97,12 +97,28 @@ api.mapkey('ou', '#8Open AWS services', function() {
 }, {domain: /console.amazonaws|console.aws.amazon.com/i});
 
 
-mapkey('oo', '#8Open omnibar for commands', function() {
+api.mapkey('oo', '#8Open omnibar for commands', function() {
     Front.openOmnibar({type: "Commands"});
 });
 
 api.mapkey('on', '#3Open newtab', function () {
     api.tabOpenLink("www.google.com"); // TODO: addded api, but not work
+});
+
+api.mapkey('sfr', '#13show failed web requests of current page', function() {
+  runtime.command({
+      action: 'getTabErrors'
+  }, function(response) {
+      if (response.tabError && response.tabError.length) {
+          var errors = response.tabError.map(function(e) {
+              var url = new URL(e.url);
+              return "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(e.error, e.type, url.host);
+          });
+          Front.showPopup("<table style='width:100%'>{0}</table>".format(errors.join('')));
+      } else {
+          Front.showPopup("No errors from webRequest.");
+      }
+  });
 });
 
 // TODO: to try think conflict prefix g,c (google and github)
