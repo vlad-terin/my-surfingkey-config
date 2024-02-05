@@ -171,7 +171,7 @@ api.addSearchAlias(
   "MDN Docs",
   "www.google.com/search?btnI=1&q=mdn+{0}",
 );
-api
+api.addSearchAlias(
   "gw",
   "Google Week",
   "https://www.google.com/search?q={0}&tbs=qdr:w",
