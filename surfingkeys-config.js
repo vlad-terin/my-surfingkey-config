@@ -16,7 +16,13 @@ api.unmap("op");
 api.unmap("oy");
 api.unmap("od");
 
-api.mapkey('B', 'Select a block and hide others', function() {
+api.map(',nt', 'T');
+api.map(',q', 'x');
+api.mapkey(',s', 'opne new tab and split', function () {
+    RUNTIME("newWindow");
+});
+
+api.mapkey('b', 'Select a block and hide others', function() {
     // Override the create function to modify its behavior
     Hints.create("asdfghjkl;", function(element) {
         // Assuming the element clicked is within the desired div or is the div itself
