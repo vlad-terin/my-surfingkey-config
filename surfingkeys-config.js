@@ -1,3 +1,4 @@
+
 // Removing default search aliases
 api.removeSearchAlias("b");
 api.removeSearchAlias("g");
@@ -14,6 +15,21 @@ api.unmap("ow");
 api.unmap("op");
 api.unmap("oy");
 api.unmap("od");
+
+// Add a custom key mapping in SurfingKeys to trigger the block selection mode
+api.mapkey('B', 'Block Highlight Mode', function() {
+  // Enter visual mode, allowing the user to select an element
+  // This part requires you to implement or utilize a method for element selection
+  // For demonstration, let's assume we have a function selectElement that lets the user select an element and returns it
+  selectElement(function(selectedElement) {
+      // Apply CSS to dim or hide all elements except the selected one
+      document.querySelectorAll('body *').forEach(function(el) {
+          el.style.opacity = '0.1'; // Dim all elements
+      });
+      selectedElement.style.opacity = '1'; // Highlight the selected element
+      // You might want to add more styles or logic to handle visibility and focus appropriately
+  });
+});
 
 settings.tabsThreshold = 0;
 // Go to https://dictionaryapi.com/ and get an API key for Learners Dictionary.
@@ -155,7 +171,7 @@ api.addSearchAlias(
   "MDN Docs",
   "www.google.com/search?btnI=1&q=mdn+{0}",
 );
-api.addSearchAlias(
+api
   "gw",
   "Google Week",
   "https://www.google.com/search?q={0}&tbs=qdr:w",
