@@ -18,7 +18,7 @@ api.unmap("od");
 
 api.mapkey('B', 'Select a block and hide others', function() {
     // Override the create function to modify its behavior
-    Hints.create("", function(element) {
+    Hints.create("asdfghjkl;", function(element) {
         // Assuming the element clicked is within the desired div or is the div itself
         let targetDiv = element.closest('div'); // Finds the closest ancestor which is a div
 
