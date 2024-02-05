@@ -28,6 +28,7 @@ settings.omnibarSuggestion   = true;
 settings.defaultSearchEngine = 'L';                          // Google I'm Feeling Luckey
 settings.nextLinkRegex       = /((forward|>>|next)+)/i;
 settings.prevLinkRegex       = /((back|<<|prev(ious)?)+)/i;
+settings.tabsThreshold = 0;
 ////////////////////////////////
 // api.unapi.map default key api.mapings  //
 ////////////////////////////////
@@ -39,11 +40,11 @@ api.map('[', '[[');
 
 // My default vim key binding: https://gist.github.com/millermedeiros/1262085
 //--Like Nerd Tree--- TODO: FIX IT LIKE VERTICALLY
-api.map(',nt', 'T');
-api.map(',q', 'x');
-api.mapkey(',s', 'opne new tab and split', function () {
-    RUNTIME("newWindow");
-});
+// api.map(',nt', 'T');
+// api.map(',q', 'x');
+// api.mapkey(',s', 'opne new tab and split', function () {
+//     RUNTIME("newWindow");
+// });
 //TODO: making spell check ,ts
 
 // FIXME: it doesn't work
@@ -370,10 +371,6 @@ api.mapkey('gq', '#1get image address with wget', function () {
     });
 });
 
-
-
-
-
 // wiki를 copy 할때 [1] 이런 정보가 나오는 것이 annoying 하므로 없애준다.
 api.vmapkey('y', "copy without reference notation on wikipedia", function () {
     api.Clipboard.write(window.getSelection().toString().replace(/\[[0-9]*\]/g, "test")); // TODO: 동작하지 않음
@@ -416,27 +413,35 @@ api.mapkey('yG', '#7 git clone', function () {
     domain: /github\.com/i
 });
 
-api.mapkey('yE', '#7 Yank Element info. copy link element id or classname', function () {
-    var linksToYank = [];
-    api.Hints.create("", function (element) {
-        linksToYank.push('id: ' + element.id + '\n');
-        linksToYank.push('innertext: ' + element.innerText + '\n');
-        linksToYank.push('className: ' + element.className + '\n');
-        linksToYank.push('href: ' + element.href + '\n');
-        linksToYank.push('type: ' + element.type + '\n');
-        linksToYank.push('style: ' + element.style + '\n');
-        linksToYank.push('src: ' + element.src + '\n');
-        linksToYank.push('alt: ' + element.alt + '\n');
-        (api.Clipboard.write(linksToYank.join('\n')));
-    });
+api.mapkey('yeI', '#7 Yank Element ID', function () {
+  api.Hints.create("", function (element) {
+    api.Clipboard.write(element.id);
+  });
 });
 
-// ADD: read like this yank element ~~~
-api.mapkey('yeI', '#7 Yank Element info. copy link element id or classname', function (element) { (api.Clipboard.write('element.id')); });
-api.mapkey('yeC', '#7 Yank Element info. copy link element id or classname', function (element) { (api.Clipboard.write('element.className')); });
-api.mapkey('yeT', '#7 Yank Element info. copy link element id or classname', function (element) { (api.Clipboard.write('element.type')); });
-api.mapkey('yeS', '#7 Yank Element info. copy link element id or classname', function (element) { (api.Clipboard.write('element.style')); });
-api.mapkey('yeA', '#7 Yank Element info. copy link element id or classname', function (element) { (api.Clipboard.write('element.alt')); });
+api.mapkey('yeC', '#7 Yank Element Class Name', function () {
+  api.Hints.create("", function (element) {
+    api.Clipboard.write(element.className);
+  });
+});
+
+api.mapkey('yeT', '#7 Yank Element Type', function () {
+  api.Hints.create("", function (element) {
+    api.Clipboard.write(element.type);
+  });
+});
+
+api.mapkey('yeS', '#7 Yank Element Style', function () {
+  api.Hints.create("", function (element) {
+    api.Clipboard.write(element.style);
+  });
+});
+
+api.mapkey('yeA', '#7 Yank Element Alt', function () {
+  api.Hints.create("", function (element) {
+    api.Clipboard.write(element.alt);
+  });
+});
 
 api.mapkey('ymE', '#7 Yank Multiple Element info  (copy multiple link element id or classname)', function () {
     var linksToYank = [];
@@ -824,3 +829,68 @@ api.mapkey('l', 'slideplayer next page', function () {
     document.querySelector("td[action='forward']").click();
 }, {domain: /slideplayer\.com/i});
 
+const API_KEY = "af712d02-1689-4378-8590-cba02e8341a0";
+const API_URL = "https://dictionaryapi.com/api/v3";
+
+api.Front.registerInlineQuery({
+  url: function (q) {
+    const url = `${API_URL}/references/learners/json/${q}?key=${API_KEY}`;
+    return url;
+  },
+  parseResult: function (res) {
+    try {
+      const [firstResult] = JSON.parse(res.text);
+      if (firstResult) {
+        let definitionsList = `<ul><li>No definitions found</li></ul>`;
+        let pronunciationsList = `<ul><li>No pronunciations found</li></ul>`;
+        if (firstResult.hasOwnProperty("shortdef")) {
+          const definitions = [];
+          for (let definition of firstResult.shortdef) {
+            definitions.push(`${definition}`);
+          }
+          const definitionListItems = definitions.map(function (definition) {
+            return `<li>${definition}</li>`;
+          });
+          definitionsList = `<ul>${definitionListItems.join("")}</ul>`;
+          //TODO: Separate this function if possible
+        }
+        if (firstResult.hasOwnProperty("hwi")) {
+          const pronunciations = [];
+          const resultPronunciationsArray = firstResult.hwi.prs;
+          if (
+            resultPronunciationsArray &&
+            resultPronunciationsArray.length !== 0
+          ) {
+            for (let i = 0; i < resultPronunciationsArray.length; i++) {
+              if (resultPronunciationsArray[i].l) {
+                pronunciations.push(
+                  `<li>${resultPronunciationsArray[i].l} -- ${resultPronunciationsArray[i].ipa}</li>`,
+                );
+              } else {
+                pronunciations.push(
+                  `<li>${resultPronunciationsArray[i].ipa}</li>`,
+                );
+              }
+            }
+
+            pronunciationsList = `<ul>${pronunciations.join("")}</ul>`;
+          }
+        }
+        return `
+                   <h3>Pronunciations</h3>
+                   ${pronunciationsList}
+                   <hr/>
+                   <h3>Definitions</h3>
+                   ${definitionsList}
+                `;
+      } else {
+        return `
+                  <h3>This is not the definition you were looking for...</h3>
+                `;
+      }
+    } catch (e) {
+      console.log(e.message);
+      return "Something bad happend... Look behind you, a three headed monkey!";
+    }
+  },
+});
