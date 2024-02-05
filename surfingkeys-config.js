@@ -78,7 +78,7 @@ api.removeSearchAlias('s');
 // })();
 
 
-mapkey('ou', '#8Open AWS services', function() {
+api.mapkey('ou', '#8Open AWS services', function() {
   var services = Array.from(top.document.querySelectorAll('#awsc-services-container li[data-service-href]')).map(function(li) {
       return {
           title: li.querySelector("span.service-label").textContent,
