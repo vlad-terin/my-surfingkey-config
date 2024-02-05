@@ -45,8 +45,8 @@ api.map('[', '[[');
 // api.mapkey(',s', 'opne new tab and split', function () {
 //     RUNTIME("newWindow");
 // });
-api.map('Ctrl-j', 'Ctrl-j');
-api.map('Ctrl-p', 'Ctrl-k');
+api.map('Ctrl-j', 'Ctrl-n');
+api.map('Ctrl-p', 'Ctrl-p');
 //TODO: making spell check ,ts
 
 // FIXME: it doesn't work
