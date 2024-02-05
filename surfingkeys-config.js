@@ -959,4 +959,46 @@ settings.theme = `
 }
 .expandRichHints span.annotation {
   color: #d5c4a1;
-}`;
+}
+/* New styles for centering and styling the omnibar */
+#sk_omnibar {
+  position: fixed; /* Fixed position to stay in place */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust the exact center position */
+  width: 600px; /* Set the width you want for the omnibar */
+  margin: 0 auto; /* For horizontal centering */
+  border: 1px solid #d5c4a1; /* White-ish border color */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Add some shadow for depth */
+  z-index: 2147483647; /* Ensure it's on top */
+}
+
+/* Style the input area of the omnibar */
+#sk_omnibar input {
+  margin: 0; /* Adjust margin as needed */
+  padding: 8px 10px; /* Add some padding inside the input box */
+  border: none; /* Remove border */
+  outline: none; /* Remove outline */
+  border-radius: 8px 8px 0 0; /* Rounded corners on top of the input */
+  width: calc(100% - 20px); /* Full width minus padding */
+}
+
+/* Style the search results area */
+#sk_omnibarSearchResult {
+  padding: 0; /* Adjust padding as needed */
+  border-radius: 0 0 8px 8px; /* Rounded corners on bottom of the results */
+}
+
+/* Style for search result list items */
+#sk_omnibarSearchResult ul li {
+  padding: 8px 10px; /* Add some padding to list items */
+  border-bottom: 1px solid #d5c4a1; /* Add a separator between items */
+}
+
+/* Style for search result list item on focus */
+#sk_omnibarSearchResult ul li.focused {
+  background-color: #3c3836; /* Different background for focused item */
+  border-radius: 4px; /* Optional: rounded corners for focused item */
+}
+`;
