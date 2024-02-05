@@ -900,7 +900,7 @@ api.Front.registerInlineQuery({
 settings.theme = `
 .sk_theme {
   font-family: Input Sans Condensed, Charcoal, sans-serif;
-  font-size: 10pt;
+  font-size: 12pt;
   background: #1d2021;
   color: #d5c4a1;
 }
@@ -918,7 +918,7 @@ settings.theme = `
   color: #fbf1c7;
 }
 .sk_theme .omnibar_highlight {
-  color: #fe8019;
+  color: #fe8019; /* Updated highlight color */
 }
 .sk_theme .omnibar_folder {
   color: #b8bb26;
@@ -945,7 +945,14 @@ settings.theme = `
   background: #3c3836;
 }
 #sk_status, #sk_find {
-  font-size: 12pt;
+  font-size: 14pt;
+}
+#sk_keystroke {
+  background: #1d2021;
+}
+
+.expandRichHints span.annotation {
+  color: #fe8019;
 }
 #sk_keystroke {
   background: #1d2021;
