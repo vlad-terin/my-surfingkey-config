@@ -914,7 +914,7 @@ settings.theme = `
   color: #d5c4a1;
 }
 .sk_theme kbd {
-  background: #665c54;
+  background: #000000;
   color: #fbf1c7;
 }
 .sk_theme .omnibar_highlight {
@@ -951,7 +951,7 @@ settings.theme = `
   background: #1d2021;
 }
 
-.expandRichHints span.annotation {
+.expandRichHints kbd>.candidates {
   color: #fe8019;
 }
 #sk_keystroke {
