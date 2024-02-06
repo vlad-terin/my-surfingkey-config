@@ -78,25 +78,21 @@ api.removeSearchAlias('s');
 // })();
 
 api.mapkey('Z', 'zen mode', function() {
-    api.Hints.create("div", function(element) {
-        // Assuming the element clicked is within the desired div or is the div itself
-        let targetDiv = element.closest('div'); // Finds the closest ancestor which is a div
+    api.Hints.create("div", function(element) { // Updated to select div elements
+        let targetDiv = element.closest('div'); // Ensures we are working with a div element
 
         if (targetDiv) {
-            // Apply styles or classes to dim or hide all other elements
             document.querySelectorAll('body > *').forEach(function(el) {
-                // Check if the current element is not the targetDiv or its ancestor
-                if (!targetDiv.contains(el) && el !== targetDiv) {
-                    el.style.display = 'none'; // Hide elements outside the target div
+                if (!targetDiv.contains(el) && el !== targetDiv && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
+                    // Ensures scripts and essential elements are not hidden
+                    el.style.display = 'none';
                 }
             });
+            targetDiv.style.display = 'block'; // Ensure the targetDiv is visible
         }
-
-        
-        element.click();
-
     }, {repeatIgnore: true});
 });
+
 
 
 api.mapkey('oo', '#8Open omnibar for commands', function() {
