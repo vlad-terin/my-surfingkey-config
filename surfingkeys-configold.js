@@ -46,7 +46,6 @@ api.mapkey('b', 'Select a block and hide others', function() {
 
 
 settings.tabsThreshold = 0;
-// Go to https://dictionaryapi.com/ and get an API key for Learners Dictionary.
 const API_KEY = "af712d02-1689-4378-8590-cba02e8341a0";
 const API_URL = "https://dictionaryapi.com/api/v3";
 
