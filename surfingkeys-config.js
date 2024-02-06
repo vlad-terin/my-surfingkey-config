@@ -120,7 +120,7 @@ api.mapkey('Z', 'Toggle Zen Mode', function() {
 });
 
 
-mapkey('os', '#8Open Search Engines Omnibar', function() {
+api.mapkey('os', '#8Open Search Engines Omnibar', function() {
     Front.openOmnibar({type: "SearchEngine", extra: "searchEngines"});
 });
 
