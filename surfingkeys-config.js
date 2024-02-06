@@ -506,6 +506,21 @@ api.mapkey('ymE', '#7 Yank Multiple Element info  (copy multiple link element id
     });
 });
 
+api.mapkey('yE', '#7 Yank Element info. copy link element id or classname', function () {
+    var linksToYank = [];
+    api.Hints.create("", function (element) {
+        linksToYank.push('id: ' + element.id + '\n');
+        linksToYank.push('innertext: ' + element.innerText + '\n');
+        linksToYank.push('className: ' + element.className + '\n');
+        linksToYank.push('href: ' + element.href + '\n');
+        linksToYank.push('type: ' + element.type + '\n');
+        linksToYank.push('style: ' + element.style + '\n');
+        linksToYank.push('src: ' + element.src + '\n');
+        linksToYank.push('alt: ' + element.alt + '\n');
+        (api.Clipboard.write(linksToYank.join('\n')));
+    });
+});
+
 api.mapkey('ymR', '#7Copy multiple link Regex URLs to the clipboard and add commas', function () {
     var linksToYank = [];
     api.Hints.create('*[href]', function (element) {
