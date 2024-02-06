@@ -78,7 +78,7 @@ api.removeSearchAlias('s');
 // })();
 
 api.mapkey('Z', '#1Open a link, press SHIFT to flip overlapped hints, hold SPACE to hide hints', function() {
-    Hints.create("", function(element) {
+    api.Hints.create("", function(element) {
         // Assuming the element clicked is within the desired div or is the div itself
         let targetDiv = element.closest('div'); // Finds the closest ancestor which is a div
 
