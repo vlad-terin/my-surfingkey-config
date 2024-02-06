@@ -79,29 +79,33 @@ api.removeSearchAlias('s');
 
 let zenModeActive = false;
 
-api.mapkey('Z', 'zen mode', function() {
-    if (zenModeActive) {
-        // Reset styles
-        document.querySelectorAll('body > *').forEach(function(el) {
-            el.style = '';
-        });
-        zenModeActive = false;
-    } else {
-        api.Hints.create(document.querySelectorAll('div'), function(element) {
-            let targetDiv = element.closest('div');
+mapkey('zZ', 'Toggle Zen Mode', function() {
+    if (!zenModeActive) {
+        // Activate Zen Mode by selecting a target element
+        Hints.create('div', function(element) {
+            // Save the original state of all elements
+            document.querySelectorAll('body > *').forEach(el => {
+                originalStyles.set(el, el.style.display);
+                el.style.display = 'none'; // Hide elements
+            });
 
-            if (targetDiv) {
-                document.querySelectorAll('body > *').forEach(function(el) {
-                    if (!targetDiv.contains(el) && el !== targetDiv && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
-                        el.style.opacity = '0.5'; // Dim non-focused elements
-                    }
-                });
-                targetDiv.style.opacity = '1'; // Ensure the targetDiv is fully visible
+            // Ensure the selected element and its parents are visible
+            let current = element;
+            while (current.tagName !== 'BODY') {
+                current.style.display = originalStyles.get(current) || '';
+                current = current.parentElement;
             }
-        }, {repeatIgnore: true});
-        zenModeActive = true;
+
+            zenModeActive = true; // Update state
+        });
+    } else {
+        // Exit Zen Mode and restore original styles
+        originalStyles.forEach((style, el) => el.style.display = style);
+        originalStyles.clear(); // Clear the map
+        zenModeActive = false; // Update state
     }
 });
+
 
 
 
