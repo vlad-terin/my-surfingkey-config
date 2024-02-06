@@ -45,8 +45,8 @@ api.map('[', '[[');
 // api.mapkey(',s', 'opne new tab and split', function () {
 //     RUNTIME("newWindow");
 // });
-api.map('Ctrl-j', 'Ctrl-n');
-api.map('Ctrl-p', 'Ctrl-p');
+api.cmap('Ctrl-j', 'Ctrl-n');
+api.cmap('Ctrl-p', 'Ctrl-p');
 //TODO: making spell check ,ts
 
 // FIXME: it doesn't work
@@ -77,6 +77,26 @@ api.removeSearchAlias('s');
 // document.getElementByClassName('slide-close').click();
 // })();
 
+api.mapkey('Z', '#1Open a link, press SHIFT to flip overlapped hints, hold SPACE to hide hints', function() {
+    Hints.create("", function(element) {
+        // Assuming the element clicked is within the desired div or is the div itself
+        let targetDiv = element.closest('div'); // Finds the closest ancestor which is a div
+
+        if (targetDiv) {
+            // Apply styles or classes to dim or hide all other elements
+            document.querySelectorAll('body > *').forEach(function(el) {
+                // Check if the current element is not the targetDiv or its ancestor
+                if (!targetDiv.contains(el) && el !== targetDiv) {
+                    el.style.display = 'none'; // Hide elements outside the target div
+                }
+            });
+        }
+
+        
+        element.click();
+
+    }, {repeatIgnore: true});
+});
 
 
 api.mapkey('oo', '#8Open omnibar for commands', function() {
