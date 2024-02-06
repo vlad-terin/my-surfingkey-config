@@ -77,35 +77,35 @@ api.removeSearchAlias('s');
 // document.getElementByClassName('slide-close').click();
 // })();
 
-api.mapkey('zZ', 'Toggle Zen Mode', function() {
-    if (!zenModeActive) {
-        // Activate Zen Mode by selecting a target element
-        api.Hints.create('div:not([hidden])', function(element) {
-            // Save the original state of all elements
-            document.querySelectorAll('body > *').forEach(el => {
-                originalStyles.set(el, el.style.display);
-                el.style.display = 'none'; // Hide elements
-            });
+let zenModeActive = false;
+let originalStyles = []; // Array to store original styles
 
-            // Ensure the selected element and its parents are visible
-            let current = element;
-            while (current.tagName !== 'BODY') {
-                current.style.display = originalStyles.get(current) || '';
-                current = current.parentElement;
-            }
-
-            zenModeActive = true; // Update state
+api.mapkey('Z', 'Toggle Zen Mode', function() {
+    if (zenModeActive) {
+        // Reset styles
+        originalStyles.forEach(({ el, style }) => {
+            el.style.opacity = style.opacity; // Restore original opacity
         });
+        originalStyles = []; // Clear the array after resetting styles
+        zenModeActive = false;
     } else {
-        // Exit Zen Mode and restore original styles
-        originalStyles.forEach((style, el) => el.style.display = style);
-        originalStyles.clear(); // Clear the map
-        zenModeActive = false; // Update state
+        Hints.create('div:not([hidden])', function(element) {
+            let targetDiv = element.closest('div');
+
+            if (targetDiv) {
+                document.querySelectorAll('body > *').forEach(function(el) {
+                    if (!targetDiv.contains(el) && el !== targetDiv && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
+                        originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
+                        el.style.opacity = '0.5'; // Dim non-focused elements
+                    }
+                });
+                originalStyles.push({ el: targetDiv, style: { opacity: targetDiv.style.opacity } }); // Save targetDiv's original opacity
+                targetDiv.style.opacity = '1'; // Ensure the targetDiv is fully visible
+            }
+        });
+        zenModeActive = true;
     }
 });
-
-
-
 
 
 api.mapkey('oo', '#8Open omnibar for commands', function() {
