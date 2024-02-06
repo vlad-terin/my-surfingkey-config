@@ -89,7 +89,7 @@ api.mapkey('Z', 'Toggle Zen Mode', function() {
         originalStyles = []; // Clear the array after resetting styles
         zenModeActive = false;
     } else {
-        Hints.create('div:not([hidden])', function(element) {
+        api.Hints.create('div:not([hidden])', function(element) {
             let targetDiv = element.closest('div');
 
             if (targetDiv) {
