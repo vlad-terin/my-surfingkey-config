@@ -33,6 +33,8 @@ settings.tabsThreshold = 0;
 // api.unapi.map default key api.mapings  //
 ////////////////////////////////
 api.unmap('<Ctrl-6>');
+api.cmap('<Ctrl-p>');
+api.cmap('<Ctrl-n>');
 api.unmap('<Ctrl-p>');
 api.unmap('<Ctrl-n>');
 api.map(']', ']]');
@@ -45,8 +47,8 @@ api.map('[', '[[');
 // api.mapkey(',s', 'opne new tab and split', function () {
 //     RUNTIME("newWindow");
 // });
-api.cmap('Ctrl-j', 'Ctrl-n');
-api.cmap('Ctrl-p', 'Ctrl-p');
+api.cmap('<Ctrl-j>', '<Ctrl-n>');
+api.cmap('<Ctrl-p>', '<Ctrl-p>');
 //TODO: making spell check ,ts
 
 // FIXME: it doesn't work
