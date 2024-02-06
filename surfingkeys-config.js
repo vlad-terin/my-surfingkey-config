@@ -120,8 +120,8 @@ api.mapkey('Z', 'Toggle Zen Mode', function() {
 });
 
 
-api.mapkey('oo', '#8Open omnibar for commands', function() {
-    Front.openOmnibar({type: "Commands"});
+mapkey('os', '#8Open Search Engines Omnibar', function() {
+    Front.openOmnibar({type: "SearchEngine", extra: "searchEngines"});
 });
 
 api.mapkey('on', '#3Open newtab', function () {
