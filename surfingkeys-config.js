@@ -87,7 +87,7 @@ api.mapkey('Z', 'zen mode', function() {
         });
         zenModeActive = false;
     } else {
-        api.Hints.click(document.querySelectorAll('div'), function(element) {
+        api.Hints.create(document.querySelectorAll('div'), function(element) {
             let targetDiv = element.closest('div');
 
             if (targetDiv) {
