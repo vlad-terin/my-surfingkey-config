@@ -82,7 +82,7 @@ let zenModeActive = false;
 mapkey('zZ', 'Toggle Zen Mode', function() {
     if (!zenModeActive) {
         // Activate Zen Mode by selecting a target element
-        Hints.create('div', function(element) {
+        Hints.create('div:not([hidden])', function(element) {
             // Save the original state of all elements
             document.querySelectorAll('body > *').forEach(el => {
                 originalStyles.set(el, el.style.display);
