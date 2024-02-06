@@ -78,34 +78,47 @@ api.removeSearchAlias('s');
 // })();
 
 let zenModeActive = false;
-let originalStyles = []; // Array to store original styles
+let originalStyles = []; // Store the original styles to restore later
+
+// Function to restore styles
+function restoreStyles() {
+  originalStyles.forEach(({ el, style }) => {
+    el.style.opacity = style.opacity; // Restore original opacity
+  });
+  originalStyles = []; // Clear the array after resetting styles
+}
+
+// Function to apply Zen Mode to a target element
+function applyZenModeToElement(targetElement) {
+  document.querySelectorAll('body > *').forEach(function(el) {
+    if (!targetElement.contains(el) && el !== targetElement && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
+      originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
+      el.style.opacity = '0.1'; // Dim non-focused elements
+    }
+  });
+  originalStyles.push({ el: targetElement, style: { opacity: targetElement.style.opacity } }); // Save targetDiv's original opacity
+  targetElement.style.opacity = '1'; // Ensure the targetDiv is fully visible
+}
 
 api.mapkey('Z', 'Toggle Zen Mode', function() {
-    if (zenModeActive) {
-        // Reset styles
-        originalStyles.forEach(({ el, style }) => {
-            el.style.opacity = style.opacity; // Restore original opacity
-        });
-        originalStyles = []; // Clear the array after resetting styles
-        zenModeActive = false;
-    } else {
-        api.Hints.create('div:not([hidden])', function(element) {
-            let targetDiv = element.closest('div');
+  if (zenModeActive) {
+    restoreStyles();
+    zenModeActive = false;
+  } else {
+    // Use Hints.create to allow selection of a div
+    api.Hints.create('div:not([hidden])', function(element) {
+      let targetDiv = element instanceof HTMLElement && element.tagName === 'DIV' ? element : element.closest('div');
 
-            if (targetDiv) {
-                document.querySelectorAll('body > *').forEach(function(el) {
-                    if (!targetDiv.contains(el) && el !== targetDiv && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
-                        originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
-                        el.style.opacity = '0.5'; // Dim non-focused elements
-                    }
-                });
-                originalStyles.push({ el: targetDiv, style: { opacity: targetDiv.style.opacity } }); // Save targetDiv's original opacity
-                targetDiv.style.opacity = '1'; // Ensure the targetDiv is fully visible
-            }
-        });
+      if (targetDiv) {
+        applyZenModeToElement(targetDiv);
         zenModeActive = true;
-    }
+      } else {
+        console.error('Zen Mode: No target div found.');
+      }
+    });
+  }
 });
+
 
 
 api.mapkey('oo', '#8Open omnibar for commands', function() {
