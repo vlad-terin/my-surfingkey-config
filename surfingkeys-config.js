@@ -106,7 +106,7 @@ api.mapkey('Z', 'Toggle Zen Mode', function() {
     zenModeActive = false;
   } else {
     // Use Hints.create to allow selection of a div
-    api.Hints.create('div:not([hidden])', function(element) {
+    api.Hints.create('div:([hidden])', function(element) {
       let targetDiv = element instanceof HTMLElement && element.tagName === 'DIV' ? element : element.closest('div');
 
       if (targetDiv) {
@@ -118,7 +118,6 @@ api.mapkey('Z', 'Toggle Zen Mode', function() {
     });
   }
 });
-
 
 
 api.mapkey('oo', '#8Open omnibar for commands', function() {
