@@ -78,17 +78,16 @@ api.removeSearchAlias('s');
 // })();
 
 api.mapkey('Z', 'zen mode', function() {
-    api.Hints.create("div", function(element) { // Updated to select div elements
-        let targetDiv = element.closest('div'); // Ensures we are working with a div element
+    api.Hints.create("div", function(element) {
+        let targetDiv = element.closest('div');
 
         if (targetDiv) {
             document.querySelectorAll('body > *').forEach(function(el) {
                 if (!targetDiv.contains(el) && el !== targetDiv && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
-                    // Ensures scripts and essential elements are not hidden
-                    el.style.display = 'none';
+                    el.style.opacity = '0.5'; // Dim non-focused elements
                 }
             });
-            targetDiv.style.display = 'block'; // Ensure the targetDiv is visible
+            targetDiv.style.opacity = '1'; // Ensure the targetDiv is fully visible
         }
     }, {repeatIgnore: true});
 });
