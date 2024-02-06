@@ -87,7 +87,7 @@ api.mapkey('Z', 'zen mode', function() {
         });
         zenModeActive = false;
     } else {
-        api.Hints.create("div", function(element) {
+        api.Hints.click(document.querySelectorAll('div'), function(element) {
             let targetDiv = element.closest('div');
 
             if (targetDiv) {
@@ -101,6 +101,10 @@ api.mapkey('Z', 'zen mode', function() {
         }, {repeatIgnore: true});
         zenModeActive = true;
     }
+});
+
+mapkey('zz', 'Hide replies', function() {
+    Hints.click(document.querySelectorAll("#less-replies:not([hidden])"), true);
 });
 
 
