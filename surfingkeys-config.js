@@ -128,7 +128,7 @@ api.mapkey('on', '#3Open newtab', function () {
     api.tabOpenLink("www.google.com"); // TODO: addded api, but not work
 });
 
-api.mapkey('Sfr', '#13show failed web requests of current page', function() {
+api.mapkey('sfr', '#13show failed web requests of current page', function() {
   runtime.command({
       action: 'getTabErrors'
   }, function(response) {
