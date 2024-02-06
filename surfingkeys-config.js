@@ -103,9 +103,6 @@ api.mapkey('Z', 'zen mode', function() {
     }
 });
 
-mapkey('zz', 'Hide replies', function() {
-    Hints.click(document.querySelectorAll("#less-replies:not([hidden])"), true);
-});
 
 
 
