@@ -77,19 +77,30 @@ api.removeSearchAlias('s');
 // document.getElementByClassName('slide-close').click();
 // })();
 
-api.mapkey('Z', 'zen mode', function() {
-    api.Hints.create("div", function(element) {
-        let targetDiv = element.closest('div');
+let zenModeActive = false;
 
-        if (targetDiv) {
-            document.querySelectorAll('body > *').forEach(function(el) {
-                if (!targetDiv.contains(el) && el !== targetDiv && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
-                    el.style.opacity = '0.5'; // Dim non-focused elements
-                }
-            });
-            targetDiv.style.opacity = '1'; // Ensure the targetDiv is fully visible
-        }
-    }, {repeatIgnore: true});
+api.mapkey('Z', 'zen mode', function() {
+    if (zenModeActive) {
+        // Reset styles
+        document.querySelectorAll('body > *').forEach(function(el) {
+            el.style = '';
+        });
+        zenModeActive = false;
+    } else {
+        api.Hints.create("div", function(element) {
+            let targetDiv = element.closest('div');
+
+            if (targetDiv) {
+                document.querySelectorAll('body > *').forEach(function(el) {
+                    if (!targetDiv.contains(el) && el !== targetDiv && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
+                        el.style.opacity = '0.5'; // Dim non-focused elements
+                    }
+                });
+                targetDiv.style.opacity = '1'; // Ensure the targetDiv is fully visible
+            }
+        }, {repeatIgnore: true});
+        zenModeActive = true;
+    }
 });
 
 
