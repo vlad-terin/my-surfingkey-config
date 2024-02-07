@@ -91,14 +91,19 @@ function restoreStyles() {
     originalStyles = []; // Clear the array after resetting styles
 }
 
-// Function to apply Zen Mode to a target element
 function applyZenModeToElement(targetElement) {
+    let parentElements = [];
+    for (let el = targetElement; el; el = el.parentElement) {
+        parentElements.push(el);
+    }
+
     document.querySelectorAll('body > *').forEach(function (el) {
-        if (!targetElement.contains(el) && el !== targetElement && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
+        if (!parentElements.includes(el) && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
             originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
             el.style.opacity = '0.1'; // Dim non-focused elements
         }
     });
+
     originalStyles.push({ el: targetElement, style: { opacity: targetElement.style.opacity } }); // Save targetDiv's original opacity
     targetElement.style.opacity = '1'; // Ensure the targetDiv is fully visible
 }
