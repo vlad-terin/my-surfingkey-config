@@ -40,6 +40,10 @@ api.unmap('<Ctrl-n>');
 api.map(']', ']]');
 api.map('[', '[[');
 
+api.mapkey('d', 'Open Chrome DevTools', function() {
+    window.open('chrome://inspect/#devices');
+});
+
 // My default vim key binding: https://gist.github.com/millermedeiros/1262085
 //--Like Nerd Tree--- TODO: FIX IT LIKE VERTICALLY
 // api.map(',nt', 'T');
@@ -149,7 +153,7 @@ api.mapkey('sfr', '#13show failed web requests of current page', function() {
 // TODO: to try think conflict prefix g,c (google and github)
 //General
 api.addSearchAlias('L', 'Im feeling lucky','https://duckduckgo.com/?q=\\');
-api.addSearchAlias('d', 'download', 'https://www.google.com/search?q=download+');
+api.addSearchAlias('D', 'download', 'https://www.google.com/search?q=download+');
 api.addSearchAlias('G', 'google', 'https://www.google.com/search?q=');
 
 //ai
