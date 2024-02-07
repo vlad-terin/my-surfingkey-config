@@ -552,13 +552,13 @@ api.mapkey('yg', '#7 git clone', function () {
     domain: /github\.com/i
 });
 
-api.mapkey('yg', '#7 git blog', function () {
-    var address = window.location.href.split(".");
-    var githubId = address[0].replace(/(^\w+:|^)\/\//, '');
-    var githubAddress = 'github.com' + '/' + githubId;
-    api.Clipboard.write(githubAddress);
-    window.location.href(githubAddress);
-})
+// api.mapkey('yg', '#7 git blog', function () {
+//     var address = window.location.href.split(".");
+//     var githubId = address[0].replace(/(^\w+:|^)\/\//, '');
+//     var githubAddress = 'github.com' + '/' + githubId;
+//     api.Clipboard.write(githubAddress);
+//     window.location.href(githubAddress);
+// })
 
 //TODO: git clone , get id
 api.mapkey('yG', '#7 git clone', function () {
