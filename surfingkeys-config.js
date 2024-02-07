@@ -40,6 +40,53 @@ api.unmap('<Ctrl-n>');
 api.map(']', ']]');
 api.map('[', '[[');
 
+api.addSearchAlias(
+  "gm",
+  "Google Month",
+  "https://www.google.com/search?q={0}&tbs=qdr:m",
+);
+api.addSearchAlias(
+    "gw",
+    "Google Week",
+    "https://www.google.com/search?q={0}&tbs=qdr:w",
+  );
+  api.addSearchAlias(
+    "gy",
+    "Google Year",
+    "https://www.google.com/search?q={0}&tbs=qdr:y",
+  );
+  api.addSearchAlias(
+    "gd",
+    "Google Day",
+    "https://www.google.com/search?q={0}&tbs=qdr:d",
+  );
+  api.addSearchAlias(
+    "gH",
+    "Google Hour",
+    "https://www.google.com/search?q={0}&tbs=qdr:h",
+  );
+  api.addSearchAlias(
+    "gsh",
+    "Google Search History",
+    "https://myactivity.google.com/myactivity?authuser=0&q={0}",
+  );
+  api.addSearchAlias(
+    "gi",
+    "Google Images",
+    "https://www.google.com/search?q={0}&tbm=isch",
+  );
+  
+  api.addSearchAlias(
+    "os",
+    "One Search",
+    "https://historysearch.com/search/list?q={0}",
+  );
+  api.addSearchAlias(
+    "hs",
+    "History Search",
+    "https://historysearch.com/search/list?q={0}",
+  );
+
 // My default vim key binding: https://gist.github.com/millermedeiros/1262085
 //--Like Nerd Tree--- TODO: FIX IT LIKE VERTICALLY
 // api.map(',nt', 'T');
