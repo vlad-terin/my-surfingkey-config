@@ -229,7 +229,51 @@ api.addSearchAlias('cr', 'rfc search', 'https://rfc.fyi/?search=');
 api.addSearchAlias('rfC', 'rfc search', 'https://rfc.fyi/?search=');
 api.addSearchAlias('cs', 'codesandbox (online interactive IDE)', 'https://codesandbox.io/search?query=');
 api.addSearchAlias('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
-api.addSearchAlias('gH', 'github', 'https://github.com/search?q=');
+api.addSearchAlias(
+  "gh",
+  "GitHub Repositories",
+  "https://github.com/search?q={0}&type=repositories",
+);
+api.addSearchAlias(
+  "ghC",
+  "GitHub Commits",
+  "https://github.com/search?q={0}&type=commits",
+);
+api.addSearchAlias(
+  "ghi",
+  "GitHub Issues",
+  "https://github.com/search?q={0}&type=issues",
+);
+api.addSearchAlias(
+  "ghd",
+  "GitHub Discussions",
+  "https://github.com/search?q={0}&type=discussions",
+);
+api.addSearchAlias(
+  "ghr",
+  "GitHub Registry",
+  "https://github.com/search?q={0}&type=registrypackages",
+);
+api.addSearchAlias(
+  "ghm",
+  "GitHub Marketplace",
+  "https://github.com/search?q={0}&type=marketplace",
+);
+api.addSearchAlias(
+  "ght",
+  "GitHub Topics",
+  "https://github.com/search?q={0}&type=topics",
+);
+api.addSearchAlias(
+  "ghw",
+  "GitHub Wiki",
+  "https://github.com/search?q={0}&type=wikis",
+);
+api.addSearchAlias(
+  "ghu",
+  "GitHub Users",
+  "https://github.com/search?q={0}&type=users",
+);
 api.addSearchAlias('ghS', 'githubStars', 'https://github.com/mindgitrwx?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
 
 // slides
