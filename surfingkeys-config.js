@@ -114,6 +114,7 @@ api.mapkey('Z', 'Toggle Zen Mode', function () {
 
             if (targetDiv) {
                 applyZenModeToElement(targetDiv);
+                console.log(targetDiv)
                 zenModeActive = true;
             } else {
                 console.error('Zen Mode: No target div found.');
