@@ -238,22 +238,15 @@ api.addSearchAlias('ss', 'slideshare', 'https://www.slideshare.net/search/slides
 api.addSearchAlias('sd', 'soundsnap', 'https://www.soundsnap.com/search/audio/');
 
 //language --
-api.addSearchAlias('lJ', 'language Javascript', 'https://www.google.com/search?q=Javascript+');
-api.addSearchAlias('lj', 'language java', 'https://www.google.com/search?q=Java+');
-api.addSearchAlias('lC', 'C++', 'https://www.google.com/search?q=C++');
-api.addSearchAlias('lc', 'language c', 'https://www.google.com/search?q=c+language+');
-api.addSearchAlias('l#', 'language C#', 'https://www.google.com/search?q=c%23+');
-api.addSearchAlias('lE', 'language E','https://ludwig.guru/s/');
-api.addSearchAlias('lR', 'language R', 'https://www.google.com/search?q=languag+');
-api.addSearchAlias('lr', 'language Ruby', 'https://www.google.com/search?q=Ruby+');
-api.addSearchAlias('lP', 'language Python', 'https://www.google.com/search?q=Python+');
-api.addSearchAlias('lp', 'language php', 'https://www.google.com/search?q=php+');
-api.addSearchAlias('lK', 'language Kotlin', 'https://www.google.com/search?q=Kotlin+');
-api.addSearchAlias('lS', 'language Swift', 'https://www.google.com/search?q=Swift+');
-api.addSearchAlias('lQ', 'language SQL Query', 'https://www.google.com/search?q=SQL+');
-api.addSearchAlias('ls', 'language Shell script', 'https://www.google.com/search?q=Shell+Schript+');
-api.addSearchAlias('lT', 'language Typescript', 'https://www.google.com/search?q=TypeScript+');
-api.addSearchAlias('lH', 'language HTML', 'https://www.google.com/search?q=HTML+');
+
+// Front-end development references
+api.addSearchAlias('lt', 'tailwind', 'https://duckduckgo.com/?q=\\' + 'tailwind');
+api.addSearchAlias('ln', 'Next.js', 'https://nextjs.org/search?q=');
+api.addSearchAlias('lm', 'MDN', 'https://developer.mozilla.org/en-US/search?q=');
+api.addSearchAlias('lT', 'TypeScript', 'https://www.typescriptlang.org/docs/search/?q=');
+api.addSearchAlias('lR', 'React', 'https://reactjs.org/search.html?q=');
+// Add more aliases for other front-end development references here
+
 
 //sentence search
 api.addSearchAlias('S', 'sentencestack', 'https://sentencestack.com/q/');
