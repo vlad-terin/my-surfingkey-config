@@ -230,7 +230,7 @@ api.addSearchAlias('rfC', 'rfc search', 'https://rfc.fyi/?search=');
 api.addSearchAlias('cs', 'codesandbox (online interactive IDE)', 'https://codesandbox.io/search?query=');
 api.addSearchAlias('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
 api.addSearchAlias(
-  "gh",
+  "gH",
   "GitHub Repositories",
   "https://github.com/search?q={0}&type=repositories",
 );
