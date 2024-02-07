@@ -97,7 +97,7 @@ function applyZenModeToElement(targetElement) {
         parentElements.push(el);
     }
 
-    document.querySelectorAll('body > *').forEach(function (el) {
+    document.querySelectorAll('body *').forEach(function (el) {
         if (!parentElements.includes(el) && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
             originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
             el.style.opacity = '0.1'; // Dim non-focused elements
