@@ -115,7 +115,7 @@ api.mapkey('Z', 'Toggle Zen Mode', function () {
     } else {
         // Use Hints.create to allow selection of a div
         api.Hints.create('div', function (element) {
-            let targetDiv = element instanceof HTMLElement && element.tagName === 'DIV' ? element.parentElement : element.closest('div');
+            let targetDiv = element instanceof HTMLElement && element.tagName === 'DIV' ? element : element.closest('div');
 
             if (targetDiv) {
                 applyZenModeToElement(targetDiv);
