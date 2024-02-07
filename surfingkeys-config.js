@@ -40,10 +40,6 @@ api.unmap('<Ctrl-n>');
 api.map(']', ']]');
 api.map('[', '[[');
 
-api.mapkey('d', 'Open Chrome DevTools', function() {
-    window.open('chrome://inspect/#devices');
-});
-
 // My default vim key binding: https://gist.github.com/millermedeiros/1262085
 //--Like Nerd Tree--- TODO: FIX IT LIKE VERTICALLY
 // api.map(',nt', 'T');
