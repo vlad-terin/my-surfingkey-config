@@ -10,24 +10,24 @@
 
 
 // ------------ for page moving -------------- (every time it would be returned zero when refreshed)
-var namuPage    = 0;
-    wikiPage    = 0;
-    stackAnswer = 0;
-    naverAnswer = 0;
-    codeWrapper = 0;
-    lineNum     = 0;
+var namuPage = 0;
+wikiPage = 0;
+stackAnswer = 0;
+naverAnswer = 0;
+codeWrapper = 0;
+lineNum = 0;
 
 var linkCounter = 0;
 
 // Properties list
-api.Hints.numericHints           = false;
+api.Hints.numericHints = false;
 // api.Hints.characters             = "asdfgqwertzxcvbyuiopmnhlk";  // without j for esc (TODO: jj for esc when hints mode)
-api.Hints.scrollKeys             = "G";
-settings.caseSensitive       = true;
-settings.omnibarSuggestion   = true;
+api.Hints.scrollKeys = "G";
+settings.caseSensitive = true;
+settings.omnibarSuggestion = true;
 settings.defaultSearchEngine = 'L';                          // Google I'm Feeling Luckey
-settings.nextLinkRegex       = /((forward|>>|next)+)/i;
-settings.prevLinkRegex       = /((back|<<|prev(ious)?)+)/i;
+settings.nextLinkRegex = /((forward|>>|next)+)/i;
+settings.prevLinkRegex = /((back|<<|prev(ious)?)+)/i;
 settings.tabsThreshold = 0;
 ////////////////////////////////
 // api.unapi.map default key api.mapings  //
@@ -40,52 +40,6 @@ api.unmap('<Ctrl-n>');
 api.map(']', ']]');
 api.map('[', '[[');
 
-api.addSearchAlias(
-  "gm",
-  "Google Month",
-  "https://www.google.com/search?q={0}&tbs=qdr:m",
-);
-api.addSearchAlias(
-    "gw",
-    "Google Week",
-    "https://www.google.com/search?q={0}&tbs=qdr:w",
-  );
-  api.addSearchAlias(
-    "gy",
-    "Google Year",
-    "https://www.google.com/search?q={0}&tbs=qdr:y",
-  );
-  api.addSearchAlias(
-    "gd",
-    "Google Day",
-    "https://www.google.com/search?q={0}&tbs=qdr:d",
-  );
-  api.addSearchAlias(
-    "gH",
-    "Google Hour",
-    "https://www.google.com/search?q={0}&tbs=qdr:h",
-  );
-  api.addSearchAlias(
-    "gsh",
-    "Google Search History",
-    "https://myactivity.google.com/myactivity?authuser=0&q={0}",
-  );
-  api.addSearchAlias(
-    "gi",
-    "Google Images",
-    "https://www.google.com/search?q={0}&tbm=isch",
-  );
-  
-  api.addSearchAlias(
-    "os",
-    "One Search",
-    "https://historysearch.com/search/list?q={0}",
-  );
-  api.addSearchAlias(
-    "hs",
-    "History Search",
-    "https://historysearch.com/search/list?q={0}",
-  );
 
 // My default vim key binding: https://gist.github.com/millermedeiros/1262085
 //--Like Nerd Tree--- TODO: FIX IT LIKE VERTICALLY
@@ -131,74 +85,121 @@ let originalStyles = []; // Store the original styles to restore later
 
 // Function to restore styles
 function restoreStyles() {
-  originalStyles.forEach(({ el, style }) => {
-    el.style.opacity = style.opacity; // Restore original opacity
-  });
-  originalStyles = []; // Clear the array after resetting styles
+    originalStyles.forEach(({ el, style }) => {
+        el.style.opacity = style.opacity; // Restore original opacity
+    });
+    originalStyles = []; // Clear the array after resetting styles
 }
 
 // Function to apply Zen Mode to a target element
 function applyZenModeToElement(targetElement) {
-  document.querySelectorAll('body > *').forEach(function(el) {
-    if (!targetElement.contains(el) && el !== targetElement && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
-      originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
-      el.style.opacity = '0.1'; // Dim non-focused elements
-    }
-  });
-  originalStyles.push({ el: targetElement, style: { opacity: targetElement.style.opacity } }); // Save targetDiv's original opacity
-  targetElement.style.opacity = '1'; // Ensure the targetDiv is fully visible
+    document.querySelectorAll('body > *').forEach(function (el) {
+        if (!targetElement.contains(el) && el !== targetElement && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
+            originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
+            el.style.opacity = '0.1'; // Dim non-focused elements
+        }
+    });
+    originalStyles.push({ el: targetElement, style: { opacity: targetElement.style.opacity } }); // Save targetDiv's original opacity
+    targetElement.style.opacity = '1'; // Ensure the targetDiv is fully visible
 }
 
-api.mapkey('Z', 'Toggle Zen Mode', function() {
-  if (zenModeActive) {
-    restoreStyles();
-    zenModeActive = false;
-  } else {
-    // Use Hints.create to allow selection of a div
-    api.Hints.create('div', function(element) {
-      let targetDiv = element instanceof HTMLElement && element.tagName === 'DIV' ? element : element.closest('div');
+api.mapkey('Z', 'Toggle Zen Mode', function () {
+    if (zenModeActive) {
+        restoreStyles();
+        zenModeActive = false;
+    } else {
+        // Use Hints.create to allow selection of a div
+        api.Hints.create('div', function (element) {
+            let targetDiv = element instanceof HTMLElement && element.tagName === 'DIV' ? element : element.closest('div');
 
-      if (targetDiv) {
-        applyZenModeToElement(targetDiv);
-        zenModeActive = true;
-      } else {
-        console.error('Zen Mode: No target div found.');
-      }
-    });
-  }
+            if (targetDiv) {
+                applyZenModeToElement(targetDiv);
+                zenModeActive = true;
+            } else {
+                console.error('Zen Mode: No target div found.');
+            }
+        });
+    }
 });
 
 
-api.mapkey('os', '#8Open Search Engines Omnibar', function() {
-    Front.openOmnibar({type: "SearchEngine", extra: "searchEngines"});
+api.mapkey('os', '#8Open Search Engines Omnibar', function () {
+    Front.openOmnibar({ type: "SearchEngine", extra: "searchEngines" });
 });
 
 api.mapkey('on', '#3Open newtab', function () {
     api.tabOpenLink("www.google.com"); // TODO: addded api, but not work
 });
 
-api.mapkey('sfr', '#13show failed web requests of current page', function() {
-  runtime.command({
-      action: 'getTabErrors'
-  }, function(response) {
-      if (response.tabError && response.tabError.length) {
-          var errors = response.tabError.map(function(e) {
-              var url = new URL(e.url);
-              return "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(e.error, e.type, url.host);
-          });
-          Front.showPopup("<table style='width:100%'>{0}</table>".format(errors.join('')));
-      } else {
-          Front.showPopup("No errors from webRequest.");
-      }
-  });
+api.mapkey('sfr', '#13show failed web requests of current page', function () {
+    runtime.command({
+        action: 'getTabErrors'
+    }, function (response) {
+        if (response.tabError && response.tabError.length) {
+            var errors = response.tabError.map(function (e) {
+                var url = new URL(e.url);
+                return "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>".format(e.error, e.type, url.host);
+            });
+            Front.showPopup("<table style='width:100%'>{0}</table>".format(errors.join('')));
+        } else {
+            Front.showPopup("No errors from webRequest.");
+        }
+    });
 });
 
 // TODO: to try think conflict prefix g,c (google and github)
 //General
-api.addSearchAlias('L', 'Im feeling lucky','https://duckduckgo.com/?q=\\');
+api.addSearchAlias('L', 'Im feeling lucky', 'https://duckduckgo.com/?q=\\');
 api.addSearchAlias('D', 'download', 'https://www.google.com/search?q=download+');
 api.addSearchAlias('G', 'google', 'https://www.google.com/search?q=');
 
+//Google 
+api.addSearchAlias(
+    "gm",
+    "Google Month",
+    "https://www.google.com/search?q={0}&tbs=qdr:m",
+);
+api.addSearchAlias(
+    "gw",
+    "Google Week",
+    "https://www.google.com/search?q={0}&tbs=qdr:w",
+);
+api.addSearchAlias(
+    "gy",
+    "Google Year",
+    "https://www.google.com/search?q={0}&tbs=qdr:y",
+);
+api.addSearchAlias(
+    "gd",
+    "Google Day",
+    "https://www.google.com/search?q={0}&tbs=qdr:d",
+);
+api.addSearchAlias(
+    "gH",
+    "Google Hour",
+    "https://www.google.com/search?q={0}&tbs=qdr:h",
+);
+api.addSearchAlias(
+    "gsh",
+    "Google Search History",
+    "https://myactivity.google.com/myactivity?authuser=0&q={0}",
+);
+api.addSearchAlias(
+    "gi",
+    "Google Images",
+    "https://www.google.com/search?q={0}&tbm=isch",
+);
+
+api.addSearchAlias(
+    "os",
+    "One Search",
+    "https://historysearch.com/search/list?q={0}",
+);
+api.addSearchAlias(
+    "Hs",
+    "History Search",
+    "https://historysearch.com/search/list?q={0}",
+);
 //ai
 api.addSearchAlias('af', 'futurepedia', 'https://www.futurepedia.io/?searchTerm=');
 api.addSearchAlias('Y', 'you', 'https://you.com/search?q=');
@@ -210,7 +211,7 @@ api.addSearchAlias('b', 'bing', 'https://www.bing.com/search?q=');
 //GoogleTrand
 api.addSearchAlias('gT', 'google trend', 'trends.google.com/trends/explore?q=');
 api.addSearchAlias('gtK', 'google trend Korea', 'trends.google.com/trends/explore?geo=KR&q=');
-api.addSearchAlias('gtU', 'google trend USA',  'trends.google.com/trends/explore?geo=US&q=');
+api.addSearchAlias('gtU', 'google trend USA', 'trends.google.com/trends/explore?geo=US&q=');
 api.addSearchAlias('gtI', 'google trend India', 'trends.google.com/trends/explore?geo=IN&q=');
 
 //api
@@ -230,49 +231,49 @@ api.addSearchAlias('rfC', 'rfc search', 'https://rfc.fyi/?search=');
 api.addSearchAlias('cs', 'codesandbox (online interactive IDE)', 'https://codesandbox.io/search?query=');
 api.addSearchAlias('cS', 'slant (editor 비교 사이트)', 'https://www.slant.co/search?query=');
 api.addSearchAlias(
-  "gH",
-  "GitHub Repositories",
-  "https://github.com/search?q={0}&type=repositories",
+    "gH",
+    "GitHub Repositories",
+    "https://github.com/search?q={0}&type=repositories",
 );
 api.addSearchAlias(
-  "ghC",
-  "GitHub Commits",
-  "https://github.com/search?q={0}&type=commits",
+    "ghC",
+    "GitHub Commits",
+    "https://github.com/search?q={0}&type=commits",
 );
 api.addSearchAlias(
-  "ghi",
-  "GitHub Issues",
-  "https://github.com/search?q={0}&type=issues",
+    "ghi",
+    "GitHub Issues",
+    "https://github.com/search?q={0}&type=issues",
 );
 api.addSearchAlias(
-  "ghd",
-  "GitHub Discussions",
-  "https://github.com/search?q={0}&type=discussions",
+    "ghd",
+    "GitHub Discussions",
+    "https://github.com/search?q={0}&type=discussions",
 );
 api.addSearchAlias(
-  "ghr",
-  "GitHub Registry",
-  "https://github.com/search?q={0}&type=registrypackages",
+    "ghr",
+    "GitHub Registry",
+    "https://github.com/search?q={0}&type=registrypackages",
 );
 api.addSearchAlias(
-  "ghm",
-  "GitHub Marketplace",
-  "https://github.com/search?q={0}&type=marketplace",
+    "ghm",
+    "GitHub Marketplace",
+    "https://github.com/search?q={0}&type=marketplace",
 );
 api.addSearchAlias(
-  "ght",
-  "GitHub Topics",
-  "https://github.com/search?q={0}&type=topics",
+    "ght",
+    "GitHub Topics",
+    "https://github.com/search?q={0}&type=topics",
 );
 api.addSearchAlias(
-  "ghw",
-  "GitHub Wiki",
-  "https://github.com/search?q={0}&type=wikis",
+    "ghw",
+    "GitHub Wiki",
+    "https://github.com/search?q={0}&type=wikis",
 );
 api.addSearchAlias(
-  "ghu",
-  "GitHub Users",
-  "https://github.com/search?q={0}&type=users",
+    "ghu",
+    "GitHub Users",
+    "https://github.com/search?q={0}&type=users",
 );
 api.addSearchAlias('ghS', 'githubStars', 'https://github.com/mindgitrwx?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
 
@@ -490,7 +491,7 @@ api.mapkey('Q', '#1Click on an Image or a button', function () {
             };
         });
     }
-    async function copyImage(imageURL){
+    async function copyImage(imageURL) {
         const blob = await imageToBlob(imageURL);
         const item = new ClipboardItem({ "image/png": blob });
         navigator.clipboard.write([item]);
@@ -501,7 +502,7 @@ api.mapkey('Q', '#1Click on an Image or a button', function () {
 });
 
 api.mapkey('gq', '#1get image address with wget', function () {
-    async function copyImageAddress(imgAddress){
+    async function copyImageAddress(imgAddress) {
         imageFormats = ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp", "ico", "tiff", "tif", "jfif", "pjpeg", "pjp", "avif", "apng"];
         // if imgAddress string has imageFormats, then cut the trailing address after the imageFormats
         for (var i = 0; i < imageFormats.length; i++) {
@@ -528,7 +529,7 @@ api.vmapkey('y', "copy without reference notation on wikipedia", function () {
 api.mapkey('ymr', '#7Copy multiple link regex URLs to the clipboard', function () {
     var linksToYank = [];
     api.Hints.create('*[href]', function (element) {
-        linksToYank.push('domain: ' + '\/' + element.href.slice(8, ).split('/')[0].replace(/\./g, "\\\.") + '\/' + 'i');
+        linksToYank.push('domain: ' + '\/' + element.href.slice(8,).split('/')[0].replace(/\./g, "\\\.") + '\/' + 'i');
         api.Clipboard.write(linksToYank.join('\n'));
     }, {
         multipleHits: true
@@ -537,7 +538,7 @@ api.mapkey('ymr', '#7Copy multiple link regex URLs to the clipboard', function (
 
 //TODO: git clone , get id
 api.mapkey('yg', '#7 git clone', function () {
-    api.Hints.create('git clone ' + window.location.href + '.git', function(element) {
+    api.Hints.create('git clone ' + window.location.href + '.git', function (element) {
         api.Clipboard.write('git clone ' + window.location.href + '.git');
     });
     // api.Clipboard.write('git clone ' + window.location.href + '.git');
@@ -561,33 +562,33 @@ api.mapkey('yG', '#7 git clone', function () {
 });
 
 api.mapkey('yeI', '#7 Yank Element ID', function () {
-  api.Hints.create("", function (element) {
-    api.Clipboard.write(element.id);
-  });
+    api.Hints.create("", function (element) {
+        api.Clipboard.write(element.id);
+    });
 });
 
 api.mapkey('yeC', '#7 Yank Element Class Name', function () {
-  api.Hints.create("", function (element) {
-    api.Clipboard.write(element.className);
-  });
+    api.Hints.create("", function (element) {
+        api.Clipboard.write(element.className);
+    });
 });
 
 api.mapkey('yeT', '#7 Yank Element Type', function () {
-  api.Hints.create("", function (element) {
-    api.Clipboard.write(element.type);
-  });
+    api.Hints.create("", function (element) {
+        api.Clipboard.write(element.type);
+    });
 });
 
 api.mapkey('yeS', '#7 Yank Element Style', function () {
-  api.Hints.create("", function (element) {
-    api.Clipboard.write(element.style);
-  });
+    api.Hints.create("", function (element) {
+        api.Clipboard.write(element.style);
+    });
 });
 
 api.mapkey('yeA', '#7 Yank Element Alt', function () {
-  api.Hints.create("", function (element) {
-    api.Clipboard.write(element.alt);
-  });
+    api.Hints.create("", function (element) {
+        api.Clipboard.write(element.alt);
+    });
 });
 
 api.mapkey('ymE', '#7 Yank Multiple Element info  (copy multiple link element id or classname)', function () {
@@ -624,7 +625,7 @@ api.mapkey('ymR', '#7Copy multiple link Regex URLs to the clipboard and add comm
         if (linkCounter === 0) {
             api.Clipboard.write('{')
         }
-        linksToYank.push('"' + element.href + '"', );
+        linksToYank.push('"' + element.href + '"',);
         api.Clipboard.write(linksToYank.join('\n'));
         linkCounter++;
     }, {
@@ -634,7 +635,7 @@ api.mapkey('ymR', '#7Copy multiple link Regex URLs to the clipboard and add comm
 
 // Copy url as regex of SurfingKeys
 api.mapkey('yr', "Copy url as regex", function () {
-    api.Clipboard.write('domain: ' + '\/' + window.location.href.slice(8, ).split('/')[0].replace(/\./g, "\\\.") + '\/' + 'i');
+    api.Clipboard.write('domain: ' + '\/' + window.location.href.slice(8,).split('/')[0].replace(/\./g, "\\\.") + '\/' + 'i');
 });
 
 
@@ -972,89 +973,89 @@ api.mapkey('gS', 'Go to the Stars tab. ', function () {
 
 api.mapkey('h', 'slideshare previous page', function () {
     document.getElementById('previous-slide').click();
-}, {domain: /www\.slideshare\.com/i});
+}, { domain: /www\.slideshare\.com/i });
 api.mapkey('l', 'slideshare next page', function () {
     document.getElementById('next-slide').click();
-}, {domain: /www\.slideshare\.com/i});
+}, { domain: /www\.slideshare\.com/i });
 
 api.mapkey('h', 'slideserve previous page', function () {
     document.getElementById('btn_prev').click();
-}, {domain: /slideserve\.com/i});
+}, { domain: /slideserve\.com/i });
 api.mapkey('l', 'slideserve next page', function () {
     document.getElementById('btn_next').click();
-}, {domain: /slideserve\.com/i});
+}, { domain: /slideserve\.com/i });
 
 api.mapkey('h', 'slideplayer previous page', function () {
     document.querySelector("td[action='back']").click();
-}, {domain: /slideplayer\.com/i});
+}, { domain: /slideplayer\.com/i });
 api.mapkey('l', 'slideplayer next page', function () {
     document.querySelector("td[action='forward']").click();
-}, {domain: /slideplayer\.com/i});
+}, { domain: /slideplayer\.com/i });
 
 const API_KEY = "af712d02-1689-4378-8590-cba02e8341a0";
 const API_URL = "https://dictionaryapi.com/api/v3";
 
 api.Front.registerInlineQuery({
-  url: function (q) {
-    const url = `${API_URL}/references/learners/json/${q}?key=${API_KEY}`;
-    return url;
-  },
-  parseResult: function (res) {
-    try {
-      const [firstResult] = JSON.parse(res.text);
-      if (firstResult) {
-        let definitionsList = `<ul><li>No definitions found</li></ul>`;
-        let pronunciationsList = `<ul><li>No pronunciations found</li></ul>`;
-        if (firstResult.hasOwnProperty("shortdef")) {
-          const definitions = [];
-          for (let definition of firstResult.shortdef) {
-            definitions.push(`${definition}`);
-          }
-          const definitionListItems = definitions.map(function (definition) {
-            return `<li>${definition}</li>`;
-          });
-          definitionsList = `<ul>${definitionListItems.join("")}</ul>`;
-          //TODO: Separate this function if possible
-        }
-        if (firstResult.hasOwnProperty("hwi")) {
-          const pronunciations = [];
-          const resultPronunciationsArray = firstResult.hwi.prs;
-          if (
-            resultPronunciationsArray &&
-            resultPronunciationsArray.length !== 0
-          ) {
-            for (let i = 0; i < resultPronunciationsArray.length; i++) {
-              if (resultPronunciationsArray[i].l) {
-                pronunciations.push(
-                  `<li>${resultPronunciationsArray[i].l} -- ${resultPronunciationsArray[i].ipa}</li>`,
-                );
-              } else {
-                pronunciations.push(
-                  `<li>${resultPronunciationsArray[i].ipa}</li>`,
-                );
-              }
-            }
+    url: function (q) {
+        const url = `${API_URL}/references/learners/json/${q}?key=${API_KEY}`;
+        return url;
+    },
+    parseResult: function (res) {
+        try {
+            const [firstResult] = JSON.parse(res.text);
+            if (firstResult) {
+                let definitionsList = `<ul><li>No definitions found</li></ul>`;
+                let pronunciationsList = `<ul><li>No pronunciations found</li></ul>`;
+                if (firstResult.hasOwnProperty("shortdef")) {
+                    const definitions = [];
+                    for (let definition of firstResult.shortdef) {
+                        definitions.push(`${definition}`);
+                    }
+                    const definitionListItems = definitions.map(function (definition) {
+                        return `<li>${definition}</li>`;
+                    });
+                    definitionsList = `<ul>${definitionListItems.join("")}</ul>`;
+                    //TODO: Separate this function if possible
+                }
+                if (firstResult.hasOwnProperty("hwi")) {
+                    const pronunciations = [];
+                    const resultPronunciationsArray = firstResult.hwi.prs;
+                    if (
+                        resultPronunciationsArray &&
+                        resultPronunciationsArray.length !== 0
+                    ) {
+                        for (let i = 0; i < resultPronunciationsArray.length; i++) {
+                            if (resultPronunciationsArray[i].l) {
+                                pronunciations.push(
+                                    `<li>${resultPronunciationsArray[i].l} -- ${resultPronunciationsArray[i].ipa}</li>`,
+                                );
+                            } else {
+                                pronunciations.push(
+                                    `<li>${resultPronunciationsArray[i].ipa}</li>`,
+                                );
+                            }
+                        }
 
-            pronunciationsList = `<ul>${pronunciations.join("")}</ul>`;
-          }
-        }
-        return `
+                        pronunciationsList = `<ul>${pronunciations.join("")}</ul>`;
+                    }
+                }
+                return `
                    <h3>Pronunciations</h3>
                    ${pronunciationsList}
                    <hr/>
                    <h3>Definitions</h3>
                    ${definitionsList}
                 `;
-      } else {
-        return `
+            } else {
+                return `
                   <h3>This is not the definition you were looking for...</h3>
                 `;
-      }
-    } catch (e) {
-      console.log(e.message);
-      return "Something bad happend... Look behind you, a three headed monkey!";
-    }
-  },
+            }
+        } catch (e) {
+            console.log(e.message);
+            return "Something bad happend... Look behind you, a three headed monkey!";
+        }
+    },
 });
 
 
