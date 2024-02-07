@@ -237,14 +237,13 @@ api.addSearchAlias('ss', 'slideshare', 'https://www.slideshare.net/search/slides
 
 api.addSearchAlias('sd', 'soundsnap', 'https://www.soundsnap.com/search/audio/');
 
-//language --
 
 // Front-end development references
-api.addSearchAlias('lt', 'tailwind', 'https://duckduckgo.com/?q=\\' + 'tailwind');
-api.addSearchAlias('ln', 'Next.js', 'https://nextjs.org/search?q=');
-api.addSearchAlias('lm', 'MDN', 'https://developer.mozilla.org/en-US/search?q=');
-api.addSearchAlias('lT', 'TypeScript', 'https://www.typescriptlang.org/docs/search/?q=');
-api.addSearchAlias('lR', 'React', 'https://reactjs.org/search.html?q=');
+api.addSearchAlias('lt', 'tailwind', 'https://duckduckgo.com/?q=!ducky+tailwind');
+api.addSearchAlias('ln', 'Next.js', 'https://duckduckgo.com/?q=!ducky+Next.js');
+api.addSearchAlias('lm', 'MDN', 'https://duckduckgo.com/?q=!ducky+MDN');
+api.addSearchAlias('lT', 'TypeScript', 'https://duckduckgo.com/?q=!ducky+TypeScript');
+api.addSearchAlias('lR', 'React', 'https://duckduckgo.com/?q=!ducky+React');
 // Add more aliases for other front-end development references here
 
 
