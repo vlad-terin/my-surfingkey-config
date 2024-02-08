@@ -80,32 +80,32 @@ api.removeSearchAlias('s');
 // document.getElementByClassName('slide-close').click();
 // })();
 
-function applyZenModeToReadableElements() {
-    const readableTags = ['P', 'ARTICLE', 'SECTION', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
-    let readableElements = [];
+let zenModeActive = false;
+let originalStyles = []; // Store the original styles to restore later
 
-    document.querySelectorAll(readableTags.join(',')).forEach(function (el) {
-        // Only select elements with sufficient textual content
-        if (el.textContent.trim().length > 100) {
-            readableElements.push(el);
-        }
+// Function to restore styles
+function restoreStyles() {
+    originalStyles.forEach(({ el, style }) => {
+        el.style.opacity = style.opacity; // Restore original opacity
     });
+    originalStyles = []; // Clear the array after resetting styles
+}
 
-    // Apply the Zen mode styles to readable elements
-    readableElements.forEach(el => {
-        originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
-        el.style.opacity = '1'; // Ensure readable elements are fully visible
-    });
+function applyZenModeToElement(targetElement) {
+    let parentElements = [];
+    for (let el = targetElement; el; el = el.parentElement) {
+        parentElements.push(el);
+    }
 
-    // Dim other elements
-    document.querySelectorAll('body *:not(script):not(noscript)').forEach(function (el) {
-        if (!readableElements.includes(el)) {
+    document.querySelectorAll('body *').forEach(function (el) {
+        if (!parentElements.includes(el) && el.tagName !== 'SCRIPT' && el.tagName !== 'NOSCRIPT') {
             originalStyles.push({ el, style: { opacity: el.style.opacity } }); // Save original opacity
-            el.style.opacity = '0.1'; // Dim non-readable elements
+            el.style.opacity = '0.1'; // Dim non-focused elements
         }
     });
 
-    zenModeActive = true;
+    originalStyles.push({ el: targetElement, style: { opacity: targetElement.style.opacity } }); // Save targetDiv's original opacity
+    targetElement.style.opacity = '1'; // Ensure the targetDiv is fully visible
 }
 
 api.mapkey('Z', 'Toggle Zen Mode', function () {
@@ -113,7 +113,18 @@ api.mapkey('Z', 'Toggle Zen Mode', function () {
         restoreStyles();
         zenModeActive = false;
     } else {
-        applyZenModeToReadableElements();
+        // Use Hints.create to allow selection of a div
+        api.Hints.create('div', function (element) {
+            let targetDiv = element instanceof HTMLElement && element.tagName === 'DIV' ? element : element.closest('div');
+
+            if (targetDiv) {
+                applyZenModeToElement(targetDiv);
+                console.log(targetDiv)
+                zenModeActive = true;
+            } else {
+                console.error('Zen Mode: No target div found.');
+            }
+        });
     }
 });
 
