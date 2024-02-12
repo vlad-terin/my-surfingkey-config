@@ -57,6 +57,7 @@ api.cmap('<Ctrl-k>', '<Ctrl-p>');
 // api.vmap('<Ctrl-[>', "<Esc>");
 
 api.removeSearchAlias('g');
+api.removeSearchAlias('d');
 api.removeSearchAlias('w');
 api.removeSearchAlias('s');
 
@@ -291,7 +292,7 @@ api.addSearchAlias('sd', 'soundsnap', 'https://www.soundsnap.com/search/audio/')
 
 // Front-end development references
 api.addSearchAlias('lt', 'tailwind', 'https://duckduckgo.com/?q=!ducky+tailwind');
-api.addSearchAlias('ds', 'tailwind', 'https://www.svgrepo.com/vectors/{0}');
+api.addSearchAlias('ds', 'svg vectors', 'https://www.svgrepo.com/vectors/{0}');
 api.addSearchAlias('ln', 'Next.js', 'https://duckduckgo.com/?q=!ducky+Next.js');
 api.addSearchAlias('lm', 'MDN', 'https://duckduckgo.com/?q=!ducky+MDN');
 api.addSearchAlias('lT', 'TypeScript', 'https://duckduckgo.com/?q=!ducky+TypeScript');
