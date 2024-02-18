@@ -296,6 +296,7 @@ api.addSearchAlias('ds', 'svg vectors', 'https://www.svgrepo.com/vectors/{0}');
 api.addSearchAlias('di', 'react vectors', 'https://react-icons.github.io/react-icons/search/#q={0}');
 api.addSearchAlias('ln', 'Next.js', 'https://duckduckgo.com/?q=!ducky+Next.js');
 api.addSearchAlias('lm', 'MDN', 'https://duckduckgo.com/?q=!ducky+MDN');
+api.addSearchAlias('lr', 'MDN', 'https://duckduckgo.com/?q=!ducky+react+dev+docs');
 api.addSearchAlias('ll', 'MDN', 'https://duckduckgo.com/?q=!ducky+lucia+auth');
 api.addSearchAlias('lT', 'TypeScript', 'https://duckduckgo.com/?q=!ducky+TypeScript');
 api.addSearchAlias('lR', 'React', 'https://duckduckgo.com/?q=!ducky+React');
