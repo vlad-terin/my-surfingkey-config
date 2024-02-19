@@ -297,6 +297,7 @@ api.addSearchAlias('di', 'react vectors', 'https://react-icons.github.io/react-i
 api.addSearchAlias('ln', 'Next.js', 'https://duckduckgo.com/?q=!ducky+Next.js');
 api.addSearchAlias('lm', 'MDN', 'https://duckduckgo.com/?q=!ducky+MDN');
 api.addSearchAlias('lr', 'react', 'https://duckduckgo.com/?q=!ducky+react+dev+docs');
+api.addSearchAlias('lp', 'producthunt', 'https://duckduckgo.com/?q=!ducky+producthunt');
 api.addSearchAlias('ll', 'lucia', 'https://duckduckgo.com/?q=!ducky+lucia+auth');
 api.addSearchAlias('lT', 'TypeScript', 'https://duckduckgo.com/?q=!ducky+TypeScript');
 api.addSearchAlias('lR', 'React', 'https://duckduckgo.com/?q=!ducky+React');
