@@ -292,6 +292,7 @@ api.addSearchAlias('sd', 'soundsnap', 'https://www.soundsnap.com/search/audio/')
 
 // Front-end development references
 api.addSearchAlias('lt', 'tailwind', 'https://duckduckgo.com/?q=!ducky+tailwind');
+api.addSearchAlias('ly', 'tailwind', 'https://duckduckgo.com/?q=!ducky+youtube');
 api.addSearchAlias('ds', 'svg vectors', 'https://www.svgrepo.com/vectors/{0}');
 api.addSearchAlias('di', 'react vectors', 'https://react-icons.github.io/react-icons/search/#q={0}');
 api.addSearchAlias('ln', 'Next.js', 'https://duckduckgo.com/?q=!ducky+Next.js');
@@ -404,7 +405,16 @@ api.addSearchAlias('mP', 'Pitchfork', 'https://pitchfork.com/search/?query=');
 api.addSearchAlias('mC', 'metaCritic', 'http://www.metacritic.com/search/all/');
 
 //Video
-api.addSearchAlias('y', 'youtube', 'https://www.youtube.com/results?search_query=');
+api.addSearchAlias({
+    alias: 'Y',
+    name: 'youtube',
+    url: 'https://www.youtube.com/results?search_query={0}'
+  });
+api.addSearchAlias({
+  alias: 'ym',
+  name: 'youtube',
+  url: 'https://www.youtube.com/results?search_query={0}EgIIBA%3D%3D'
+});
 api.addSearchAlias('yg', 'youglish', 'https://youglish.com/pronounce/');
 api.addSearchAlias('ul', 'underline', 'https://underline.io/library/search?query=');
 
