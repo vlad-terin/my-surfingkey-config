@@ -57,7 +57,7 @@ api.cmap('<Ctrl-k>', '<Ctrl-p>');
 // api.vmap('<Ctrl-[>', "<Esc>");
 
 api.removeSearchAlias('g');
-api.removeSearchAlias('d');
+// api.removeSearchAlias('d');
 api.removeSearchAlias('w');
 api.removeSearchAlias('s');
 
