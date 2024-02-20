@@ -291,17 +291,17 @@ api.addSearchAlias('sd', 'soundsnap', 'https://www.soundsnap.com/search/audio/')
 
 
 // Front-end development references
-api.addSearchAlias('lt', 'tailwind', 'https://duckduckgo.com/?q=!ducky+tailwind');
-api.addSearchAlias('ly', 'tailwind', 'https://duckduckgo.com/?q=!ducky+youtube');
+api.addSearchAlias('lt', 'tailwind', 'https://duckduckgo.com/?q=!ducky+tailwind+{0}');
+api.addSearchAlias('ly', 'tailwind', 'https://duckduckgo.com/?q=!ducky+youtube+{0}');
 api.addSearchAlias('ds', 'svg vectors', 'https://www.svgrepo.com/vectors/{0}');
 api.addSearchAlias('di', 'react vectors', 'https://react-icons.github.io/react-icons/search/#q={0}');
-api.addSearchAlias('ln', 'Next.js', 'https://duckduckgo.com/?q=!ducky+Next.js');
-api.addSearchAlias('lm', 'MDN', 'https://duckduckgo.com/?q=!ducky+MDN');
-api.addSearchAlias('lr', 'react', 'https://duckduckgo.com/?q=!ducky+react+dev+docs');
-api.addSearchAlias('lp', 'producthunt', 'https://duckduckgo.com/?q=!ducky+producthunt');
-api.addSearchAlias('ll', 'lucia', 'https://duckduckgo.com/?q=!ducky+lucia+auth');
-api.addSearchAlias('lT', 'TypeScript', 'https://duckduckgo.com/?q=!ducky+TypeScript');
-api.addSearchAlias('lR', 'React', 'https://duckduckgo.com/?q=!ducky+React');
+api.addSearchAlias('ln', 'Next.js', 'https://duckduckgo.com/?q=!ducky+Next.js+{0}');
+api.addSearchAlias('lm', 'MDN', 'https://duckduckgo.com/?q=!ducky+MDN+{0}');
+api.addSearchAlias('lr', 'react', 'https://duckduckgo.com/?q=!ducky+react+dev+docs+{0}');
+api.addSearchAlias('lp', 'producthunt', 'https://duckduckgo.com/?q=!ducky+producthunt+{0}');
+api.addSearchAlias('ll', 'lucia', 'https://duckduckgo.com/?q=!ducky+lucia+auth+{0}');
+api.addSearchAlias('lT', 'TypeScript', 'https://duckduckgo.com/?q=!ducky+TypeScript+{0}');
+api.addSearchAlias('lR', 'React', 'https://duckduckgo.com/?q=!ducky+React+{0}');
 // Add more aliases for other front-end development references here
 
 
@@ -364,7 +364,7 @@ api.addSearchAlias('T', 'tlanslate English to Hangle 영어한글번역', 'https
 api.addSearchAlias('tA', 'tlanslate All 네이버사전all', 'http://dic.naver.com/search.nhn?dicQuery=');
 api.addSearchAlias('tE', 'tlanslate Examples 네어버사전example', 'http://endic.naver.com/search_example.nhn?sLn=kr&query=');
 // api.addSearchAlias('tL', 'tlanslate lyrics 가사해석', 'https://www.google.com/search?q=가사+해석+');
-api.addSearchAlias('ll', '가사', 'https://www.google.com/search?q=lyrics+of+');
+// api.addSearchAlias('ll', '가사', 'https://www.google.com/search?q=lyrics+of+');
 
 //TODO: 검색을 통해서 google tlanslated 된 걸 clipboard에 복사 붙여넣는 것 만들기
 api.addSearchAlias('ty', '한글영어번역', 'https://translate.google.co.kr/?hl=ko#ko/en/');
