@@ -405,16 +405,7 @@ api.addSearchAlias('mP', 'Pitchfork', 'https://pitchfork.com/search/?query=');
 api.addSearchAlias('mC', 'metaCritic', 'http://www.metacritic.com/search/all/');
 
 //Video
-api.addSearchAlias({
-    alias: 'Y',
-    name: 'youtube',
-    url: 'https://www.youtube.com/results?search_query={0}'
-  });
-api.addSearchAlias({
-  alias: 'ym',
-  name: 'youtube',
-  url: 'https://www.youtube.com/results?search_query={0}EgIIBA%3D%3D'
-});
+api.addSearchAlias('ym', 'youtube', 'https://www.youtube.com/results?search_query={0}EgIIBA%3D%3D');
 api.addSearchAlias('yg', 'youglish', 'https://youglish.com/pronounce/');
 api.addSearchAlias('ul', 'underline', 'https://underline.io/library/search?query=');
 
