@@ -282,6 +282,11 @@ api.addSearchAlias(
     "GitHub Users",
     "https://github.com/search?q={0}&type=users",
 );
+api.addSearchAlias(
+   "Hnm",
+   "Hacker News Month",
+   "https://hn.algolia.com/?dateRange=pastMonth&page=0&prefix=false&query={0}&sort=byPopularity&type=story"
+),
 api.addSearchAlias('ghS', 'githubStars', 'https://github.com/mindgitrwx?page=1&q=face&tab=stars&utf8=%E2%9C%93&utf8=%E2%9C%93&q=');
 
 // slides
