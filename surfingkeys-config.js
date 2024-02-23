@@ -243,8 +243,8 @@ api.addSearchAlias(
     "https://github.com/search?q={0}&type=repositories",
 );
 api.addSearchAlias(
-    "ghC",
-    "GitHub Commits",
+    "ghc",
+    "GitHub Code",
     "https://github.com/search?q={0}&type=code",
 );
 api.addSearchAlias(
