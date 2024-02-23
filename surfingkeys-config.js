@@ -307,6 +307,7 @@ api.addSearchAlias('lp', 'producthunt', 'https://duckduckgo.com/?q=!ducky+produc
 api.addSearchAlias('ll', 'lucia', 'https://duckduckgo.com/?q=!ducky+lucia+auth+{0}');
 api.addSearchAlias('lT', 'TypeScript', 'https://duckduckgo.com/?q=!ducky+TypeScript+{0}');
 api.addSearchAlias('lR', 'React', 'https://duckduckgo.com/?q=!ducky+React+{0}');
+api.addSearchAlias('lj', 'React', 'https://duckduckgo.com/?q=!ducky+exploringjs+impatient-js+{0}');
 // Add more aliases for other front-end development references here
 
 
