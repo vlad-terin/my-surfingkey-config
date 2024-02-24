@@ -160,7 +160,7 @@ api.addSearchAlias('L', 'Im feeling lucky', 'https://duckduckgo.com/?q=\\');
 api.addSearchAlias('D', 'download', 'https://www.google.com/search?q=download+');
 api.addSearchAlias('G', 'google', 'https://www.google.com/search?q=');
 
-//Google 
+//Google
 api.addSearchAlias(
     "gm",
     "Google Month",
@@ -304,7 +304,7 @@ api.addSearchAlias('ln', 'Next.js', 'https://duckduckgo.com/?q=!ducky+Next.js+{0
 api.addSearchAlias('lm', 'MDN', 'https://duckduckgo.com/?q=!ducky+MDN+{0}');
 api.addSearchAlias('lr', 'react', 'https://duckduckgo.com/?q=!ducky+react+dev+docs+{0}');
 api.addSearchAlias('lp', 'producthunt', 'https://duckduckgo.com/?q=!ducky+producthunt+{0}');
-api.addSearchAlias('ll', 'lucia', 'https://duckduckgo.com/?q=!ducky+lucia+auth+{0}');
+api.addSearchAlias('li', 'Issues', 'https://duckduckgo.com/?q=!ducky+github+issues+{0}');
 api.addSearchAlias('lT', 'TypeScript', 'https://duckduckgo.com/?q=!ducky+TypeScript+{0}');
 api.addSearchAlias('lR', 'React', 'https://duckduckgo.com/?q=!ducky+React+{0}');
 api.addSearchAlias('lj', 'React', 'https://duckduckgo.com/?q=!ducky+exploringjs+impatient-js+{0}');
