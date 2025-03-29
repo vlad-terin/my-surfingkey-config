@@ -1193,18 +1193,17 @@ settings.theme = `
 `;
 
 // Auto show hints on page load
-window.onload = function () {
-    // Add domains where you want to disable auto hints
+document.addEventListener('DOMContentLoaded', function() {
     const excludedDomains = [
         /github\.com/i,
         /mail\.google\.com/i
-        // Add more domains as needed
     ];
 
-    // Check if current domain is excluded
     const isExcluded = excludedDomains.some(domain => domain.test(window.location.href));
 
     if (!isExcluded) {
-        Normal.feedkeys('f');  // Using lowercase f to follow links in current tab
+        setTimeout(() => {
+            api.Normal.feedkeys('f');
+        }, 1000); // Small delay to ensure Surfingkeys is ready
     }
-};
+});
