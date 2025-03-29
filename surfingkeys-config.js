@@ -1193,11 +1193,18 @@ settings.theme = `
 `;
 
 // Auto show hints on page load
-document.addEventListener('DOMContentLoaded', function() {
-    // Small delay to ensure page is fully loaded
-    setTimeout(() => {
-        api.Hints.create('a[href]', function(element) {
-            element.click();
-        });
-    }, 500);
-});
+window.onload = function () {
+    // Add domains where you want to disable auto hints
+    const excludedDomains = [
+        /github\.com/i,
+        /mail\.google\.com/i
+        // Add more domains as needed
+    ];
+
+    // Check if current domain is excluded
+    const isExcluded = excludedDomains.some(domain => domain.test(window.location.href));
+
+    if (!isExcluded) {
+        Normal.feedkeys('f');  // Using lowercase f to follow links in current tab
+    }
+};
