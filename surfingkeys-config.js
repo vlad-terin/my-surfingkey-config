@@ -1192,6 +1192,13 @@ settings.theme = `
 }
 `;
 
+// Create a custom key binding for auto hints
+api.mapkey('\\', '#1Show link hints on page load', function() {
+    api.Hints.create('a[href]', function(element) {
+        element.click();
+    });
+});
+
 // Auto show hints on page load
 document.addEventListener('DOMContentLoaded', function() {
     const excludedDomains = [
@@ -1203,7 +1210,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!isExcluded) {
         setTimeout(() => {
-            api.Normal.feedkeys('f');
-        }, 1000); // Small delay to ensure Surfingkeys is ready
+            api.Normal.feedkeys('\\');
+        }, 1000);
     }
 });
