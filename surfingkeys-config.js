@@ -1191,3 +1191,13 @@ settings.theme = `
   border-radius: 4px; /* Optional: rounded corners for focused item */
 }
 `;
+
+// Auto show hints on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Small delay to ensure page is fully loaded
+    setTimeout(() => {
+        api.Hints.create('a[href]', function(element) {
+            element.click();
+        });
+    }, 500);
+});
